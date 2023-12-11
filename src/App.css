@@ -1,0 +1,50 @@
+
+body{
+  color: #494949 !important;
+  font-size: 20px !important;
+} 
+
+
+form button
+{
+  background-color: #EF9B28 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+.form-group input{
+  font-size: 14px;
+}
+.form-group i{
+  margin-left:5px;
+  margin-top: 12px;
+  position: relative;
+  font-size: 10px;
+}
+.form-group i:after{
+  content: '';
+  background-color: rgba(9, 10, 10, 0.898);
+  width: 1px;
+  height: 22px;
+  position: absolute;
+  left: 15px;
+  bottom: -7px;
+}
+
+.from-design{
+  background-color: #315951E5;
+
+}
+
+.bg-overlay{
+  background-image: url(assets/bg3.png);
+
+}
+
+.logo-toggle img{
+  width: 150px;
+}
+
+.color{
+  color: #EF9B28 !important;
+
+}
