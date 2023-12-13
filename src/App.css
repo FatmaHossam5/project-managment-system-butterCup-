@@ -94,7 +94,11 @@ h4.color::after{
   height:5px;
   background-color: #EF9B28;
   position: absolute;
-  bottom: 0%;
+ 
   top: 90%;
   right: 97%;
+}
+.from-design{
+  background-color: rgb(45, 86, 78,0.8);
+
 }
