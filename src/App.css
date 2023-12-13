@@ -9,11 +9,40 @@ form button
 {
   background-color: #EF9B28 !important;
   color: #fff !important;
-  font-weight: 700 !important;
-}
+  font-weight: 500 !important;
+  line-height: 46px;
+  
+} 
 .form-group input{
   font-size: 14px;
+  border: none!important;
+  background-color: transparent!important;
+  
+
 }
+
+::placeholder{
+  color: rgba(255, 255, 255,0.6)!important;
+}
+.Forget-pass{
+  color: rgba(255, 255, 255,0.6)!important;
+  font-weight: 400;
+  line-height: 22px;
+ 
+
+
+}
+
+input.login::after{
+  content: 'ddd';
+  width: 13px;
+  height:5px;
+  background-color: #EF9B28;
+  position: absolute;
+  bottom: 62%;
+  right: 64%;
+}
+
 .form-group i{
   margin-left:5px;
   margin-top: 12px;
@@ -31,12 +60,16 @@ form button
 }
 
 .from-design{
-  background-color: #315951E5;
+  background-color: rgb(45, 86, 78,0.8);
 
 }
 
 .bg-overlay{
-  background-image: url(assets/bg3.png);
+  background-image: url(assets/bg-logIn.png);
+
+  background-size:  cover;
+  background-position: bottom center;
+ 
 
 }
 
@@ -47,4 +80,21 @@ form button
 .color{
   color: #EF9B28 !important;
 
+}
+.logo img{
+  right: 25%;
+  bottom: 20%;
+}
+.from-design span{
+  font-size: 11px;
+}
+h4.color::after{
+  content: '';
+  width: 13px;
+  height:5px;
+  background-color: #EF9B28;
+  position: absolute;
+  bottom: 0%;
+  top: 90%;
+  right: 97%;
 }
