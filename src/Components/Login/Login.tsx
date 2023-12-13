@@ -1,16 +1,35 @@
 
+import axios from "axios";
+
 import { useForm } from "react-hook-form";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 
 
-export default function Login() {
-  const {register,handleSubmit,formState:{errors}}=useForm()
 
-  const LogIn=(data:string)=>{
+
+export default function Login({saveAdminData}:any) {
+ 
+  const {register,handleSubmit,formState:{errors}}=useForm();
+  
+    const navigate=useNavigate()
+
+const LogIn =(data:any)=>{
+
+axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login',data)
+
+.then((response)=>{
+  
+    localStorage.setItem("adminToken",response?.data?.token)
+    saveAdminData()
+    navigate('/dashboard')
    
-    console.log(data);
-    
-  }
+}).catch((error)=>{
+  
+    toast(error?.response?.data?.message);
+
+})
+}
  
   return (
     <div className="Auth-container container-fluid">
@@ -18,7 +37,7 @@ export default function Login() {
         <div className="col-lg-5 col-md-7 col-sm-9">
           <div className="from-design py-4 rounded-2">
             
-            <form className="  w-75 m-auto" onSubmit={handleSubmit(LogIn as any)} >
+            <form className="  w-75 m-auto" onSubmit={handleSubmit(LogIn)} >
             <span className=" text-white">
               welcome to PMS
               </span>
