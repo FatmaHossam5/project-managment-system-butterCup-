@@ -1,6 +1,6 @@
 
 
-import { Link} from "react-router-dom";
+
 import logo from '../../assets/PMS 3.svg'
 
 import axios from "axios";
@@ -47,28 +47,24 @@ axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login',data)
       
       <img src={logo} alt="logo" className="position-absolute " />
       </div>
-          <div className="from-design py
-            <form className="  w-75 m-auto" >
-            <span className=" text-white">
-              welcome to PMS
-              </span>
-              <h4 className="fw-bolder color position-relative">Login</h4>
-              <div className="form-group my-4 ">
+    
+              <div className="form-group from-design py-4 rounded-2  ">
            
             
             <form className="  w-75 m-auto" onSubmit={handleSubmit(LogIn)} >
             <span className=" text-white">
               welcome to PMS
               </span>
-              <h4 className="fw-bolder color">Log in</h4>
+              <h4 className="fw-bolder color position-relative">Log in</h4>
               <div className="form-group my-3 position-relative">
-                <i className="fa fa-envelope-open position-absolute"></i>
+               
 
                 <input
                   placeholder="Enter your E-mail "
                   className="form-control ps-4 mb-1 login " 
                   type="email"
 
+                  {...register('email',{required:true,pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/})}
                 
                   
                
@@ -77,8 +73,7 @@ axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login',data)
                 
 
                  
-                  {...register('email',{required:true,pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/})}
-                />
+               
                 {errors.email&&errors.email.type==='required'&&(<span className="text-danger"> email is required</span>)}
 
               </div>
