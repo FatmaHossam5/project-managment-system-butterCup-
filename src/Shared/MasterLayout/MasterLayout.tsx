@@ -3,7 +3,7 @@ import SideBar from '../SideBar/SideBar'
 import NavBar from '../Navbar/NavBar'
 import { Outlet } from 'react-router-dom'
 
-export default function MasterLayout() {
+export default function MasterLayout({adminData}:any) {
   return (
     <>
    
@@ -16,7 +16,7 @@ export default function MasterLayout() {
             </div>
             <div className="col-md-9">
                 <div className='bg-info'>
-                    <NavBar/>
+                    <NavBar adminData={adminData}/>
                 </div>
                 <div className="content-container">
                 <Outlet/>
