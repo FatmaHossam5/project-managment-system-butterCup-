@@ -113,8 +113,50 @@ h4.color::after{
   color: #EF9B28;
   font-size: 13px;
   font-weight: 400;
-  line-height: 22px;
+line-height: 22px;
   position: absolute;
   bottom: 80%;
   right: 86%;
+  margin-bottom: 2px;
+  
+}
+.otp{
+  color: #EF9B28;
+  font-size: 13px;
+  font-weight: 400;
+line-height: 22px;
+  position: absolute;
+  bottom: 80%;
+  right:72%;
+  margin-bottom: 2px;
+ 
+}
+.newPass{
+  color: #EF9B28;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+  position: absolute;
+  bottom: 80%;
+  right:73%;
+  margin-bottom: 2px;
+
+}
+.confirm{
+  color: #EF9B28;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+  position: absolute;
+  bottom: 80%;
+  right:68%;
+  margin-bottom: 2px;
+
+}
+.bg-reset{
+  background-image: url(/src/assets/bg-reset.png);
+  background-position: center center;
+  background-size: cover;
+  
+  overflow: hidden;
 }
