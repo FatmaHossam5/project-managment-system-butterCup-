@@ -52,11 +52,12 @@ navigate('/reset-password')
              className="form-control ps-4 mb-1 login " 
              type="email"
              name='email' 
-{...register("email",{required:true})}
+{...register("email",{required:true,pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/})}
            
              
           
           />
+          {errors.email&&errors.email.type==='required'&&(<span className='text-danger'> Email is required</span>)}
           <hr className="text-white" />
            
 
