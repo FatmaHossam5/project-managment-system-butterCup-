@@ -1,6 +1,21 @@
 import React from 'react'
 import logo from '../../assets/PMS 3.svg'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 export default function ResetPassword() {
+   const {register,handleSubmit,formState:{errors}}=useForm();
+    const navigate=useNavigate()
+   const ResetPassword =(data)=>{
+ axios.post("http://upskilling-egypt.com:3003/api/v1/Users/Reset",data).then((response)=>{
+  console.log(response);
+  navigate('/login')
+ }).catch((error)=>{
+  console.log(error);
+  
+ })
+    
+   }
   return (
    
     <div className="Auth-container container-fluid ">
@@ -16,7 +31,7 @@ export default function ResetPassword() {
             <div className="form-group from-design py-4 rounded-2  ">
          
           
-          <form className="  w-75 m-auto"  >
+          <form className="  w-75 m-auto" onSubmit={handleSubmit(ResetPassword)} >
           <span className=" text-white">
             welcome to PMS
             </span>
@@ -30,10 +45,11 @@ export default function ResetPassword() {
                 type="email"
                 name='email'
    
-              
+              {...register("email",{required:true,pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/})}
                 
              
              />
+             {errors.email&&errors.email.type==='required'&&(<span className='text-danger'>Email is required </span>)}
              <hr className="text-white" />
               
    
@@ -50,8 +66,10 @@ export default function ResetPassword() {
                 placeholder=" Enter your Password"
                 className="form-control ps-4 mb-1"
                 type="password"
-               
+               {...register("seed",{required:true})}
               />
+             {errors.seed&&errors.seed.type==='required'&&(<span className='text-danger'>OTP is required </span>)}
+
             <hr className="text-white" />
    
             
@@ -60,14 +78,18 @@ export default function ResetPassword() {
    
             <div className="form-group my-3 position-relative ">
             
-            <label htmlFor="email" className='newPass w-50 text-end'>  New Password </label>
+            <label htmlFor="newPass" className='newPass w-50 text-end'>  New Password </label>
           
               <input
                 placeholder=" Enter your New Password"
                 className="form-control ps-4 mb-1"
                 type="password"
+                name='newPass'
+                {...register("password",{required:true})}
                
               />
+             {errors.password&&errors.password.type==='required'&&(<span className='text-danger'>password is required </span>)}
+
             <hr className="text-white" />
    
             
@@ -75,14 +97,18 @@ export default function ResetPassword() {
             </div>
             <div className="form-group my-3 position-relative ">
             
-            <label htmlFor="email" className='confirm  w-50 text-end'>  Confirm Password </label>
+            <label htmlFor="confirm" className='confirm  w-50 text-end'>  Confirm Password </label>
           
               <input
                 placeholder=" Confirm New Password"
                 className="form-control ps-4 mb-1"
                 type="password"
+                name='confirm'
+                {...register("confirmPassword",{required:true})}
                
               />
+             {errors.confirmPassword&&errors.confirmPassword.type==='required'&&(<span className='text-danger'>confirmPassword is required </span>)}
+
             <hr className="text-white" />
    
             
