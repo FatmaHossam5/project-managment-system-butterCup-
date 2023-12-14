@@ -10,7 +10,7 @@ export default function RequestReset() {
 
   const{register,handleSubmit,formState:{errors}}=useForm();
  const navigate= useNavigate()
-  const RequestPass =(data)=>{
+  const RequestPass =(data:any)=>{
     axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Reset/Request',data).then((response)=>
     {
      
