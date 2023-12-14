@@ -22,10 +22,10 @@ form button
 }
 
 ::placeholder{
-  color: rgba(255, 255, 255,0.6)!important;
+  color: rgba(255, 255, 255)!important;
 }
 .Forget-pass{
-  color: rgba(255, 255, 255,0.6)!important;
+  color: rgba(255, 255, 255)!important;
   font-weight: 400;
   line-height: 22px;
  
@@ -101,4 +101,20 @@ h4.color::after{
 .from-design{
   background-color: rgb(45, 86, 78,0.8);
 
+}
+.bg-request{
+  background-image: url(/src/assets/bg-reuest.png);
+  background-position: 100vw 100vh;
+  background-size: cover;
+  
+  overflow: hidden;
+}
+.email{
+  color: #EF9B28;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+  position: absolute;
+  bottom: 80%;
+  right: 86%;
 }
