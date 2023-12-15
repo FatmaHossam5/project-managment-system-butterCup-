@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
+import ChangePass from './Components/ChangePassword/ChangePassword';
 
 function App() {
   interface saveAdminData{
@@ -46,6 +47,8 @@ function App() {
       {path:'request-reset',element:<RequestReset/>},
       {path:'reset-password',element:<ResetPassword/>},
       {path:'verify-user',element:<VerifyUser/>},
+      {path:'Change-pass',element:<ChangePass/>},
+
      ]
   },{
     path:'dashboard',

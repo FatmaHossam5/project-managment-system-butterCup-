@@ -10,7 +10,7 @@ export default function MasterLayout({adminData}:any) {
     <div className="container-fluid">
         <div className="row">
             <div className="col-md-3 ">
-                <div className='bg-danger'>
+                <div>
                     <SideBar/>
                 </div>
             </div>
