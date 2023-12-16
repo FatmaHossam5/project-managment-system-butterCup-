@@ -1,0 +1,12 @@
+swagger
+http://upskilling-egypt.com:3003/docs/
+
+figma
+https://www.figma.com/file/VBm3UIt8eftJj96656NWVk/Project-Management-System?type=design&node-id=0-1&mode=
+design&t=fS2d64jMEPyV9lXR-0
+
+Gira 
+https://ahmedaqenawy.atlassian.net/jira/software/projects/EATJRC1/boards/1
+
+drive
+https://drive.google.com/drive/folders/1qdn1-iAmRvbaUysgkK5Qb8znzYeSLiRz?usp=sharing

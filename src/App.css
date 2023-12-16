@@ -17,8 +17,6 @@ form button
   font-size: 14px;
   border: none!important;
   background-color: transparent!important;
-  
-
 }
 
 ::placeholder{
@@ -160,3 +158,9 @@ line-height: 22px;
   
   overflow: hidden;
 }
+.form-group input{
+  color: #fff;
+}
+/* .bg-overlay{
+  overflow: hidden;
+} */

@@ -1,0 +1,22 @@
+.rounded6 {
+    border-radius: 2rem !important;
+    border-color: #EF9B28 !important;
+}
+
+.overlayRegister {
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0%);
+    opacity: 0;
+}
+
+.overlayRegister:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+
+.inputFileRegister {
+    display: none;
+} 

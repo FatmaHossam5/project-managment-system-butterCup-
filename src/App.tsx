@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
+import { ToastContainer } from 'react-bootstrap';
 
 function App() {
   interface saveAdminData{
@@ -62,7 +63,10 @@ function App() {
   }]);
 
   return (
+    <>
+    <ToastContainer/>
    <RouterProvider router={routes}/>
+    </>
   )
 }
 
