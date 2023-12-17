@@ -95,7 +95,7 @@ export default function VerifyUser() {
     </div>
   </div>
  </div>
- fffff
+
     </>
    )
 }
