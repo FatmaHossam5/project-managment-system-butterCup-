@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function Login({ saveAdminData }: any) {
+export default function Login({ saveUserData }: any) {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -17,7 +17,7 @@ export default function Login({ saveAdminData }: any) {
       .then((response) => {
 
         localStorage.setItem("adminToken", response?.data?.token)
-        saveAdminData()
+        saveUserData()
         navigate('/dashboard')
 
       }).catch((error) => {
