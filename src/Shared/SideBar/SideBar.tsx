@@ -33,7 +33,7 @@ export default function SideBar() {
            icon={<i className="fa fa-home" aria-hidden="true"></i>}
            component={<Link to="/dashboard" />}
           >
-            Home
+            Homeeeee
           </MenuItem>
           <MenuItem
            style={{ fontSize: '12px' }} 
