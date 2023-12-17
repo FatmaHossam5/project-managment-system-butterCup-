@@ -22,7 +22,7 @@ export default function MasterLayout({userData}:any) {
         <Header  userData={userData}/>
         
       
-    <Dashboard/>
+    <Outlet/>
 
     </div>
     </div>
