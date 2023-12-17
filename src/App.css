@@ -61,7 +61,7 @@ input.login::after{
   background-color: rgb(45, 86, 78,0.8);
 
 }
-
+/* 
 .bg-overlay{
   background-image: url(assets/bg-logIn.png);
 
@@ -69,7 +69,7 @@ input.login::after{
   background-position: bottom center;
  
 
-}
+} */
 
 .logo-toggle img{
   width: 150px;
@@ -161,6 +161,19 @@ line-height: 22px;
 .form-group input{
   color: #fff;
 }
-/* .bg-overlay{
-  overflow: hidden;
-} */
+.bg-request{
+  background-image: url(/src/assets/bg-reuest.png);
+  background-position: 100vw 100vh;
+  background-size: cover;
+}
+.bg-register{
+  background-image: url(/src/assets/bg-register.png);
+  background-position: center center;
+  background-size: cover;
+}
+.layer{
+  overflow: hidden!important;
+}
+.register{
+  overflow: hidden!important;
+}

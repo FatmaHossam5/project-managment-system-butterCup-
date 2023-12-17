@@ -59,37 +59,34 @@ export default function Register() {
   return (
     <>
 
-      <div className='container-fluid Auth-container'>
-        <div className="row bg-overlay align-items-center justify-content-center vh-100">
-          <div className="col-lg-5 col-md-7 col-sm-9 w-50">
 
-            <div className="logo position-relative ">
-              <img src={logo} alt="logo" className="position-absolute " />
+   
+
+       <div className='container-fluid bg-register vh-100  register'>
+       
+          <div className="col-lg-12 col-md-12 col-sm-9 m-auto">
+
+            <div className="logo text-center  ">
+              <img src={logo} alt="logo"  />
             </div>
 
-            <div className="form-group from-design p-5 rounded-2 ">
-              <h6 className='text-white'>Welcome to PMS</h6>
-              <h3 className='color'><span className='text-decoration-underline color fs-2'>C</span>reate New Account</h3>
+            <div className="form-group from-design layer  col-md-8 rounded-2 m-auto  mb-5 ">
+              <h6 className='text-white ms-5 mt-1'>Welcome to PMS</h6>
+              <h3 className='color ms-5'><span className='text-decoration-underline color fs-2'>C</span>reate New Account</h3>
 
-              <div className=' text-center text-white my-3 position-relative'>
-                {/* <input type="file" className={`${styles.inputFileRegister}`}/> */}
+              <div className=' text-center text-white  position-relative'>
+                <input type="file" className={`${styles.inputFileRegister}`}/>
                 <img src={photo} alt='profile photo' className={`${styles.imgRegister} `}/>
-                <img src={photoOverLay} alt='profile photo' className={`${styles.overlayRegister} position-absolute`}/>
+                <img src={photoOverLay} alt='profile photo' className={`${styles.overlayRegister} position-absolute bg-info`}/>
               </div>
 
               <form action="" onSubmit={handleSubmit(onSubmit)}>
                 <ToastContainer />
 
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
-                      {/* <TextField
-                        variant="standard"
-                        type="email"
-                        placeholder="Enter Your E-mail"
-                        className="w-100"
-                      /> */}
-                      <label htmlFor="" className='color fs-6'>UserName</label>
+                  <div className="col-md-10 d-flex   m-auto justify-content-between ">
+                    <div className="form-group mt-2 col-md-5 ">
+                     
+                      <label htmlFor="" className='color fs-6 '>UserName</label>
                       <input
                         className='form-control ps-1'
                         type="text"
@@ -97,17 +94,13 @@ export default function Register() {
                         {...register("userName",
                           {
                             required: true,
-                            // pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
                           })}
                       />
                       <hr className="text-white m-0" />
                     </div>
                     {errors.userName && errors.userName.type === "required" && <span className='text-danger '> user name is required </span>}
-                    {/* {errors.email && errors.email.type === "pattern" && <span className='text-danger '>Invalid email </span>} */}
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
+                  
+                    <div className="form-group mt-2 col-md-5 ">
                       <label htmlFor="" className='color fs-6'>E-mail</label>
                       <input
                         className='form-control ps-1'
@@ -123,11 +116,15 @@ export default function Register() {
                     </div>
                     {errors.email && errors.email.type === "required" && <span className='text-danger '> email is required </span>}
                     {errors.email && errors.email.type === "pattern" && <span className='text-danger '>Invalid email </span>}
-
                   </div>
 
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
+                   
+
+
+             
+
+                  <div className="col-md-10 d-flex   m-auto justify-content-between ">
+                    <div className="form-group mt-2 col-md-5  ">
                       <label htmlFor="" className='color fs-6'>Country</label>
                       <input
                         className='form-control ps-1'
@@ -143,10 +140,7 @@ export default function Register() {
                       <hr className="text-white m-0" />
                     </div>
                     {errors.country && errors.country.type === "required" && <span className='text-danger'> country is required </span>}
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
+                    <div className="form-group mt-2 col-md-5">
                       <label htmlFor="" className='color fs-6'>Phone Number</label>
                       <input
                         className='form-control ps-1'
@@ -164,11 +158,13 @@ export default function Register() {
                     </div>
                   </div>
 
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
+                  
+
+                  <div className="col-md-10 d-flex   m-auto justify-content-between ">
+                    <div className="form-group mt-2  col-md-5  ">
                       <label htmlFor="" className='color fs-6'>password</label>
                       <input
-                        className='form-control ps-1'
+                        className='form-control ps-1 '
                         type="password"
                         placeholder="Enter your password"
                         {...register("password",
@@ -181,11 +177,7 @@ export default function Register() {
                     </div>
 
                     {errors.password && errors.password.type === "required" && <span className='text-danger'> password is required </span>}
-
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="form-group mt-3 position-relative">
+                    <div className="form-group mt-2 col-md-5 ">
                       <label htmlFor="" className='color fs-6'>Confirm Password</label>
                       <input
                         className='form-control ps-1'
@@ -200,20 +192,21 @@ export default function Register() {
                       />
                       <hr className="text-white m-0" />
                     </div>
-
                     {errors.confirmPassword && errors.confirmPassword.type === "required" && <span className='text-danger'> confirm Password is required </span>}
 
                   </div>
-                </div>
 
-                <div className='form-group d-flex justify-content-end my-3 fs-6'>
-                  <Link className='text-white text-decoration-underline' to={"/login"}>
+         
+              
+
+                <div className='form-group text-end pt-3 ps-5 me-5 fs-6 mt-2'>
+                  <Link className='text-white text-decoration-none' to={"/login"}>
                     Login Now ?
                   </Link>
                 </div>
 
-                <div className='w-75 m-auto'>
-                  <button className={`${styles.rounded6} btn btn-success w-100 mt-3`}>
+                <div className='w-50 m-auto'>
+                  <button className={`${styles.rounded6} btn btn-success w-100 m-3`}>
                     save
                   </button>
                 </div>
@@ -221,8 +214,8 @@ export default function Register() {
             </div>
 
           </div>
-        </div>
-      </div>
+      
+      </div> 
     </>
   )
 }
