@@ -10,6 +10,9 @@ export default function AuthContextProvider(props:any){
 
   const [userData, setUserData] = useState(null);
 
+  let reqHeaders={
+    Authorization:`Bearer${localStorage.getItem("userToken")}`
+  }
   const baseUrl = "http://upskilling-egypt.com:3003/api/v1";
 
   const saveUserData = () => {
@@ -28,7 +31,7 @@ export default function AuthContextProvider(props:any){
 
 
   return (
-    <AuthContext.Provider value={{userData,saveUserData,baseUrl}}>
+    <AuthContext.Provider value={{userData,saveUserData,baseUrl,reqHeaders}}>
       {props.children}
     </AuthContext.Provider>
   );

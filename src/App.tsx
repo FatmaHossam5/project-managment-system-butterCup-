@@ -11,38 +11,24 @@ import Users from './Components/Users/Users';
 import VerifyUser from './Components/VerifyUser/VerifyUser';
 import AuthLayout from './Shared/AuthLayout/AuthLayout';
 import Notfound from './Shared/NotFound/Notfound';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
 import { ToastContainer } from 'react-bootstrap';
+import { AuthContext } from './Context/AuthContext';
 
 function App() {
-  interface saveAdminData{
-    encodedToken:String|null,
-    decodedToken:string|null
-  }
-  const[adminData,setAdminData]=useState(null)
- 
-  let saveAdminData=()=>{
-    let encodedToken=localStorage.getItem("adminToken");
-    let decodedToken= jwtDecode(encodedToken)
-    setAdminData(decodedToken)
-  
-  }
-  useEffect(()=>{
-    if(localStorage.getItem("adminToken")){
-      saveAdminData()
-    }
-  },[])
+
+ let {userData,saveUserData}:any=useContext(AuthContext)
 
   const routes = createBrowserRouter([{
      path:'/',
      element:<AuthLayout/>,
      errorElement:<Notfound/>,
      children:[
-      {index:true,element:<Login saveAdminData={saveAdminData} />},
-      {path:'login',element:<Login saveAdminData={saveAdminData}/>},
+      {index:true,element:<Login saveUserData={saveUserData} />},
+      {path:'login',element:<Login saveUserData={saveUserData}/>},
       {path:'register',element:<Register/>},
       {path:'request-reset',element:<RequestReset/>},
       {path:'reset-password',element:<ResetPassword/>},
@@ -50,12 +36,12 @@ function App() {
      ]
   },{
     path:'dashboard',
-    element: <ProtectedRoute adminData={adminData}> <MasterLayout adminData={adminData} />  </ProtectedRoute>,
+    element: <ProtectedRoute userData={userData}> <MasterLayout userData={userData} />  </ProtectedRoute>,
            
                
     errorElement:<Notfound/>,
     children:[
-     {index:true,element:<Dashboard  adminData={adminData} />},
+     {index:true,element:<Dashboard  userData={userData} />},
      {path:'projects',element:<Projects/>},
      {path:'users',element:<Users/>},
      {path:'tasks',element:<Tasks/>},
