@@ -3,6 +3,7 @@ import SideBar from '../SideBar/SideBar'
 import NavBar from '../Navbar/NavBar'
 import { Outlet } from 'react-router-dom'
 import Dashboard from '../../Components/Dashboard/Dashboard'
+import Header from '../Header/Header'
 
 export default function MasterLayout({userData}:any) {
   return (
@@ -13,10 +14,14 @@ export default function MasterLayout({userData}:any) {
         <NavBar userData={userData}/>
     </div>
     <div className='d-flex'>
-    <div className="col-md-3 bg-danger vh-100  ">
+    <div className="col-md-2 bg-danger vh-100  ">
         <SideBar/>
     </div>
-    <div className='col-md-9 dashboard'>
+    <div className='col-md-10 dashboard'>
+
+        <Header  userData={userData}/>
+        
+      
     <Dashboard/>
 
     </div>
