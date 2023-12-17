@@ -40,7 +40,7 @@ export default function MasterLayout({userData}:any) {
                 </div>
                 </div>
             <div className="col-md-3 ">
-                <div className='bg-danger'>
+                <div>
                     <SideBar/>
                 </div>
             </div>

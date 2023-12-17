@@ -2,7 +2,9 @@
 body{
   color: #494949 !important;
   font-size: 20px !important;
+ 
 } 
+
 
 
 form button
@@ -158,6 +160,31 @@ line-height: 22px;
   
   overflow: hidden;
 }
+
+
+.sidebar-cont{
+  background-color: #0E382F;
+  border-top-right-radius: 50px;
+}
+
+.sidebar-container .ps-sidebar-container{
+  background-color: #0E382F;
+  
+  height: 100vh;
+  color: #fff;
+}
+
+.sidebar-container .ps-sidebar-root
+{
+    border: none;
+    width: 200px;
+    min-width: 200px;
+}
+
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover{
+    background-color: #EF9B28;
+}
+
 .form-group input{
   color: #fff;
 }
@@ -202,3 +229,4 @@ line-height: 22px;
   padding: 0px!important;
  
 }
+

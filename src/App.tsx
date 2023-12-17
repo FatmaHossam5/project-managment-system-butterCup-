@@ -15,8 +15,12 @@ import { useContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
+
+import ChangePass from './Components/ChangePassword/ChangePassword';
+=======
 import { ToastContainer } from 'react-bootstrap';
 import { AuthContext } from './Context/AuthContext';
+
 
 function App() {
 
@@ -33,6 +37,8 @@ function App() {
       {path:'request-reset',element:<RequestReset/>},
       {path:'reset-password',element:<ResetPassword/>},
       {path:'verify-user',element:<VerifyUser/>},
+      {path:'Change-pass',element:<ChangePass/>},
+
      ]
   },{
     path:'dashboard',
