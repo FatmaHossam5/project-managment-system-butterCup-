@@ -17,7 +17,7 @@ import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
 
 import ChangePass from './Components/ChangePassword/ChangePassword';
-=======
+
 import { ToastContainer } from 'react-bootstrap';
 import { AuthContext } from './Context/AuthContext';
 
