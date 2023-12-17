@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
 
 export default function SideBar() {
-  let [isCollapsed, setIsCollapsed] = useState(true);
+  // let [isCollapsed, setIsCollapsed] = useState(true);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -29,12 +29,14 @@ export default function SideBar() {
         <Menu>
           
           <MenuItem
-            icon={<i className="fa fa-home" aria-hidden="true"></i>}
-            component={<Link to="/dashboard" />}
+           style={{ fontSize: '12px' }} 
+           icon={<i className="fa fa-home" aria-hidden="true"></i>}
+           component={<Link to="/dashboard" />}
           >
             Home
           </MenuItem>
           <MenuItem
+           style={{ fontSize: '12px' }} 
             icon={<i className="fa fa-users" aria-hidden="true"></i>}
             component={<Link to="/dashboard/users" />}
           >
@@ -42,13 +44,14 @@ export default function SideBar() {
           </MenuItem>
          
           <MenuItem
+           style={{ fontSize: '12px' }} 
             icon={<i className="fa-solid fa-bars"></i>}
             component={<Link to="/dashboard/categories" />}
           >
             Tasks
           </MenuItem>
           <MenuItem
-          style={{ fontSize: '15px' }}            onClick={handleShow}
+          style={{ fontSize: '12px' }}            onClick={handleShow}
             icon={<i className="fa fa-key" aria-hidden="true"></i>}
           >
             Change Password
