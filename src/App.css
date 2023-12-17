@@ -19,8 +19,6 @@ form button
   font-size: 14px;
   border: none!important;
   background-color: transparent!important;
-  
-
 }
 
 ::placeholder{
@@ -185,5 +183,50 @@ line-height: 22px;
 
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover{
     background-color: #EF9B28;
+}
+
+.form-group input{
+  color: #fff;
+}
+.bg-request{
+  background-image: url(/src/assets/bg-reuest.png);
+  background-position: 100vw 100vh;
+  background-size: cover;
+}
+.bg-register{
+  background-image: url(/src/assets/bg-register.png);
+  background-position: center center;
+  background-size: cover;
+}
+.layer{
+  overflow: hidden!important;
+}
+.register{
+  overflow: hidden!important;
+}
+.master.container-fluid{
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
+.userImg{
+  transform: translate(-8%);
+} 
+.dashboard{
+  background-color:#f5f5f5;
+}
+
+.bg-header{
+  background-image: url(./assets/header-bg.png);
+  background-position: center center;
+  background-size: cover;
+}
+.header-content {
+  top:25%;
+  left:20%
+}
+.headers.container-fluid{
+
+  padding: 0px!important;
+ 
 }
 
