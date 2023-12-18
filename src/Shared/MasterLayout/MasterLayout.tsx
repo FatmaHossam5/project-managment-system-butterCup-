@@ -30,25 +30,6 @@ export default function MasterLayout({userData}:any) {
     
   
 
-    {/* <div className="container-fluid ">
-        <div className="row">
-        <div className="col-md-12">
-                <div className='bg-info'>
-                    <NavBar adminData={adminData}/>
-                </div>
-                </div>
-            <div className="col-md-3 ">
-                <div>
-                    <SideBar/>
-                </div>
-            </div>
-          
-                <div className="content-container">
-                <Outlet/>
-                </div>
-            
-        </div>
-    </div> */}
     </>
   )
 }
