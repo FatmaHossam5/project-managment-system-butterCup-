@@ -79,6 +79,8 @@ input.login::after{
   color: #EF9B28 !important;
 
 }
+
+
 .logo img{
   right: 25%;
   bottom: 20%;
@@ -201,4 +203,22 @@ line-height: 22px;
 
   padding: 0px!important;
  
+}
+
+
+.sidebar-container .ps-sidebar-container{
+  background-color:#0E382F;
+  height: 100vh;
+  color: #fff;
+}
+
+.sidebar-container .ps-sidebar-root
+{
+   border: none;
+   width: 200px;
+   min-width: 200px;
+}
+
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover{
+   background-color:#EF9B28;
 }
