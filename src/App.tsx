@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
@@ -10,10 +11,8 @@ import Tasks from './Components/Tasks/Tasks';
 import Users from './Components/Users/Users';
 import VerifyUser from './Components/VerifyUser/VerifyUser';
 import AuthLayout from './Shared/AuthLayout/AuthLayout';
-import Notfound from './Shared/NotFound/Notfound';
-import { useContext, useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
+import Notfound from './Shared/NotFound/Notfound';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
 
 import ChangePass from './Components/ChangePassword/ChangePassword';
@@ -47,7 +46,7 @@ function App() {
                
     errorElement:<Notfound/>,
     children:[
-     {index:true,element:<Dashboard  userData={userData} />},
+     {index:true,element:<Dashboard userData={userData} />},
      {path:'projects',element:<Projects/>},
      {path:'users',element:<Users/>},
      {path:'tasks',element:<Tasks/>},
