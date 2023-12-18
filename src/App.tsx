@@ -23,7 +23,7 @@ import { AuthContext } from './Context/AuthContext';
 
 function App() {
 
- let {userData,saveUserData}:any=useContext(AuthContext)
+ let {userData,saveUserData,role}:any=useContext(AuthContext)
 
   const routes = createBrowserRouter([{
      path:'/',
