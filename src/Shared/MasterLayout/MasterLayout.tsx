@@ -20,7 +20,10 @@ export default function MasterLayout({userData}:any) {
         <Header />
         
       
+
     <Outlet userData={userData}/>
+
+
 
     </div>
     </div>
