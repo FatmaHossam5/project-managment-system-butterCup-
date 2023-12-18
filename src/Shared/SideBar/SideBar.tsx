@@ -1,8 +1,9 @@
-import  React, { useState } from "react";
+import  React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function SideBar() {
   let [isCollapsed, setIsCollapsed] = useState(false);
@@ -13,10 +14,17 @@ export default function SideBar() {
     setIsCollapsed(!isCollapsed);
   };
   let navigate = useNavigate();
- 
+ let {role}:any=useContext(AuthContext)
+ let logOut =()=>{
+  localStorage.removeItem("userToken")
+  navigate('/login')
+} 
+console.log(role);
 
+ 
   return (
     <>
+ 
   
    
     <Modal show={show} onHide={handleClose}>
@@ -37,13 +45,14 @@ export default function SideBar() {
             Home
             
           </MenuItem>
-          <MenuItem
+          {role==='Manager'?<MenuItem
            style={{ fontSize: '12px' }} 
             icon={<i className="fa fa-users fa-2x ico" aria-hidden="true"></i>}
             component={<Link to="/dashboard/users" />}
           >
             Users
-          </MenuItem>  
+          </MenuItem>  :''}
+        
           <MenuItem
            style={{ fontSize: '12px' }} 
             icon={<i className="fa-solid fa-diagram-project fa-2x ico"></i>}
@@ -64,6 +73,8 @@ export default function SideBar() {
           >
             Change Pass
           </MenuItem>
+          <MenuItem   style={{ fontSize: '12px' }} 
+           icon={<i className="fa-solid fa-arrow-right-from-bracket ico fa-2x"></i> } onClick={logOut}> logOut </MenuItem>
         </Menu>
       </Sidebar>
       <main style={{ padding: 10 }}>
