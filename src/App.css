@@ -2,7 +2,9 @@
 body{
   color: #494949 !important;
   font-size: 20px !important;
+ 
 } 
+
 
 
 form button
@@ -160,6 +162,35 @@ line-height: 22px;
   
   overflow: hidden;
 }
+
+.sideBar-Container .ps-sidebar-container{
+  background-color: #0e382f;
+  color: #fff;
+
+
+}
+.sideBar-Container .ps-sidebar-container .ps-menu-button:hover{
+  background-color: rgba(239, 155, 40,0.7);
+  
+}
+
+.css-1wvake5{
+  border: none!important;
+}
+.ps-sidebar-container{
+  height: 200vh!important;
+ 
+}
+.Side{
+  height: 100vh!important;
+}
+
+
+
+
+
+
+
 .form-group input{
   color: #fff;
 }
@@ -186,7 +217,7 @@ line-height: 22px;
 .userImg{
   transform: translate(-8%);
 } 
-.dashboard{
+.dashboard,.master{
   background-color:#f5f5f5;
 }
 
@@ -206,19 +237,81 @@ line-height: 22px;
 }
 
 
+
 .sidebar-container .ps-sidebar-container{
   background-color:#0E382F;
   height: 100vh;
   color: #fff;
-}
-
-.sidebar-container .ps-sidebar-root
-{
-   border: none;
+  border: none;
    width: 200px;
    min-width: 200px;
 }
 
+
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover{
    background-color:#EF9B28;
 }
+
+.arrow{
+  width: 35px;
+  height:40px;
+ border-top-right-radius: 7px;
+ border-bottom-right-radius: 7px;
+  background-color: #EF9B28;
+  z-index: 999;
+  right: 1%;
+  bottom: 96%;
+  position: fixed!important;
+  transition: all;
+}
+.arrow i{
+ 
+ transform: translateY(45%);
+ margin-left: 12px;
+ 
+}
+.css-dip3t8{
+  position: static!important;
+  overflow-x: hidden!important;
+}
+.ps-sidebar-root.css-1wvake5{
+  position: static!important;
+  overflow-x: hidden!important;
+}
+aside{
+
+ 
+ min-width: 85px!important;
+
+}
+.dashboard{
+ 
+  margin-top: 55px!important;
+  
+}
+.ps-sidebar-container{
+  background-color: rgb(14,56,47)!important;
+  width: 85px!important;
+  min-width: 250px!important;
+}
+.css-1t8x7v1 >.ps-menu-button{
+  color: #fff!important;
+  padding-left: 40px!important;
+  /* padding-right: 0px!important; */
+
+
+ 
+}
+.css-1t8x7v1 >.ps-menu-button:hover{
+  background-color: #EF9B28!important;
+}
+.ico{
+  transform: translateX(-80%);
+}
+ /* .css-1wvake5{
+  background-color: red!important;
+  min-width: 210px!important;
+ 
+} */
+main{padding: 0px!important;}
+

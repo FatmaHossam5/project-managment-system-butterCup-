@@ -57,15 +57,27 @@ export default function ChangePass({ handleClose }:any) {
     <>
      <div className="Auth-container container-fluid ">
  
+
  <div className="row bg-overlay justify-content-center align-items-center">
+
+=======
+ <div className="row bg-overlay vh-100 justify-content-center align-items-center">
+
+   <div className="col-lg-5 col-md-7 col-sm-9 ">
 
    {/* <div className="logo  position-relative "> 
  
   <img src={logo} alt="logo" className="position-absolute " />
  </div> */}
 
+
       
          <form className="w-100 m-auto" onSubmit={handleSubmit(onSubmit)}>
+
+         <div className="form-group from-design py-3 my-5 rounded-2  ">
+      
+         <form className="w-75 m-auto" onSubmit={handleSubmit(onSubmit)}>
+
               <h4 className="fw-bolder color position-relative p-0">Change Your Password</h4>
               <div className="form-group my-1 position-relative">
                <p  className="color my-0" style={{ fontSize: '14px' }}>Old Password</p>
@@ -129,7 +141,12 @@ export default function ChangePass({ handleClose }:any) {
      
      </div>
    </div>
+
  
+
+ </div>
+</div>
+
     </>
   );
 }

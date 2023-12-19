@@ -9,6 +9,8 @@ export  const AuthContext = createContext ({});
 export default function AuthContextProvider(props:any){
 
   const [userData, setUserData] = useState(null);
+  const[role,setRole]=useState(null)
+  
 
   let reqHeaders={
     Authorization:`Bearer${localStorage.getItem("userToken")}`
@@ -20,6 +22,7 @@ export default function AuthContextProvider(props:any){
     const decodedToken:any = jwtDecode(encodedToken)
 
     setUserData(decodedToken)
+    setRole(decodedToken.userGroup)
 
   };
 
@@ -31,7 +34,7 @@ export default function AuthContextProvider(props:any){
 
 
   return (
-    <AuthContext.Provider value={{userData,saveUserData,baseUrl,reqHeaders}}>
+    <AuthContext.Provider value={{userData,saveUserData,baseUrl,reqHeaders,role}}>
       {props.children}
     </AuthContext.Provider>
   );
