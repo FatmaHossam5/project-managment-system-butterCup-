@@ -104,7 +104,7 @@ const handleClose = () => setModalState("close");
         </tr>
       </thead>
       <tbody className='text-center'>
-        {allProjs.length>0?allProjs.map((pro)=>(<tr>
+        {allProjs.length>0?allProjs.map((pro)=>(<tr key={pro?.id}>
           <td>{pro?.title}</td>
           <td className='text-white' ><div className='status'>{pro?.manager?.userName}</div></td>
           <td>{pro?.description}</td>

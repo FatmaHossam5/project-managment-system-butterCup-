@@ -15,7 +15,6 @@ export default function Login({ saveUserData }: any) {
     axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login', data)
 
       .then((response) => {
-console.log(response);
 
         localStorage.setItem("userToken", response?.data?.token)
 
@@ -25,9 +24,8 @@ console.log(response);
        navigate('/dashboard')
 
       }).catch((error) => {
-console.log(error);
 
-        toast(error?.response?.data?.message);
+        console.log(error?.response?.data?.message);
 
       })
   }
@@ -60,7 +58,7 @@ console.log(error);
                     placeholder="Enter your E-mail "
                     className="form-control ps-4 mb-1 login "
                     type="email"
-                    {...register('email', { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
+                    {...register('email', { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
                   />
                   <hr className="text-white" />
 

@@ -16,10 +16,10 @@ export default function MasterLayout({userData}:any) {
         <SideBar/>
         
     </div>
-    <div className='col-md-10 dashboard '>
+    <div className='col-md-10 dashboard mt-0 '>
 
       
-    <Header />
+    {/* <Header /> */}
       
 
     <Outlet userData={userData}/>

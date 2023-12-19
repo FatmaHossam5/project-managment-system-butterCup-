@@ -231,6 +231,7 @@ line-height: 22px;
 .headers.container-fluid{
 
   padding: 0px!important;
+  transform: translateY(20%)!important;
  
 }
 .arrow{
@@ -296,8 +297,8 @@ aside{
 } */
 main{padding: 0px!important;}
 .trans-head{
-  transform: translateY(-120%);
-  margin-top: 0px!important;
+ 
+  padding-top: 20px!important;
   
 }
 .navbar{
@@ -335,4 +336,10 @@ td, tr{
 }
 .dropdown-menu i{
   color: #2e7464!important;
+}
+.addHead{
+  margin-top: 0px!important;
+}
+.inputs input::placeholder,textarea{
+  color: #917f7f!important;
 }

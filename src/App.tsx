@@ -51,6 +51,7 @@ function App() {
     children:[
      {index:true,element:<Dashboard userData={userData} />},
      {path:'projects',element:<Projects/>},
+    
       {path:'Add-pro',element:<AddProject/>},
       {path:'edit-pro/:id',element:<EditProject/>},
       {path:'view-pro/:id',element:<ViewProject/>},
