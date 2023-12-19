@@ -343,3 +343,6 @@ td, tr{
 .inputs input::placeholder,textarea{
   color: #917f7f!important;
 }
+.imgNoFound{
+  transform: translateX(60%);
+}

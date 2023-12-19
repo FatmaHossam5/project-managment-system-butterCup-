@@ -103,7 +103,7 @@ const handleClose = () => setModalState("close");
 
         </tr>
       </thead>
-      <tbody className='text-center'>
+      <tbody className='text-center '>
         {allProjs.length>0?allProjs.map((pro)=>(<tr key={pro?.id}>
           <td>{pro?.title}</td>
           <td className='text-white' ><div className='status'>{pro?.manager?.userName}</div></td>
@@ -129,7 +129,7 @@ const handleClose = () => setModalState("close");
   </ul>
 </div></td>
         </tr>
-        )):<div><img src={noData} alt="notfound" /></div>}
+        )):<div className='imgNoFound'><img src={Datano} alt="notfound"  /></div>}
         
        
       </tbody>

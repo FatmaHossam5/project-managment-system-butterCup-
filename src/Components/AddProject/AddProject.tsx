@@ -19,10 +19,13 @@ axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
 })
 
 }
+const handleClose =()=>{
+navigate(-1)
+}
   return (
     <>
     <form onSubmit={handleSubmit(AddProject)} >
-    <div className="container bg-white addHead pb-4">
+    <div className="container bg-white addHead pb-4 ">
     <div className="col-md-12">
       <div>
      
@@ -60,8 +63,8 @@ axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
    </div>
    <hr className='' />
    <div className="btns d-flex justify-content-between">
-    <button className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
-    <button className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>save</button>
+    <button  onClick={handleClose} className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
+    <button  className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>save</button>
    </div>
  
 </div>
