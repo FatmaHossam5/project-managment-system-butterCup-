@@ -15,12 +15,17 @@ export default function Login({ saveUserData }: any) {
     axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login', data)
 
       .then((response) => {
+console.log(response);
 
         localStorage.setItem("userToken", response?.data?.token)
+
         saveUserData()
-        navigate('/dashboard')
+  
+        
+       navigate('/dashboard')
 
       }).catch((error) => {
+console.log(error);
 
         toast(error?.response?.data?.message);
 

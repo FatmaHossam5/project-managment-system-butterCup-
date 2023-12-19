@@ -14,11 +14,12 @@ export default function MasterLayout({userData}:any) {
     <div className='d-flex '>
     <div className="col-md-2 "  >
         <SideBar/>
-    </div>
-    <div className='col-md-10 dashboard  '>
-
-        <Header />
         
+    </div>
+    <div className='col-md-10 dashboard '>
+
+      
+    <Header />
       
 
     <Outlet userData={userData}/>

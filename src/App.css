@@ -295,3 +295,44 @@ aside{
  
 } */
 main{padding: 0px!important;}
+.trans-head{
+  transform: translateY(-120%);
+  margin-top: 0px!important;
+  
+}
+.navbar{
+  box-shadow:0px 2px 2px #b9b9b9!important;
+}
+/* .table>:not(caption)>*>*{
+ background-color: rgb(70,106,98)!important;
+} */
+th{
+  background-color: rgb(70,106,98)!important;
+  border-color:rgb(90, 110, 106)!important ;
+}
+.table{
+ border: none!important;
+}
+td, tr{
+  border-style: none!important;
+}
+
+.pro::placeholder{
+  color: #979696!important;
+  font-size: 12px!important;
+  transform: translateY(-25%);
+
+}
+.status{
+  background-color:rgb(70,106,98)!important ;
+  border-radius: 15px;
+
+ 
+  
+}
+.dropdown-toggle::after{
+  display: none!important;
+}
+.dropdown-menu i{
+  color: #2e7464!important;
+}
