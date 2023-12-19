@@ -1,5 +1,4 @@
-import  { useState } from "react";
-import  React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
@@ -34,7 +33,7 @@ export default function SideBar() {
            icon={<i className="fa fa-home" aria-hidden="true"></i>}
            component={<Link to="/dashboard" />}
           >
-            Homeeeeeeee
+            Home
           </MenuItem>
           <MenuItem
            style={{ fontSize: '12px' }} 
@@ -133,7 +132,7 @@ console.log(role);
           style={{ fontSize: '12px' }}            onClick={handleShow}
             icon={<i className="fa fa-key fa-2x ico " aria-hidden="true"></i>}
           >
-            Change Pass
+            Change Password
           </MenuItem>
           <MenuItem   style={{ fontSize: '12px' }} 
            icon={<i className="fa-solid fa-arrow-right-from-bracket ico fa-2x"></i> } onClick={logOut}> logOut </MenuItem>
@@ -151,32 +150,6 @@ console.log(role);
 
     
     </div>
-    {/* <div className=" position-relative" >
-      <Modal show={show} onHide={handleClose}>
-      
-        <Modal.Body>
-          <ChangePassword handleClose={handleClose}/>
-        </Modal.Body>
-        
-     </Modal>
-      <Sidebar collapsed={!isCollapsed}  >
-        <Menu >
-         <MenuItem></MenuItem>
-         
-         
-        
-        
-      
-        
-        </Menu>
-        <div className="arrow position-absolute" onClick={handleToggle}>
-{isCollapsed? <i className="fa-solid fa-chevron-left text-white"></i>:<i className="fa-solid fa-chevron-right text-white coll"></i>}
-</div>
-      </Sidebar>
-
-    
-      </div> */}
-
     </>
   );
 }  

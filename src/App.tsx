@@ -14,9 +14,6 @@ import AuthLayout from './Shared/AuthLayout/AuthLayout';
 import MasterLayout from './Shared/MasterLayout/MasterLayout';
 import Notfound from './Shared/NotFound/Notfound';
 import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
-
-import ChangePass from './Components/ChangePassword/ChangePassword';
-
 import { ToastContainer } from 'react-bootstrap';
 import { AuthContext } from './Context/AuthContext';
 import ChangePass from './Components/ChangePassword/ChangePassword';
@@ -24,7 +21,7 @@ import ChangePass from './Components/ChangePassword/ChangePassword';
 
 function App() {
 
- let {userData,saveUserData,role}:any=useContext(AuthContext)
+ let {userData,saveUserData}:any=useContext(AuthContext)
 
   const routes = createBrowserRouter([{
      path:'/',

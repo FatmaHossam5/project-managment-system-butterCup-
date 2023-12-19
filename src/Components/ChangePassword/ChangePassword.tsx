@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-// import logo from "../../../src/assets/bg-changepass.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 export default function ChangePass({ handleClose }:any) {
   const navigate = useNavigate();
@@ -60,16 +59,11 @@ export default function ChangePass({ handleClose }:any) {
 
  <div className="row bg-overlay justify-content-center align-items-center">
 
-=======
  <div className="row bg-overlay vh-100 justify-content-center align-items-center">
 
    <div className="col-lg-5 col-md-7 col-sm-9 ">
 
-   {/* <div className="logo  position-relative "> 
- 
-  <img src={logo} alt="logo" className="position-absolute " />
- </div> */}
-
+   
 
       
          <form className="w-100 m-auto" onSubmit={handleSubmit(onSubmit)}>
@@ -150,6 +144,3 @@ export default function ChangePass({ handleClose }:any) {
     </>
   );
 }
-
-
-

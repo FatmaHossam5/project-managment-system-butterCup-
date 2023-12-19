@@ -1,7 +1,6 @@
 
 
 
-import Dashboard from '../../Components/Dashboard/Dashboard'
 import { Outlet } from 'react-router-dom'
 import Header from '../Header/Header'
 import NavBar from '../Navbar/NavBar'
@@ -9,7 +8,7 @@ import SideBar from '../SideBar/SideBar'
 
 export default function MasterLayout({userData}:any) {
   return (
-    <>
+ <>
 
 <div className="container-fluid master">
     <div className="col-md-12 bg-white  ">
