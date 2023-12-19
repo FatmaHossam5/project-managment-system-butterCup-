@@ -16,7 +16,7 @@ export default function Login({ saveUserData }: any) {
 
       .then((response) => {
 
-        localStorage.setItem("adminToken", response?.data?.token)
+        localStorage.setItem("userToken", response?.data?.token)
         saveUserData()
         navigate('/dashboard')
 
