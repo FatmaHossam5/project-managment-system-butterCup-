@@ -315,3 +315,9 @@ aside{
 } */
 main{padding: 0px!important;}
 
+.modal-body{
+  padding: 0 !important;
+}
+.bg-form{
+  background-color: #0E382F;
+}
