@@ -54,7 +54,7 @@ navigate(-1)
     
     <label className='d-block' >Description</label>
   
-   <textarea className='form-control  border-2 rounded-4' cols="20" rows="4"   {...register("description",{required:true})} >Description
+   <textarea className='form-control  border-2 rounded-4' cols="20" rows="4" placeholder='Description'   {...register("description",{required:true})} >
  
 
    </textarea>

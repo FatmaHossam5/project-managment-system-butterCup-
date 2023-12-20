@@ -340,9 +340,7 @@ td, tr{
 .addHead{
   margin-top: 0px!important;
 }
-.inputs input::placeholder,textarea{
-  color: #917f7f!important;
-}
-.imgNoFound{
-  transform: translateX(60%);
+
+textarea::placeholder ,input::placeholder{
+  color:  #917f7f!important;
 }
