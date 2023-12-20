@@ -18,11 +18,10 @@ export default function Tasks() {
     axios
       .get(`${baseUrl}/Task`, { headers: requestHeaders })
       .then((response: any) => {
-        console.log("sucsess", response);
         setTasks(response?.data);
       })
-      .catch((error: any) => {
-        console.log("error", error.response.data.message);
+      .catch((_: any) => {
+        
       });
   };
 
