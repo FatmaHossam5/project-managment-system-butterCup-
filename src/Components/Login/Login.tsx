@@ -17,12 +17,15 @@ export default function Login({ saveUserData }: any) {
       .then((response) => {
 
         localStorage.setItem("userToken", response?.data?.token)
+
         saveUserData()
-        navigate('/dashboard')
+  
+        
+       navigate('/dashboard')
 
       }).catch((error) => {
 
-        toast(error?.response?.data?.message);
+        console.log(error?.response?.data?.message);
 
       })
   }
@@ -55,7 +58,7 @@ export default function Login({ saveUserData }: any) {
                     placeholder="Enter your E-mail "
                     className="form-control ps-4 mb-1 login "
                     type="email"
-                    {...register('email', { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
+                    {...register('email', { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
                   />
                   <hr className="text-white" />
 
