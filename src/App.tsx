@@ -17,6 +17,9 @@ import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
 import { ToastContainer } from 'react-bootstrap';
 import { AuthContext } from './Context/AuthContext';
 import ChangePass from './Components/ChangePassword/ChangePassword';
+import AddProject from './Components/AddProject/AddProject';
+import EditProject from './Components/EditProject/EditProject';
+import ViewProject from './Components/ViewProject/ViewProject';
 
 
 function App() {
@@ -46,6 +49,15 @@ function App() {
     children:[
      {index:true,element:<Dashboard userData={userData} />},
      {path:'projects',element:<Projects/>},
+    
+      {path:'Add-pro',element:<AddProject/>},
+      {path:'edit-pro/:id',element:<EditProject/>},
+      {path:'view-pro/:id',element:<ViewProject/>},
+
+
+     
+   
+
      {path:'users',element:<Users/>},
      {path:'tasks',element:<Tasks/>},
     ]

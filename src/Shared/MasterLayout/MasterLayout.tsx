@@ -22,11 +22,12 @@ export default function MasterLayout({userData}:any) {
     <div className="col-md-2 "  >
 
         <SideBar/>
-    </div>
-    <div className='col-md-10 dashboard  '>
-
-        <Header />
         
+    </div>
+    <div className='col-md-10 dashboard mt-0 '>
+
+      
+    {/* <Header /> */}
       
 
     <Outlet userData={userData}/>
