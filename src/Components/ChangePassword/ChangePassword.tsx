@@ -2,10 +2,13 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function ChangePass({ handleClose }:any) {
   const navigate = useNavigate();
 
+  let {reqHeaders,baseUrl}=useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -14,15 +17,12 @@ export default function ChangePass({ handleClose }:any) {
 
   const onSubmit = (data:any) => {
     // console.log(data);
-
     axios
       .put(
-        "https://upskilling-egypt.com/api/v1/Users/ChangePassword",
+        `${baseUrl}/Users/ChangePassword`,
         data,
         {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
+          headers:reqHeaders,
         }
       )
       .then((response) => {
@@ -52,28 +52,15 @@ export default function ChangePass({ handleClose }:any) {
       });
   };
 
+
   return (
     <>
-     <div className="Auth-container container-fluid ">
- 
+     <div className="Auth-container container-fluid  bg-overlay">
+ <div className="row ">
+         <form className="w-100 m-auto p-5 bg-form" onSubmit={handleSubmit(onSubmit)}>
 
- <div className="row bg-overlay justify-content-center align-items-center">
-
- <div className="row bg-overlay vh-100 justify-content-center align-items-center">
-
-   <div className="col-lg-5 col-md-7 col-sm-9 ">
-
-   
-
-      
-         <form className="w-100 m-auto" onSubmit={handleSubmit(onSubmit)}>
-
-         <div className="form-group from-design py-3 my-5 rounded-2  ">
-      
-         <form className="w-75 m-auto" onSubmit={handleSubmit(onSubmit)}>
-
-              <h4 className="fw-bolder color position-relative p-0">Change Your Password</h4>
-              <div className="form-group my-1 position-relative">
+              <h4 className="fw-bolder color p-0">Change Your Password</h4>
+              <div className="form-group my-1 ">
                <p  className="color my-0" style={{ fontSize: '14px' }}>Old Password</p>
                 <input
                   placeholder="Old Password"
@@ -129,18 +116,13 @@ export default function ChangePass({ handleClose }:any) {
               </div>
 
               <div className="form-group my-3">
-                <button className="btn  w-100">Change Password</button>
+                <button className="btn w-100">Change Password</button>
               </div>
             </form>
-     
      </div>
    </div>
 
- 
-
- </div>
-</div>
-
     </>
-  );
+  )
 }
+
