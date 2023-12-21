@@ -1,35 +1,31 @@
+import { useContext } from 'react';
 import logo from '../../assets/PMS 3.svg'
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
+import { ToastContext } from '../../Context/ToastContext';
+import { ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function Login({ saveUserData }: any) {
-
   const { register, handleSubmit, formState: { errors } } = useForm();
-
+  const{getToastValue}= useContext(ToastContext);
+  const{baseUrl}=useContext(AuthContext)
   const navigate = useNavigate()
 
+
   const LogIn = (data: any) => {
-
-    axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login', data)
-
+    axios.post(`${baseUrl}/Users/Login`, data)
       .then((response) => {
-
         localStorage.setItem("userToken", response?.data?.token)
-
         saveUserData()
-  
-        
        navigate('/dashboard')
-
+       getToastValue('success','welcome')
       }).catch((error) => {
-
-        console.log(error?.response?.data?.message);
-
+        getToastValue('error',error?.response?.data?.message)
       })
   }
-
   return (
 
     <>
@@ -108,6 +104,7 @@ export default function Login({ saveUserData }: any) {
           </div>
         </div>
       </div>
+
 
     </>
   );

@@ -320,7 +320,9 @@ tr {
 .addHead {
   margin-top: 0px !important;
 }
-.inputs input::placeholder,
-textarea {
-  color: #917f7f !important;
+
+
+textarea::placeholder ,input::placeholder{
+  color:  #917f7f!important;
 }
+
