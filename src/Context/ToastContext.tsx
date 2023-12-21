@@ -7,14 +7,14 @@ export default  function ToastContextProvider (props:any){
     let getToastValue =(type,message)=>
     {
         return toast[type](message,{
-            position:'top-right',
-            autoClose:3000,
-            hideProgressBar:false,
-            closeOnClick:true,
-            pauseOnHover:true,
-            draggable:true,
-            progress:undefined,
-            theme:"colored"
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
 
         })
     }

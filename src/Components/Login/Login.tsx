@@ -6,41 +6,32 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContext } from '../../Context/ToastContext';
 import { ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function Login({ saveUserData }: any) {
-
   const { register, handleSubmit, formState: { errors } } = useForm();
   const{getToastValue}= useContext(ToastContext);
-
+  const{baseUrl}=useContext(AuthContext)
   const navigate = useNavigate()
 
+
   const LogIn = (data: any) => {
-
-    axios.post('http://upskilling-egypt.com:3003/api/v1/Users/Login', data)
-
+    axios.post(`${baseUrl}/Users/Login`, data)
       .then((response) => {
-
         localStorage.setItem("userToken", response?.data?.token)
-
         saveUserData()
-  
-        getToastValue('success',response?.data?.message)
        navigate('/dashboard')
-
+       getToastValue('success','welcome')
       }).catch((error) => {
-
         getToastValue('error',error?.response?.data?.message)
-  
-
       })
   }
-
   return (
 
     <>
-    
+
       <div className="Auth-container container-fluid ">
-      
+
         <div className="row bg-overlay vh-100 justify-content-center align-items-center">
 
           <div className="col-lg-5 col-md-7 col-sm-9 ">
@@ -113,7 +104,7 @@ export default function Login({ saveUserData }: any) {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+
 
     </>
   );
