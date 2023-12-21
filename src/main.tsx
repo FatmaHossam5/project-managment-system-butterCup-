@@ -9,13 +9,16 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import './index.css'
 
 import AuthContextProvider from './Context/AuthContext.tsx';
+import ToastContextProvider from './Context/ToastContext.tsx';
 
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthContextProvider>
+      <ToastContextProvider>
     <App/>
+    </ToastContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
 )

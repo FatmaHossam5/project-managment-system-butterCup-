@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import logo from '../../assets/PMS 3.svg'
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
+import { ToastContext } from '../../Context/ToastContext';
+import { ToastContainer } from 'react-toastify';
 
 export default function Login({ saveUserData }: any) {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const{getToastValue}= useContext(ToastContext);
 
   const navigate = useNavigate()
 
@@ -20,12 +24,13 @@ export default function Login({ saveUserData }: any) {
 
         saveUserData()
   
-        
+        getToastValue('success',response?.data?.message)
        navigate('/dashboard')
 
       }).catch((error) => {
 
-        console.log(error?.response?.data?.message);
+        getToastValue('error',error?.response?.data?.message)
+  
 
       })
   }
@@ -33,9 +38,9 @@ export default function Login({ saveUserData }: any) {
   return (
 
     <>
-
+    
       <div className="Auth-container container-fluid ">
-
+      
         <div className="row bg-overlay vh-100 justify-content-center align-items-center">
 
           <div className="col-lg-5 col-md-7 col-sm-9 ">
@@ -108,6 +113,7 @@ export default function Login({ saveUserData }: any) {
           </div>
         </div>
       </div>
+      <ToastContainer/>
 
     </>
   );
