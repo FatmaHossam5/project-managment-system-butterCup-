@@ -279,11 +279,26 @@ aside{
 .css-1t8x7v1 >.ps-menu-button{
   color: #fff!important;
   padding-left: 40px!important;
-  /* padding-right: 0px!important; */
-
-
- 
 }
+.bg-view{
+  background-color: rgb(14,56,47)!important;
+
+}
+.view input{
+  background-color: #EF9B28!important;
+}
+.arrView{
+height: 30px!important;
+width: 30px!important;
+  border-radius: 50%;
+  /* background-color: #0e382f!important; */
+}
+.arrView i{
+  height: 30px!important;
+  width: 30px!important;
+    border-radius: 50%;
+    color: #EF9B28!important;
+  }
 .css-1t8x7v1 >.ps-menu-button:hover{
   background-color: #EF9B28!important;
 }

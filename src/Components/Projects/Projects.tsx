@@ -110,25 +110,18 @@ const handleClose = () => setModalState("close");
           <th>Image</th>
           <th>Date Created</th>
           <th>
-        
           </th>
-
-
         </tr>
-      </thead>
-      
+      </thead> 
       <tbody className='text-center '>
         {allProjs.length>0&&allProjs.map((pro)=>(<tr key={pro?.id}>
           <td>{pro?.title}</td>
           <td className='text-white' ><div className='status'>{pro?.manager?.userName}</div></td>
           <td>{pro?.description}</td>
           <td>
-
           <div className="img-container">
       {pro?.imagePath?(<img className='img-fluid' src={`https://upskilling-egypt.com/`+pro.imagePath} />):(<img className='img-fluid'src={avatar}/>)}
-
       </div>
-
           </td>
           <td className='datepicker'>{pro?.creationDate}</td>
 <td>  <div className="dropdown ">
@@ -138,22 +131,17 @@ const handleClose = () => setModalState("close");
   <ul className="dropdown-menu ">
     <li onClick={()=>viewPro(pro?.id)}><a className="dropdown-item" > <i className=" fa-regular fa-eye "></i> View</a></li>
     <li onClick={()=>editShow(pro?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
- 
     <li onClick={()=>showDeleteModel(pro?.id)}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
   </ul>
 </div></td>
         </tr>
         ))}
         
-       
       </tbody>
     </Table>
 {allProjs.length==0&&<div className=' d-flex justify-content-center align-content-center'><img src={Datano} alt="notfound "  /></div>}
- 
   </div>
-
  </div>
-   
     </>
   )
 }
