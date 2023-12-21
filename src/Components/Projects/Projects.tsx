@@ -18,8 +18,10 @@ const handleClose = () => setModalState("close");
 
   const showAllProjects =()=>{
     axios.get(`${baseUrl}/Project`,{headers:reqHeaders}).then((response)=>{
-      console.log(response);
-      setAllProjs(response?.data)
+      
+      setAllProjs(response?.data?.data)
+      
+      
       
     }).catch((error)=>{
       console.log(error);
@@ -86,8 +88,6 @@ const handleClose = () => setModalState("close");
   <div className="col-md-12 ">
     <input type="text" placeholder='SearchFleets 'className='rounded-4 border-1 mb-4 pro' />
  
-    {allProjs.length==0?<div className=' d-flex justify-content-center align-content-center'><img src={Datano} alt="notfound" /></div>:
-
 
     <Table striped bordered hover>
       <thead >
@@ -106,39 +106,38 @@ const handleClose = () => setModalState("close");
       </thead>
       
       <tbody className='text-center '>
-      {allProjs.length>0?allProjs.map((pro)=>(<tr key={pro?.id}>
-        <td>{pro?.title}</td>
-        <td className='text-white' ><div className='status'>{pro?.manager?.userName}</div></td>
-        <td>{pro?.description}</td>
-        <td>
+        {allProjs.length>0&&allProjs.map((pro)=>(<tr key={pro?.id}>
+          <td>{pro?.title}</td>
+          <td className='text-white' ><div className='status'>{pro?.manager?.userName}</div></td>
+          <td>{pro?.description}</td>
+          <td>
 
-        <div className="img-container">
-    {pro?.imagePath?(<img className='img-fluid' src={`https://upskilling-egypt.com/`+pro.imagePath} />):(<img className='img-fluid'src={avatar}/>)}
+          <div className="img-container">
+      {pro?.imagePath?(<img className='img-fluid' src={`https://upskilling-egypt.com/`+pro.imagePath} />):(<img className='img-fluid'src={avatar}/>)}
 
-    </div>
+      </div>
 
-        </td>
-        <td className='datepicker'>{pro?.creationDate}</td>
+          </td>
+          <td className='datepicker'>{pro?.creationDate}</td>
 <td>  <div className="dropdown ">
-<button className="btn btn-transparent dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-<i className="fa-solid fa-ellipsis-vertical"></i>
-</button>
-<ul className="dropdown-menu ">
-  <li onClick={()=>viewPro(pro?.id)}><a className="dropdown-item" > <i className=" fa-regular fa-eye "></i> View</a></li>
-  <li onClick={()=>editShow(pro?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
-
-  <li onClick={showDeleteModel}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
-</ul>
+  <button className="btn btn-transparent dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <i className="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+  <ul className="dropdown-menu ">
+    <li onClick={()=>viewPro(pro?.id)}><a className="dropdown-item" > <i className=" fa-regular fa-eye "></i> View</a></li>
+    <li onClick={()=>editShow(pro?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
+ 
+    <li onClick={showDeleteModel}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
+  </ul>
 </div></td>
-      </tr>
-      )):""}
-      
-     
-    </tbody>
-    
+        </tr>
+        ))}
+        
+       
+      </tbody>
     </Table>
-   }
-
+{allProjs.length==0&&<div className=' d-flex justify-content-center align-content-center'><img src={Datano} alt="notfound "  /></div>}
+ 
   </div>
 
  </div>
