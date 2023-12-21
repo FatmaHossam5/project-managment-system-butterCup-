@@ -18,6 +18,7 @@ const handleClose = () => setModalState("close");
 
   const showAllProjects =()=>{
     axios.get(`${baseUrl}/Project`,{headers:reqHeaders}).then((response)=>{
+      console.log(response);
       
       setAllProjs(response?.data?.data)
       
@@ -37,13 +38,24 @@ const handleClose = () => setModalState("close");
     navigate(`/dashboard/edit-pro/${id}`)
 
   }
-  const showDeleteModel = ()=>{
-   
-    
+  const showDeleteModel = (id)=>{
+
     setModalState("delete-modal")
+    setItemId(id)
+ 
   }
   const viewPro = (id)=>{
     navigate(`/dashboard/view-pro/${id}`)
+  }
+  const DeleteProject =()=>{
+    axios.delete(`${baseUrl}/Project/${itemId}`,{headers:reqHeaders}).then((response)=>{
+      console.log(response);
+      handleClose()
+      showAllProjects()
+    }).catch((error)=>{
+      console.log(error);
+      
+    })
   }
   useEffect(() => {
     showAllProjects()
@@ -69,7 +81,7 @@ const handleClose = () => setModalState("close");
 
          
           <div className="delete-btn text-end">
-            <button  className='text-white bg-danger btn btn-outline-danger   border-danger rounded-2  '>Delete This Item </button>
+            <button onClick={DeleteProject} className='text-white bg-danger btn btn-outline-danger   border-danger rounded-2  '>Delete This Item </button>
           </div>
         </div>
    
@@ -127,7 +139,7 @@ const handleClose = () => setModalState("close");
     <li onClick={()=>viewPro(pro?.id)}><a className="dropdown-item" > <i className=" fa-regular fa-eye "></i> View</a></li>
     <li onClick={()=>editShow(pro?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
  
-    <li onClick={showDeleteModel}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
+    <li onClick={()=>showDeleteModel(pro?.id)}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
   </ul>
 </div></td>
         </tr>
