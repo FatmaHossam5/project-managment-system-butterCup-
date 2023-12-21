@@ -3,18 +3,24 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
+import { ToastContext } from '../../Context/ToastContext'
+import { ToastContainer } from 'react-toastify'
 
 export default function AddProject() {
  const navigate= useNavigate()
 const {register,handleSubmit,formState:{errors}}=useForm()
 let{baseUrl,reqHeaders}:any=useContext(AuthContext)
+const{getToastValue}= useContext(ToastContext);
+
 const AddProject =(data)=>{
-axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
+axios.post(`${baseUrl}/project`,data,{headers:reqHeaders}).then((response)=>{
+getToastValue('success','Added Successfully')
   navigate(-1)
 }).catch((error)=>{
-  console.log(error);
+  getToastValue('error',error?.response?.data?.message)
 })
 }
+
 const handleClose =()=>{
 navigate(-1)
 }
@@ -48,7 +54,7 @@ navigate(-1)
    {errors.description&&errors.description.type==='required'&&(<span className='text-danger'> description is required </span>)}
 
    </div>
-   <hr className='' />
+   <hr  />
    <div className="btns d-flex justify-content-between">
     <button  onClick={handleClose} className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
     <button  className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>save</button>
@@ -56,6 +62,7 @@ navigate(-1)
 </div>
   </div>
     </form>
+    
     </>
   )
 }

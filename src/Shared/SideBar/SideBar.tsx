@@ -1,7 +1,7 @@
-import  React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
+import { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
+import { Link, useNavigate } from "react-router-dom";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -10,29 +10,20 @@ export default function SideBar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let handleToggle = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+
   let navigate = useNavigate();
  let {role}:any=useContext(AuthContext)
  let logOut =()=>{
   localStorage.removeItem("userToken")
   navigate('/login')
 } 
-console.log(role);
 
- 
   return (
     <>
- 
-  
-   
     <Modal show={show} onHide={handleClose}>
-      
       <Modal.Body>
         <ChangePassword handleClose={handleClose}/>
       </Modal.Body>
-      
    </Modal>
     <div style={{ display: 'flex', height: '100%', minHeight: '400px' }}>
       <Sidebar collapsed={!isCollapsed} >
@@ -43,7 +34,6 @@ console.log(role);
            icon={<i className="fa fa-home fa-2x ico" aria-hidden="true"></i>}
            component={<Link to="/dashboard" />}>
             Home
-            
           </MenuItem>
           {role==='Manager'?<MenuItem
            style={{ fontSize: '12px' }} 
@@ -51,8 +41,7 @@ console.log(role);
             component={<Link to="/dashboard/users" />}
           >
             Users
-          </MenuItem>  :''}
-        
+          </MenuItem>  :''} 
           <MenuItem
            style={{ fontSize: '12px' }} 
             icon={<i className="fa-solid fa-diagram-project fa-2x ico"></i>}
@@ -89,31 +78,7 @@ console.log(role);
 
     
     </div>
-    {/* <div className=" position-relative" >
-      <Modal show={show} onHide={handleClose}>
-      
-        <Modal.Body>
-          <ChangePassword handleClose={handleClose}/>
-        </Modal.Body>
-        
-     </Modal>
-      <Sidebar collapsed={!isCollapsed}  >
-        <Menu >
-         <MenuItem></MenuItem>
-         
-         
-        
-        
-      
-        
-        </Menu>
-        <div className="arrow position-absolute" onClick={handleToggle}>
-{isCollapsed? <i className="fa-solid fa-chevron-left text-white"></i>:<i className="fa-solid fa-chevron-right text-white coll"></i>}
-</div>
-      </Sidebar>
 
-    
-      </div> */}
 
     </>
   );

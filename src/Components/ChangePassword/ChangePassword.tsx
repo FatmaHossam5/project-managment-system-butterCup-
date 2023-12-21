@@ -14,7 +14,7 @@ export default function ChangePass({ handleClose }:any) {
   } = useForm();
 
   const onSubmit = (data:any) => {
-    // console.log(data);
+ 
 
     axios
       .put(
