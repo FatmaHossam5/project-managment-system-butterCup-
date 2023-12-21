@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
-// import noData from './../../assets/images/no-data.png'
 import axios from "axios";
+import noData from '../../assets/noData.png';
+
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
 
-  const { baseUrl, requestHeaders }: any = useContext(AuthContext);
+  const { baseUrl,reqHeaders,role }: any = useContext(AuthContext);
   const navigate = useNavigate();
 
   const navigateToNew = () => {
@@ -16,12 +17,12 @@ export default function Tasks() {
 
   let getTasksList = () => {
     axios
-      .get(`${baseUrl}/Task`, { headers: requestHeaders })
+      .get(`${baseUrl}/Task/manager`,{ headers: reqHeaders })
       .then((response: any) => {
         setTasks(response?.data);
       })
       .catch((_: any) => {
-        
+      
       });
   };
 
@@ -31,11 +32,12 @@ export default function Tasks() {
 
   return (
     <>
-      <div className="header bg-info d-flex justify-content-between p-3">
+      <div className="header d-flex justify-content-between p-3">
         <h3>Tasks</h3>
-        <button onClick={navigateToNew} className="btn btn-warning rounded-5">
+        {role=="manager"? <button onClick={navigateToNew} className="btn btn-warning rounded-5">
           <i className="fa fa-plus" aria-hidden="true"></i> Add new task
-        </button>
+        </button>:""}
+       
       </div>
 
       <div className="table-container p-3">
@@ -43,8 +45,10 @@ export default function Tasks() {
           <thead>
             <tr>
               <th scope="col">Title</th>
+              <th scope="col">Status</th>
               <th scope="col">Description</th>
               <th scope="col">User</th>
+              <th scope="col">Project</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -53,13 +57,15 @@ export default function Tasks() {
               tasks.map((task: any) => (
                 <tr key={task?.id}>
                   <th scope="row">{task?.title}</th>
+                  <td key={task?.status}></td>
                   <td>{task?.description}</td>
-                  <td>nmsdnm</td>
+                  <td>{task?.employee.userName}</td>
+                  <td>{task?.project.title}</td>
                   <td></td>
                 </tr>
               ))
             ) : (
-              <div className="text-center">ff</div>
+              <div className="text-center"><img src={noData} alt="notfound" /></div>
             )}
           </tbody>
         </table>
