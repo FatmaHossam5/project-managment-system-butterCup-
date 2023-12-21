@@ -21,6 +21,8 @@ const handleClose = () => setModalState("close");
       console.log(response);
       
       setAllProjs(response?.data?.data)
+     
+      
       
       
       
