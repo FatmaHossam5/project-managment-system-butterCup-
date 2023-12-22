@@ -7,12 +7,11 @@ import { AuthContext } from '../../Context/AuthContext'
 export default function AddProject() {
  const navigate= useNavigate()
 const {register,handleSubmit,formState:{errors}}=useForm()
-let{baseUrl,reqHeaders}:any=useContext(AuthContext)
+const{baseUrl,reqHeaders}:any=useContext(AuthContext)
 const AddProject =(data)=>{
-axios.post(`${baseUrl}/Task`,data,{headers:reqHeaders}).then((response)=>{
-  
+axios.post(`${baseUrl}/Task`,data,
+{headers:reqHeaders}).then((response)=>{
   navigate(-1)
-  
 }).catch((error)=>{
   console.log(error);
   
@@ -45,12 +44,33 @@ axios.post(`${baseUrl}/Task`,data,{headers:reqHeaders}).then((response)=>{
 
     
     <label className='d-block fw-bolder' >Description</label>
-  
    <textarea className='form-control  border-2 rounded-2' cols="20" rows="4"   {...register("description",{required:true})} >Description
- 
-
    </textarea>
- 
+
+
+   <div className="inputs m-auto justify-content-between d-flex pt-3" >
+  <div className="input-group">
+    <label className='d-block fw-bolder ' htmlFor="userInput">User</label>
+    <input
+      type="text"
+      id="userInput"
+      placeholder='Select user'
+      className='border-2 rounded-2'
+      {...register('user', { required: true })}
+    />
+  </div>
+
+  <div className="input-group">
+    <label className='d-block fw-bolder' htmlFor="projectsInput">Projects</label>
+    <input
+      type="text"
+      id="projectsInput"
+      placeholder='Select status'
+      className='border-2 rounded-2'
+      {...register('projects', { required: true })}
+    />
+  </div>
+</div>
 
    </div>
    <hr className='' />

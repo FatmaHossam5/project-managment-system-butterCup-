@@ -87,12 +87,8 @@ export default function Tasks() {
   </div>
   <div className="col-md-12 ">
     <input type="text" placeholder='SearchFleets 'className='rounded-4 border-1 mb-4 pro' />
- 
       <div className="header d-flex justify-content-between p-3">
-       
-       
       </div>
-
      {role=="Manager"? <div className="table-container p-3">
         <table className="table">
           <thead>
