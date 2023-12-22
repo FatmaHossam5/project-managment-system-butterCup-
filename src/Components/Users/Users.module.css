@@ -1,0 +1,30 @@
+.users{
+    /* font-family: monospace; */
+    font-weight: 500;
+    width: 99%;
+}
+
+.tableContainer{
+    /* border-radius: 0.7rem !important;
+    overflow: hidden; */
+    box-shadow: 0 -5px 10px rgba(181, 181, 181, 0.1),   /* Top */
+              5px 0 10px rgba(181, 181, 181, 0.1),    /* Right */
+              0 5px 10px rgba(181, 181, 181, 0.1),    /* Bottom */
+              -5px 0 10px rgba(181, 181, 181, 0.1);   /* Left */
+}
+.tableContainer table tbody tr:last-child{
+    border-radius: 0.7rem !important;
+    overflow: hidden;
+    width: 95%;
+}
+.tableHead th{
+    background-color: rgba(49, 89, 81, 0.90) !important;
+}
+.searchIcon{
+    top: 50%;
+    bottom: 50%;
+    transform: translate(50%, -50%);
+}
+.searchInput{
+    padding-left: 2rem !important;
+}

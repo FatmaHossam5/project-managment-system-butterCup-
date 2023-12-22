@@ -307,14 +307,14 @@ main{padding: 0px!important;}
 /* .table>:not(caption)>*>*{
  background-color: rgb(70,106,98)!important;
 } */
-th{
+.container .col-md-12 th{
   background-color: rgb(70,106,98)!important;
   border-color:rgb(90, 110, 106)!important ;
 }
-.table{
+.container .col-md-12 .table{
  border: none!important;
 }
-td, tr{
+.container .col-md-12 td, .container .col-md-12 tr{
   border-style: none!important;
 }
 
