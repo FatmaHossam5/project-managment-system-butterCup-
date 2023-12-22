@@ -20,6 +20,7 @@ import ChangePass from "./Components/ChangePassword/ChangePassword";
 import AddProject from "./Components/AddProject/AddProject";
 import EditProject from "./Components/EditProject/EditProject";
 import ViewProject from "./Components/ViewProject/ViewProject";
+import AddTask from "./Components/AddTask/AddTask.jsx";
 
 function App() {
   let { userData, saveUserData }: any = useContext(AuthContext);
@@ -57,6 +58,8 @@ function App() {
         { path: "view-pro/:id", element: <ViewProject /> },
         { path: "users", element: <Users /> },
         { path: "tasks", element: <Tasks /> },
+        { path: "add-task", element: <AddTask/> },
+
       ],
     },
   ]);

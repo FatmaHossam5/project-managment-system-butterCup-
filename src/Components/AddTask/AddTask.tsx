@@ -1,7 +1,7 @@
 import axios from 'axios'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 
 export default function AddProject() {
@@ -9,7 +9,7 @@ export default function AddProject() {
 const {register,handleSubmit,formState:{errors}}=useForm()
 let{baseUrl,reqHeaders}:any=useContext(AuthContext)
 const AddProject =(data)=>{
-axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
+axios.post(`${baseUrl}/Task`,data,{headers:reqHeaders}).then((response)=>{
   
   navigate(-1)
   
@@ -25,33 +25,28 @@ axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
     <div className="container bg-white addHead pb-4">
     <div className="col-md-12">
       <div>
-     
-        
-        <h5 onClick={()=>navigate(-1)}>
+        <h5 className="p-3 m-auto" onClick={()=>navigate(-1)}>
         <i className="fa-solid fa-chevron-left pe-2"> </i>
-        view All Project
+        view All Tasks
         </h5>
-        
-        
-      
-      <h3> New Project</h3>
+      <h3> New Task</h3>
       </div>
     </div>
   </div>
   <div className="container">
 <div className="col-md-8  m-auto bg-white mt-4  p-5 rounded-3">
-  <div className="inputs w-75 m-auto ">
-    <label className='d-block ' >Title</label>
-    <input type="text" placeholder='Name' className='form-control  border-2 rounded-5 ' 
+  <div className="inputs m-auto ">
+    <label className='d-block fw-bolder ' >Title</label>
+    <input type="text" placeholder='Name' className='form-control  border-2 rounded-2 ' 
     {...register('title',{required:true})}
     />
     </div>
-    <div className='w-75 m-auto text'>
+    <div className='w-100 p-3 m-auto text'>
 
     
-    <label className='d-block' >Description</label>
+    <label className='d-block fw-bolder' >Description</label>
   
-   <textarea className='form-control  border-2 rounded-4' cols="20" rows="4"   {...register("description",{required:true})} >Description
+   <textarea className='form-control  border-2 rounded-2' cols="20" rows="4"   {...register("description",{required:true})} >Description
  
 
    </textarea>
@@ -60,7 +55,7 @@ axios.post(`${baseUrl}/Project`,data,{headers:reqHeaders}).then((response)=>{
    </div>
    <hr className='' />
    <div className="btns d-flex justify-content-between">
-    <button className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
+    <button className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-muted'>cancel</button>
     <button className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>save</button>
    </div>
  
