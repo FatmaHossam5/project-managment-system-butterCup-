@@ -66,10 +66,7 @@ const handleClose = () => setModalState("close");
             </div>
             <h5 className='py-3'> Are you sure to Delete this item ? </h5>
           </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> dfe32894b41c59e2ca027ee189c8c05d35c45874
           <div className="delete-btn text-end">
             <button onClick={DeleteProject} className='text-white bg-danger btn btn-outline-danger   border-danger rounded-2  '>Delete This Item </button>
           </div>

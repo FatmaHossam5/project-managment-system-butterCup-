@@ -15,14 +15,9 @@ export default function ChangePass({ handleClose }: any) {
     formState: { errors },
   } = useForm();
 
-<<<<<<< HEAD
   const onSubmit = (data: any) => {
-=======
   const onSubmit = (data:any) => {
- 
-
->>>>>>> dfe32894b41c59e2ca027ee189c8c05d35c45874
-    axios
+     axios
       .put(`${baseUrl}/Users/ChangePassword`, data, {
         headers: reqHeaders,
       })
@@ -129,4 +124,5 @@ export default function ChangePass({ handleClose }: any) {
       </div>
     </>
   );
+                }
 }

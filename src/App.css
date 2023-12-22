@@ -324,10 +324,7 @@ tr {
 textarea {
   color: #917f7f !important;
 }
-<<<<<<< HEAD
-=======
 
 textarea::placeholder ,input::placeholder{
   color:  #917f7f!important;
 }
->>>>>>> dfe32894b41c59e2ca027ee189c8c05d35c45874

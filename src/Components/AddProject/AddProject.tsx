@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
-import { ToastContainer } from 'react-toastify'
 
 export default function AddProject() {
  const navigate= useNavigate()
@@ -34,14 +33,8 @@ navigate(-1)
         <i className="fa-solid fa-chevron-left pe-2"> </i>
         view All Project
         </h5>
-<<<<<<< HEAD
-        
-        
-      
       <h3> New Project</h3>
-=======
       <h3>Add a New Project</h3>
->>>>>>> dfe32894b41c59e2ca027ee189c8c05d35c45874
       </div>
     </div>
   </div>

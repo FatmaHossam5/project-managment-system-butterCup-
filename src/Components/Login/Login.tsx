@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContext } from '../../Context/ToastContext';
-import { ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthContext';
 
 export default function Login({ saveUserData }: any) {

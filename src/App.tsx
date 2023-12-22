@@ -68,37 +68,9 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <RouterProvider router={routes} />
+      <RouterProvider router={routes} />,
      
-  ,{
-    path:'dashboard',
-    element: <ProtectedRoute userData={userData}> <MasterLayout userData={userData} />  </ProtectedRoute>,
-           
-               
-    errorElement:<Notfound/>,
-    children:[
-     {index:true,element:<Dashboard userData={userData} />},
-     {path:'projects',element:<Projects/>},
-      {path:'Add-pro',element:<AddProject/>},
-      {path:'edit-pro/:id',element:<EditProject/>},
-      {path:'view-pro/:id',element:<ViewProject/>},
-
-
-     
-   
-
-     {path:'users',element:<Users/>},
-     {path:'tasks',element:<Tasks/>},
-    ];
-
-  return (
-    <>
-  
-   <RouterProvider router={routes}/>
-   <ToastContainer/>
- dfe32894b41c59e2ca027ee189c8c05d35c45874
-    </>
-  );
-}
-
+</>
+)
+  }
 export default App;
