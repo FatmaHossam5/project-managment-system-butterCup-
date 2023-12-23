@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +13,8 @@ export default function SideBar() {
   const handleShow = () => setShow(true);
 
   let navigate = useNavigate();
+
+
  let {role}:any=useContext(AuthContext)
  let logOut =()=>{
   localStorage.removeItem("userToken")
@@ -80,6 +83,7 @@ export default function SideBar() {
     </div>
 
 
+
     </>
   );
-}  
+}
