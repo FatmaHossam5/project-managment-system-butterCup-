@@ -10,11 +10,13 @@ export default function MasterLayout({ userData }: any) {
         <div className="col-md-12 bg-white  ">
           <NavBar userData={userData} />
         </div>
-        <div className="d-flex ">
-          <div className="col-md-2 ">
+
+        <div className='d-flex '>
+          <div className="col-md-2 "  >
             <SideBar />
           </div>
           <div className='col-md-10 dashboard mt-0 '>
+
             <Outlet userData={userData} />
           </div>
         </div>
