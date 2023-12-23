@@ -8,7 +8,7 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function ChangePass({ handleClose }: any) {
   const navigate = useNavigate();
 
-  let { reqHeaders, baseUrl } = useContext(AuthContext);
+  let { reqHeaders, baseUrl }:any = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -17,11 +17,14 @@ export default function ChangePass({ handleClose }: any) {
 
 
 
+
+
   const onSubmit = (data:any) => {
  
 
 
     axios
+
       .put(`${baseUrl}/Users/ChangePassword`, data, {
         headers: reqHeaders,
       })
@@ -128,4 +131,5 @@ export default function ChangePass({ handleClose }: any) {
       </div>
     </>
   );
+                }
 }

@@ -76,6 +76,15 @@ export default function SideBar() {
          
        
           </div>
+
+        </main>
+      </div>
+
+  </>
+  )
+} 
+
+
         </div>
       </main>
 
@@ -87,3 +96,4 @@ export default function SideBar() {
     </>
   );
 }
+
