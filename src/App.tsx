@@ -23,31 +23,34 @@ import ViewProject from "./Components/ViewProject/ViewProject";
 import AddTask from "./Components/AddTask/AddTask.jsx";
 
 function App() {
-  let { userData, saveUserData }: any = useContext(AuthContext);
 
-  const routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <AuthLayout />,
-      errorElement: <Notfound />,
-      children: [
-        { index: true, element: <Login saveUserData={saveUserData} /> },
-        { path: "login", element: <Login saveUserData={saveUserData} /> },
-        { path: "register", element: <Register /> },
-        { path: "request-reset", element: <RequestReset /> },
-        { path: "reset-password", element: <ResetPassword /> },
-        { path: "verify-user", element: <VerifyUser /> },
-        { path: "Change-pass", element: <ChangePass /> },
-      ],
-    },
-    {
-      path: "dashboard",
-      element: (
-        <ProtectedRoute userData={userData}>
-          {" "}
-          <MasterLayout userData={userData} />{" "}
-        </ProtectedRoute>
-      ),
+
+
+ let {userData,saveUserData,role}:any=useContext(AuthContext)
+
+  const routes = createBrowserRouter([{
+     path:'/',
+     element:<AuthLayout/>,
+     errorElement:<Notfound/>,
+     children:[
+      {index:true,element:<Login saveUserData={saveUserData} />},
+      {path:'login',element:<Login saveUserData={saveUserData}/>},
+      {path:'register',element:<Register/>},
+      {path:'request-reset',element:<RequestReset/>},
+      {path:'reset-password',element:<ResetPassword/>},
+      {path:'verify-user',element:<VerifyUser/>},
+      {path:'Change-pass',element:<ChangePass/>},
+
+     ]
+  },{
+    path:'dashboard',
+    element: <ProtectedRoute userData={userData}> <MasterLayout userData={userData} />  </ProtectedRoute>,
+           
+               
+
+
+
+  
 
       errorElement: <Notfound />,
       children: [
@@ -67,10 +70,17 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
-      <RouterProvider router={routes} />,
+  <RouterProvider router={routes}/>
+   <ToastContainer/>
      
 </>
-)
-  }
+
+
+  
+ 
+
+ 
+  );
+}
+
 export default App;
