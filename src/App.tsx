@@ -1,30 +1,30 @@
-import { useContext } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
-import Dashboard from './Components/Dashboard/Dashboard';
-import Login from './Components/Login/Login';
-import Projects from './Components/Projects/Projects';
-import Register from './Components/Register/Register';
-import RequestReset from './Components/RequestReset/RequestReset';
-import ResetPassword from './Components/ResetPassword/ResetPassword';
-import Tasks from './Components/Tasks/Tasks';
-import Users from './Components/Users/Users';
-import VerifyUser from './Components/VerifyUser/VerifyUser';
-import AuthLayout from './Shared/AuthLayout/AuthLayout';
-import MasterLayout from './Shared/MasterLayout/MasterLayout';
-import Notfound from './Shared/NotFound/Notfound';
-import ProtectedRoute from './Shared/ProtectedRoute/ProtectedRoute';
-
-import ChangePass from './Components/ChangePassword/ChangePassword';
-
-import { ToastContainer } from 'react-bootstrap';
-import { AuthContext } from './Context/AuthContext';
-import AddProject from './Components/AddProject/AddProject';
-import EditProject from './Components/EditProject/EditProject';
-import ViewProject from './Components/ViewProject/ViewProject';
-
+import { useContext } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.css";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Login from "./Components/Login/Login";
+import Projects from "./Components/Projects/Projects";
+import Register from "./Components/Register/Register";
+import RequestReset from "./Components/RequestReset/RequestReset";
+import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import Tasks from "./Components/Tasks/Tasks";
+import Users from "./Components/Users/Users";
+import VerifyUser from "./Components/VerifyUser/VerifyUser";
+import AuthLayout from "./Shared/AuthLayout/AuthLayout";
+import MasterLayout from "./Shared/MasterLayout/MasterLayout";
+import Notfound from "./Shared/NotFound/Notfound";
+import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute";
+import { ToastContainer } from "react-bootstrap";
+import { AuthContext } from "./Context/AuthContext";
+import ChangePass from "./Components/ChangePassword/ChangePassword";
+import AddProject from "./Components/AddProject/AddProject";
+import EditProject from "./Components/EditProject/EditProject";
+import ViewProject from "./Components/ViewProject/ViewProject";
+import AddTask from "./Components/AddTask/AddTask.jsx";
 
 function App() {
+
+
 
  let {userData,saveUserData,role}:any=useContext(AuthContext)
 
@@ -47,30 +47,40 @@ function App() {
     element: <ProtectedRoute userData={userData}> <MasterLayout userData={userData} />  </ProtectedRoute>,
            
                
-    errorElement:<Notfound/>,
-    children:[
-     {index:true,element:<Dashboard userData={userData} />},
-     {path:'projects',element:<Projects/>},
-      {path:'Add-pro',element:<AddProject/>},
-      {path:'edit-pro/:id',element:<EditProject/>},
-      {path:'view-pro/:id',element:<ViewProject/>},
 
 
-     
-   
 
-     {path:'users',element:<Users/>},
-     {path:'tasks',element:<Tasks/>},
-    ]
-  }]);
+  
+
+      errorElement: <Notfound />,
+      children: [
+        { index: true, element: <Dashboard userData={userData} /> },
+        { path: "projects", element: <Projects /> },
+        { path: "Add-pro", element: <AddProject /> },
+        { path: "edit-pro/:id", element: <EditProject /> },
+        { path: "view-pro/:id", element: <ViewProject /> },
+        { path: "users", element: <Users /> },
+        { path: "tasks", element: <Tasks /> },
+        { path: "add-task", element: <AddTask/> },
+
+
+      ],
+    },
+  ]);
 
   return (
     <>
-  
-   <RouterProvider router={routes}/>
+  <RouterProvider router={routes}/>
    <ToastContainer/>
-    </>
-  )
+     
+</>
+
+
+  
+ 
+
+ 
+  );
 }
 
-export default App
+export default App;

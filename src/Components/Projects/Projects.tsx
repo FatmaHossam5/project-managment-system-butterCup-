@@ -17,6 +17,7 @@ const handleClose = () => setModalState("close");
   const showAllProjects =()=>{
     axios.get(`${baseUrl}/Project`,{headers:reqHeaders}).then((response)=>{
       setAllProjs(response?.data?.data)
+
     }).catch((error)=>{
       console.log(error);
     })
@@ -66,6 +67,7 @@ const handleClose = () => setModalState("close");
             </div>
             <h5 className='py-3'> Are you sure to Delete this item ? </h5>
           </div>
+
           <div className="delete-btn text-end">
             <button onClick={DeleteProject} className='text-white bg-danger btn btn-outline-danger   border-danger rounded-2  '>Delete This Item </button>
           </div>
@@ -92,7 +94,10 @@ const handleClose = () => setModalState("close");
           <th>
           </th>
         </tr>
+
+
       </thead>
+
       <tbody className='text-center '>
         {allProjs.length>0&&allProjs.map((pro)=>(<tr key={pro?.id}>
           <td>{pro?.title}</td>
@@ -100,7 +105,9 @@ const handleClose = () => setModalState("close");
           <td>{pro?.description}</td>
           <td>
           <div className="img-container">
+
       {pro?.imagePath?(<img className='img-fluid' src={`https://upskilling-egypt.com/`+pro?.imagePath} />):(<img className='img-fluid'src={avatar}/>)}
+
       </div>
           </td>
           <td className='datepicker'>{pro?.creationDate}</td>
@@ -116,6 +123,9 @@ const handleClose = () => setModalState("close");
 </div></td>
         </tr>
         ))}
+
+        
+
       </tbody>
     </Table>
 {allProjs.length==0&&<div className=' d-flex justify-content-center align-content-center'><img src={Datano} alt="notfound "  /></div>}
