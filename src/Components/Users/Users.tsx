@@ -1,6 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import styles from './Users.module.css'
-import { HiDotsVertical } from "react-icons/hi";
+import { HiDotsVertical as ThreeDots } from "react-icons/hi";
 import { FaEye } from "react-icons/fa6"
 import { ImBlocked } from "react-icons/im"
 import { CiSearch } from "react-icons/ci";
@@ -8,9 +8,11 @@ import { IoFilter } from "react-icons/io5";
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
+import { ToastContext } from '../../Context/ToastContext';
 
 export default function Users() {
 
+  const { getToastValue }: any = useContext(ToastContext)
   const { baseUrl, reqHeaders }: any = useContext(AuthContext)
   const [usersList, setUsersList] = useState()
   const [modalState, setModalState] = useState("close")
@@ -21,18 +23,19 @@ export default function Users() {
     axios.get(`${baseUrl}/Users`, { headers: reqHeaders }).then((response) => {
       setUsersList(response.data.data);
     }).catch((error) => {
-      console.log(error);
+      getToastValue('error', error.response.data.message)
     })
   }
 
   const handleBlock = (user: any) => {
-    axios.put(`${baseUrl}/Users/${user.id}`, user, { headers: reqHeaders })
+    axios.put(`${baseUrl}/Users/${user}`, user, { headers: reqHeaders })
       .then((response) => {
-        // setUsersList(response.data.data);
-        console.log(response);
         showAllUsers()
+        {
+          response.data.isActivated === false ? getToastValue('warning', "user is blocked") : getToastValue('success', "user is Unblocked")
+        }
       }).catch((error) => {
-        console.log(error);
+        getToastValue('error', error.response.data.message)
       })
   }
 
@@ -40,10 +43,12 @@ export default function Users() {
     setModalState("show-user")
     setUserItem(user)
   }
-  
+
   useEffect(() => {
     showAllUsers()
-  }, [])
+  }, [userItem])
+
+
 
   return (
     <Fragment>
@@ -119,16 +124,16 @@ export default function Users() {
 
                         <div className="dropdown">
 
-                          <HiDotsVertical className="dropdown-toggle" data-bs-toggle="dropdown" />
+                          <ThreeDots className="dropdown-toggle" data-bs-toggle="dropdown" />
                           <ul className="dropdown-menu">
                             <li>
                               {user.isActivated == true ?
 
                                 <a className="dropdown-item"
-                                  onClick={() => handleBlock(user)}> <ImBlocked /> Block
+                                  onClick={() => handleBlock(user.id)}> <ImBlocked /> Block
                                 </a>
                                 : <a className="dropdown-item"
-                                  onClick={() => handleBlock(user)}> <ImBlocked /> UnBlock
+                                  onClick={() => handleBlock(user.id)}> <ImBlocked /> UnBlock
                                 </a>
                               }
 
