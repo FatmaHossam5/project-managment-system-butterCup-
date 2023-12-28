@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
-import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
 import { AuthContext } from "../../Context/AuthContext";
@@ -77,23 +76,16 @@ export default function SideBar() {
        
           </div>
 
+
+          </div>
+
         </main>
       </div>
 
   </>
   )
-} 
+  
+    }
 
 
-        </div>
-      </main>
-
-    
-    </div>
-
-
-
-    </>
-  );
-}
 

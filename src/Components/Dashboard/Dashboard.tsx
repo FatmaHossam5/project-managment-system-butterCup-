@@ -1,8 +1,46 @@
-import React from 'react'
-import header from '../../assets/header-bg.png'
-export default function Dashboard({userData}:any) {
+import header from "../../assets/header-bg.png";
+import icon from "../../assets/icone_one.png";
+import iconn from "../../assets/icon_2.png";
+import iconnn from "../../assets/icon_3.png";
+import Ch from "../Chart/Ch.tsx";
+import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext.tsx";
+import { useContext, useEffect, useState } from "react";
+
+
+
+export default function Dashboard({ userData }: any) {
+  const [toDoCount, setToDoCount] = useState(0);
+  const [progressCount, setProgressCount] = useState(0);
+  const [doneCount, setDoneCount] = useState(0);
+ 
+
+  const {baseUrl,reqHeaders}:any=useContext(AuthContext)
+
+
+  const getTasksCounts =()=>{
+    axios.get(`${baseUrl}/Task/count`,{headers:reqHeaders}).then((response)=>{
+      // console.log(response);
+      
+      setToDoCount(response?.data?.toDo)
+      setProgressCount(response?.data?.inProgress)
+      setDoneCount(response?.data?.done)
+
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
+
+
+useEffect(()=>{
+  getTasksCounts();
+},[])
+
   return (
-    <div className="container-fluid headers  ">
+    <>
+      <div>
+        <div className="container-fluid headers  ">
     <div className="col-md-12 ">
       <div className="header position-relative   ">
       <img src={header} alt="" className='w-100 '/>
@@ -19,5 +57,38 @@ export default function Dashboard({userData}:any) {
    
     </div>
    </div>
-  )
+        <div className="row">
+          <div className="col-md-6">
+            <div>
+              <h3 className="pt-5 mt-5">Tasks</h3>
+              <span>Lorem ipsum dolor sit amet,consecteture</span>
+              <div className="row">
+                <div className="col-md-4 d-flex p-4 m-4 ">
+                  <div className=" rounded-3 colorr-one p-3 m-2 text-center" >
+                    <img src={icon} alt="#" className="rounded-2 color-one "  style={{ width: '30px' }} />
+                    <div className="text-#6F7881 " >Todo</div>
+                    <h6>{toDoCount}</h6>
+                  </div>
+                  <div className=" rounded-3 colorr-two p-3 m-2 text-center" >
+                    <img src={iconn} alt="#" className="rounded-2 color-two"  style={{ width: '30px' }} />
+                    <div className="text-#6F7881 " >Inprogress</div>
+                    <h6>{progressCount}</h6>
+                  </div>
+                  <div className=" rounded-3 colorr-three p-3 m-2 text-center" >
+                    <img src={iconnn} alt="#" className="rounded-2 color-three"  style={{ width: '30px' }} />
+                    <div className="text-#6F7881 " >Done</div>
+                    <h6>{doneCount}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <h3 className="pt-5 mt-5">Users</h3>
+            <Ch />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

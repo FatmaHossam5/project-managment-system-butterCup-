@@ -14,16 +14,8 @@ export default function ChangePass({ handleClose }: any) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-
-
-
-
   const onSubmit = (data:any) => {
- 
-
-
-    axios
+     axios
 
       .put(`${baseUrl}/Users/ChangePassword`, data, {
         headers: reqHeaders,
@@ -132,4 +124,4 @@ export default function ChangePass({ handleClose }: any) {
     </>
   );
                 }
-}
+
