@@ -13,9 +13,9 @@ export default function Ch() {
   const {baseUrl,reqHeaders}:any=useContext(AuthContext)
 
 
-  const getChartCounts =()=>{
-    axios.get(`${baseUrl}/Users/count`,{headers:reqHeaders}).then((response)=>{
-      // console.log(response);
+  const getChartCountsUser =()=>{
+    axios.get(`${baseUrl}/Task/count`,{headers:reqHeaders}).then((response)=>{
+    //   console.log(response);
       
       setActiveCount(response?.data?.activatedEmployeeCount)
       setDeActiveCount(response?.data?.deactivatedEmployeeCount)
@@ -26,7 +26,7 @@ export default function Ch() {
   }
 
   useEffect(()=>{
-    getChartCounts();
+    getChartCountsUser();
   },[])
   
   const data = {
