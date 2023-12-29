@@ -80,13 +80,13 @@ export default function SideBar() {
             </div>
           </div>
         </main>
-      </div>
+  
 
     </>
   )
   
     }
 
-} 
+
 
 

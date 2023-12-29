@@ -6,19 +6,23 @@ import axios from "axios";
 
 export default function Ch() {
 
-  const [activeCount, setActiveCount] = useState(0);
-  const [deActiveCount, setDeActiveCount] = useState(0);
-  // console.log(deActiveCount);
-  
+ 
+
+  const [toDoCount, setToDoCount] = useState(0);
+  const [progressCount, setProgressCount] = useState(0);
+  const [doneCount, setDoneCount] = useState(0);
+ 
+
   const {baseUrl,reqHeaders}:any=useContext(AuthContext)
 
 
-  const getChartCounts =()=>{
-    axios.get(`${baseUrl}/Users/count`,{headers:reqHeaders}).then((response)=>{
-      // console.log(response);
+  const getTasksCounts =()=>{
+    axios.get(`${baseUrl}/Task/count`,{headers:reqHeaders}).then((response)=>{
+      console.log(response);
       
-      setActiveCount(response?.data?.activatedEmployeeCount)
-      setDeActiveCount(response?.data?.deactivatedEmployeeCount)
+      setToDoCount(response?.data?.toDo)
+      setProgressCount(response?.data?.inProgress)
+      setDoneCount(response?.data?.done)
 
     }).catch((error)=>{
       console.log(error);
@@ -26,17 +30,17 @@ export default function Ch() {
   }
 
   useEffect(()=>{
-    getChartCounts();
+    getTasksCounts();
   },[])
   
   const data = {
-    labels: ["Active", "Deactivated"],
+    labels: ["ToDo", "InProgress","Done"],
     datasets: [
       {
         label: "Employee Status",
-        data: [activeCount, deActiveCount],
+        data: [toDoCount,progressCount,doneCount ],
         borderWidth: 1,
-        backgroundColor:['pink','gray'],
+        backgroundColor:['pink','gray',"beige"],
       },
     ],
     options: {

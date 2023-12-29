@@ -6,27 +6,27 @@ import axios from "axios";
 
 export default function Ch() {
 
-  const [activeCount, setActiveCount] = useState(0);
-  const [deActiveCount, setDeActiveCount] = useState(0);
-  // console.log(deActiveCount);
+    const [activeCount, setActiveCount] = useState(0);
+    const [deActiveCount, setDeActiveCount] = useState(0);
+    // console.log(deActiveCount);
+    
+    const {baseUrl,reqHeaders}:any=useContext(AuthContext)
   
-  const {baseUrl,reqHeaders}:any=useContext(AuthContext)
-
-
-  const getChartCountsUser =()=>{
-    axios.get(`${baseUrl}/Task/count`,{headers:reqHeaders}).then((response)=>{
-    //   console.log(response);
-      
-      setActiveCount(response?.data?.activatedEmployeeCount)
-      setDeActiveCount(response?.data?.deactivatedEmployeeCount)
-
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
+  
+    const getChartCounts =()=>{
+      axios.get(`${baseUrl}/Users/count`,{headers:reqHeaders}).then((response)=>{
+        // console.log(response);
+        
+        setActiveCount(response?.data?.activatedEmployeeCount)
+        setDeActiveCount(response?.data?.deactivatedEmployeeCount)
+  
+      }).catch((error)=>{
+        console.log(error);
+      })
+    }
 
   useEffect(()=>{
-    getChartCountsUser();
+    getChartCounts();
   },[])
   
   const data = {
