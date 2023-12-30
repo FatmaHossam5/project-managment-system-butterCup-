@@ -290,11 +290,7 @@ aside{
 .ico{
   transform: translateX(-80%);
 }
- /* .css-1wvake5{
-  background-color: red!important;
-  min-width: 210px!important;
- 
-} */
+
 main{padding: 0px!important;}
 .trans-head{
  
@@ -304,9 +300,7 @@ main{padding: 0px!important;}
 .navbar{
   box-shadow:0px 2px 2px #b9b9b9!important;
 }
-/* .table>:not(caption)>*>*{
- background-color: rgb(70,106,98)!important;
-} */
+
 .container .col-md-12 th{
   background-color: rgb(70,106,98)!important;
   border-color:rgb(90, 110, 106)!important ;
@@ -346,3 +340,20 @@ main{padding: 0px!important;}
 textarea::placeholder ,input::placeholder{
   color:  #917f7f!important;
 }
+.arrView{
+  height: 30px!important;
+  width: 30px!important;
+    border-radius: 50%;
+
+  }
+  .arrView i{
+    height: 30px!important;
+    width: 30px!important;
+      border-radius: 50%;
+      color: #EF9B28!important;
+    }
+    .bg-view{
+      background-color: rgb(14,56,47)!important;
+    
+    }
+ 
