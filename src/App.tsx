@@ -21,6 +21,8 @@ import AddProject from "./Components/AddProject/AddProject";
 import EditProject from "./Components/EditProject/EditProject";
 import ViewProject from "./Components/ViewProject/ViewProject";
 import AddTask from "./Components/AddTask/AddTask.jsx";
+import DarkAndLight from "./Components/DarkAndLight/DarkAndLight.js";
+
 
 function App() {
 
@@ -62,6 +64,8 @@ function App() {
         { path: "users", element: <Users /> },
         { path: "tasks", element: <Tasks /> },
         { path: "add-task", element: <AddTask/> },
+        { path: "dark", element: <DarkAndLight/> },
+
 
 
       ],

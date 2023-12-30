@@ -70,6 +70,9 @@ export default function SideBar() {
           </Menu>
         </Sidebar>
 
+
+          </div>
+
         <main style={{ padding: 10 }}>
           <div>
             <div className=" position-relative arrow " onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -77,10 +80,13 @@ export default function SideBar() {
             </div>
           </div>
         </main>
-      </div>
+  
 
     </>
   )
-} 
+  
+    }
+
+
 
 

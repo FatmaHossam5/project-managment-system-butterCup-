@@ -346,3 +346,28 @@ main{padding: 0px!important;}
 textarea::placeholder ,input::placeholder{
   color:  #917f7f!important;
 }
+
+
+.color-one{
+  background-color: #CFD1EC;
+}
+
+.colorr-one{
+  background-color: #E5E6F4;
+}
+
+.color-two{
+  background-color:#E4E4BC;
+}
+
+.colorr-two{
+  background-color: #F4F4E5;
+}
+
+.color-three{
+  background-color: #E7C3D7;
+}
+
+.colorr-three{
+  background-color: #F4E5ED;
+}
