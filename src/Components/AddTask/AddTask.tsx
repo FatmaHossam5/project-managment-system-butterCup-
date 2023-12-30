@@ -12,12 +12,13 @@ export default function AddProject() {
   let { getToastValue } = useContext(ToastContext)
   const [users, setUsers] = useState([])
   const [allProjects, setAllProjects] = useState([])
+ 
 
 
   {/* Add  Task*/ }
   const AddTask = (data) => {
     axios.post(`${baseUrl}/Task`, data, { headers: reqHeaders }).then((response) => {
-      console.log(response);
+   
 
       navigate(-1)
 
