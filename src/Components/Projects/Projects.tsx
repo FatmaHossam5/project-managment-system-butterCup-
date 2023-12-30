@@ -11,7 +11,6 @@ import { IoFilter } from "react-icons/io5";
 import { ToastContext } from '../../Context/ToastContext';
 import noData from '../../assets/noData.png';
 
-
 export default function Projects() {
   const { baseUrl, reqHeaders, role }: any = useContext(AuthContext)
   const [allProjs, setAllProjs] = useState([])
@@ -19,6 +18,9 @@ export default function Projects() {
   const [itemId, setItemId] = useState(0)
   const navigate = useNavigate()
   const [modalState, setModalState] = useState("close")
+  const [pageArray,setPageArray] = useState()
+  const [searchValue,setSearchValue] = useState()
+
   const handleClose = () => setModalState("close");
 
   const { getToastValue }: any = useContext(ToastContext)
@@ -27,26 +29,28 @@ export default function Projects() {
     axios.get(`${baseUrl}/Project`, { headers: reqHeaders }).then((response) => {
       setAllProjs(response?.data?.data)
     }).catch((error) => {
-      console.log(error);
+      getToastValue('error', error.response.data.message)
     })
   }
 
-  const showAllProjectsEmployee = () => {
+  const showAllProjectsEmployee = (no:any,searchValue) => {
     axios.get(`${baseUrl}/Project/employee`,
       {
         headers: reqHeaders,
 
         params: {
           pageSize: 5,
-          pageNumber: 1
+          pageNumber: no,
+          title:searchValue
         }
 
       }
 
     ).then((response) => {
+      setPageArray(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
       setAllProjsEmployee(response?.data?.data)
     }).catch((error) => {
-      console.log(error);
+      getToastValue('error', error.response.data.message)
     })
   }
 
@@ -74,15 +78,23 @@ export default function Projects() {
         showAllProjects()
         getToastValue('success', "Deleted Successfully")
       }).catch((error) => {
-        console.log(error);
-
+        getToastValue('error', error.response.data.message)
       })
   }
-  useEffect(() => {
-    showAllProjects();
-    showAllProjectsEmployee()
-  }, [])
 
+  const filtration = (e:any) => {
+    searchValue?
+      showAllProjectsEmployee(1,searchValue)
+   : <img src={noData} alt="" />
+  }
+  
+  //Calling
+  useEffect(() => {
+   { role == "Manager" ? 
+    showAllProjects()
+    :showAllProjectsEmployee()}    
+  }, [])
+  
   return (
     <>
       <Modal show={modalState === 'delete-modal'} onHide={handleClose}>
@@ -107,6 +119,8 @@ export default function Projects() {
 
       {
         role == 'Manager' ?
+
+          // manager
           <div className="container rounded-3">
 
             <div className=" d-flex justify-content-between header bg-white py-4 px-5">
@@ -124,7 +138,7 @@ export default function Projects() {
                     <input
                       type="text"
                       className={`form-control ${styles.searchInput} rounded-5`}
-                      placeholder="SearchFleets "
+                      placeholder="Search by title of project"
                     />
                   </div>
                 </div>
@@ -208,10 +222,13 @@ export default function Projects() {
 
           :
 
+          // employee
           <div className="container rounded-3">
+
             <div className="header bg-white py-4 px-5">
               <h2>Projects</h2>
             </div>
+
             <div className={`${styles.tableContainer} my-3 p-0 rounded-3 bg-white `}>
 
               {/* Filteration Row */}
@@ -222,12 +239,13 @@ export default function Projects() {
                     <input
                       type="text"
                       className={`form-control ${styles.searchInput} rounded-5`}
-                      placeholder="SearchFleets "
+                      placeholder="Search by title of project"
+                      onChange={(e)=>setSearchValue(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col-md-2">
-                  <button className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
+                  <button onClick={filtration} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
                 </div>
               </div>
 
@@ -249,10 +267,15 @@ export default function Projects() {
                     <tbody>
 
                       {
-                        allProjs.map((pro) => {
+                        allProjsEmployee.map((pro) => {
                           return (
-                            <tr>
-                              <td>test</td>
+                            <tr key={pro?.id}>
+                              <td>{pro?.title}</td>
+                              <td className='text-white' ><div className='status p-1'>{pro?.description}</div></td>
+                              <td>{pro?.modificationDate}</td>
+                              <td>{pro?.task.length}</td>
+                              <td>{pro?.creationDate}</td>
+                              <td></td>
                             </tr>
                           )
                         }
@@ -273,13 +296,20 @@ export default function Projects() {
                   Showing
                 </div>
                 <div className="col-md-1">
-                  <select className='form-select'>
-                    <option value="10">10</option>
-                    <option value="10">20</option>
+                  <select className='form-select' 
+                  onChange={(e)=>showAllProjectsEmployee(e.target.value, searchValue)}
+                  >
+                  {
+                    pageArray?.map((pageNo)=>{               
+                     return(
+                      <option key={pageNo} value={pageNo}>{pageNo}</option>
+                     )
+                    })
+                  }
                   </select>
                 </div>
                 <div className="col-md-2 text-center">
-                  of 102 Results
+                  of {pageArray?.length} Results
                 </div>
               </div>
 
