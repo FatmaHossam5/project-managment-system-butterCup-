@@ -22,6 +22,8 @@ import EditProject from "./Components/EditProject/EditProject";
 import ViewProject from "./Components/ViewProject/ViewProject";
 import AddTask from "./Components/AddTask/AddTask.jsx";
 import EditTask from "./Components/EditTask/EditTask.js";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
 
@@ -73,9 +75,10 @@ function App() {
 
   return (
     <>
+    <DndProvider backend={HTML5Backend}>
   <RouterProvider router={routes}/>
    <ToastContainer/>
-     
+   </DndProvider>
 </>
 
 

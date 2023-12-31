@@ -7,6 +7,7 @@ import Datano from '../../assets/DataNo.svg';
 import { Modal, Pagination, Table } from 'react-bootstrap';
 import { ToastContext } from "../../Context/ToastContext";
 import DataTable from "react-data-table-component";
+import Column from "./Column";
 
 
 
@@ -20,6 +21,11 @@ export default function Tasks() {
   const { baseUrl, reqHeaders, role }: any = useContext(AuthContext);
   const {getToastValue}=useContext(ToastContext)
   const navigate = useNavigate();
+ 
+  const [todos,setTodos]=useState([])
+  const [inProgress,setInProgress]=useState([])
+  const [done,setDone]=useState([])
+  
  
   
 
@@ -67,11 +73,33 @@ export default function Tasks() {
 
   }
 
+  const getEmployeeTasks =()=>{
+    axios.get(`${baseUrl}/Task`,{headers:reqHeaders}).then((response)=>{
+      console.log(response);
+      
+  
+      const todosTask=response?.data?.data.filter((task:any)=>task.status=='ToDo')
+      const inProgressTask=response?.data?.data.filter((task:any)=>task.status=='InProgress')
+      const doneTask=response?.data?.data.filter((task:any)=>task.status=='Done')
+      setTodos(todosTask)
+      setInProgress(inProgressTask)
+      setDone(doneTask)
+  
+      setTasks(response.data.data)
+   
+    })
+   }
+  
+
   useEffect(() => {
+    if(role==='Manager')
     getTasksList();
+  else
+  getEmployeeTasks()
   }, []);
 
 
+  const statuses =['ToDo','InProgress','Done']
   return (
     <>
   
@@ -113,7 +141,8 @@ export default function Tasks() {
 
           </div>
 
-          {role == "Manager" ? <div className="table-container p-3">
+          {role == "Manager" ? 
+          <div className="table-container p-3">
             <Table striped bordered hover>
               <thead className='text-center '>
                 <tr>
@@ -161,7 +190,24 @@ export default function Tasks() {
             
            </Table>
     
-          </div> : <h1>employee</h1>}
+          </div> :
+           <>
+
+
+{todos.length>0&&<div className="row ">
+
+
+  <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-5 tasksBox text-white text-center">
+ 
+  {statuses.map((status,index)=>
+  <Column  key={index} status={status} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done}  setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks}/>)}
+  </div>
+
+
+  </div>}
+
+
+          </>}
             
            
         </div>

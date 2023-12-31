@@ -356,4 +356,12 @@ textarea::placeholder ,input::placeholder{
       background-color: rgb(14,56,47)!important;
     
     }
- 
+ .tasksBox{
+  background-color: #f2f0f0!important;
+ }
+ .boxContainer{
+  background-color: rgb(69, 105, 97)!important;
+ }
+ .boxTask{
+  background-color: #EF9B28;
+ }
