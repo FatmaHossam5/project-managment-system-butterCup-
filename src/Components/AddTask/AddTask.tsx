@@ -4,23 +4,32 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+import { TasksContext } from '../../Context/TasksContext'
 
-export default function AddProject() {
+export default function AddTask() {
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
   let { baseUrl, reqHeaders }: any = useContext(AuthContext)
   let { getToastValue } = useContext(ToastContext)
   const [users, setUsers] = useState([])
   const [allProjects, setAllProjects] = useState([])
+  // let{  getAllTasks,getDataTasks}=useContext(TasksContext)
  
+
 
 
   {/* Add  Task*/ }
   const AddTask = (data) => {
     axios.post(`${baseUrl}/Task`, data, { headers: reqHeaders }).then((response) => {
-   
 
-      navigate(-1)
+      getToastValue('success','Added Successfully')
+      navigate('/dashboard/tasks')
+  
+
+      
+
+    
+      
 
     }).catch((error) => {
 
@@ -58,6 +67,7 @@ export default function AddProject() {
   useEffect(() => {
     Users();
     AllProjects();
+   
   }, [])
   return (
     <>
