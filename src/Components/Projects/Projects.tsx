@@ -74,7 +74,7 @@ const handleClose = () => setModalState("close");
         </div>
        </Modal.Body>
      </Modal>
- <div className="container bg-white rounded-3 px-3">
+ <div className="container bg-white rounded-3 p-3">
   <div className="col-md-12 trans-head">
     <div className="top d-flex justify-content-between ">
       <h4>Projects</h4>
@@ -82,7 +82,7 @@ const handleClose = () => setModalState("close");
     </div>
   </div>
   <div className="col-md-12 ">
-    <input type="text" placeholder='SearchFleets 'className='rounded-4 border-1 mb-4 pro' />
+    <input type="text" placeholder='    SearchFleets 'className='rounded-4 border-1 mb-4 pro' />
     <Table striped bordered hover>
       <thead >
         <tr className='bg text-center' >
@@ -110,7 +110,7 @@ const handleClose = () => setModalState("close");
 
       </div>
           </td>
-          <td className='datepicker'>{pro?.creationDate}</td>
+          <td className='datepicker' >{pro?.creationDate}</td>
 <td> <div className="dropdown ">
   <button className="btn btn-transparent dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="fa-solid fa-ellipsis-vertical"></i>
