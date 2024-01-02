@@ -66,6 +66,7 @@ export default function Users() {
       showAllUsers(1, searchValue, searchRole)
       : <img src={noData} alt="" />}
   }
+  
   const filtrationByRole = () => {
     searchRole !== null ?
       showAllUsers(1, searchValue, searchRole)
