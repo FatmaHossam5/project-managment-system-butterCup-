@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
-import { ToastContainer } from 'react-toastify';
+
 
 export default function EditProject() {
   const {id}:any=useParams();
@@ -13,7 +13,7 @@ export default function EditProject() {
   const navigate=useNavigate()
   const{getToastValue}=useContext(ToastContext)
  
-   const updatePro = (data)=>{
+   const updatePro = (data:any)=>{
     axios.put (`${baseUrl}/project/${id}`,data,{headers:reqHeaders}).then((response)=>
     {
 
@@ -59,7 +59,7 @@ export default function EditProject() {
             </div>
             <div className='w-75 m-auto text'>
               <label className='d-block' >Description</label>
-              <textarea className='form-control  border-2 rounded-4' cols="20" rows="4" placeholder='description'  {...register("description", { required: true })}  >Description
+              <textarea className='form-control  border-2 rounded-4' cols={20} rows={4} placeholder='description'  {...register("description", { required: true })}  >Description
               </textarea>
               {errors.description&&errors.description.type==='required'&&(<span className='test-danger'>Title is Required</span>)}
             </div>

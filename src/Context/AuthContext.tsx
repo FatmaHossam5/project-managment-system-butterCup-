@@ -1,28 +1,46 @@
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
+interface UserData{
+id:string;
+username:string;
+}
+interface AuthContextType{
+  userData:UserData|null;
+  saveUserData:()=>void;
+  baseUrl:string;
+  reqHeaders:Record<string,string>;
+  role:string|null;
+}
+export const AuthContext = createContext<AuthContextType> ({
+  userData:null,
+  saveUserData:()=>{}
+  ,baseUrl:"",
+  reqHeaders:{},
+  role:null
+});
 
 
-export  const AuthContext = createContext ({});
+export default function AuthContextProvider(props:React.PropsWithChildren<{}>){
 
-
-export default function AuthContextProvider(props:any){
-
-  const [userData, setUserData] = useState(null);
-  const[role,setRole]=useState(null)
+  const [userData, setUserData] = useState<UserData|null>(null);
+  const[role,setRole]=useState <string|null>(null)
   
 
-  let reqHeaders={
-    Authorization:`Bearer ${localStorage.getItem("userToken")}`
+  const reqHeaders:Record<string,string>    ={
+    Authorization:`Bearer ${localStorage.getItem("userToken")||''}`
   }
-  const baseUrl = "http://upskilling-egypt.com:3003/api/v1";
+  const baseUrl = "https://upskilling-egypt.com:3003/api/v1";
 
   const saveUserData = () => {
-    const encodedToken:any = localStorage.getItem("userToken");
-    const decodedToken:any = jwtDecode(encodedToken)
+    const encodedToken = localStorage.getItem("userToken");
+    if(encodedToken){
+      const decodedToken:any = jwtDecode(encodedToken)
 
-    setUserData(decodedToken)
-    setRole(decodedToken.userGroup)
+      setUserData(decodedToken)
+      setRole(decodedToken.userGroup)
+    }
+    
 
   };
 
@@ -32,9 +50,16 @@ export default function AuthContextProvider(props:any){
     }
   }, []);
 
+  const contextValue:AuthContextType={
+    userData,
+    saveUserData,
+    baseUrl,
+    reqHeaders,
+    role
+  }
 
   return (
-    <AuthContext.Provider value={{userData,saveUserData,baseUrl,reqHeaders,role}}>
+    <AuthContext.Provider value={contextValue}>
       {props.children}
     </AuthContext.Provider>
   );

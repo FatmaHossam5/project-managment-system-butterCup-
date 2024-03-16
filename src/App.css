@@ -9,21 +9,43 @@ body{
 
 form button
 {
-  background-color: #EF9B28 !important;
+  background-color: rgb(239, 155, 40) !important;
   color: #fff !important;
   font-weight: 500 !important;
   line-height: 46px;
+
   
 } 
+.hover-effect{
+  
+  transition:  box-shadow 0.3s, transform 0.3s!important;
+}
+.hover-effect:hover{
+  transform: translateY(-2px);
+   box-shadow: 0px 4px 8px rgba(239, 155, 40, 0.5);
+}
+.search-input{
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.search-input:focus{
+  outline: none;
+  border-color: rgba(45, 180, 153, 0.8);
+}
+.search-input::placeholder {
+  color: #999; 
+}
 .form-group input{
   font-size: 14px;
   border: none!important;
   background-color: transparent!important;
 }
 
-/* ::placeholder{
-  color: rgba(255, 255, 255)!important;
-} */
+
 .Forget-pass{
   color: rgba(255, 255, 255)!important;
   font-weight: 400;
@@ -279,7 +301,7 @@ aside{
 .css-1t8x7v1 >.ps-menu-button{
   color: #fff!important;
   padding-left: 40px!important;
-  /* padding-right: 0px!important; */
+
 
 
  
@@ -290,12 +312,9 @@ aside{
 .ico{
   transform: translateX(-80%);
 }
- /* .css-1wvake5{
-  background-color: red!important;
-  min-width: 210px!important;
- 
-} */
+
 main{padding: 0px!important;}
+
 .trans-head{
  
   padding-top: 20px!important;
@@ -304,9 +323,7 @@ main{padding: 0px!important;}
 .navbar{
   box-shadow:0px 2px 2px #b9b9b9!important;
 }
-/* .table>:not(caption)>*>*{
- background-color: rgb(70,106,98)!important;
-} */
+
 .container .col-md-12 th{
   background-color: rgb(70,106,98)!important;
   border-color:rgb(90, 110, 106)!important ;
@@ -346,3 +363,28 @@ main{padding: 0px!important;}
 textarea::placeholder ,input::placeholder{
   color:  #917f7f!important;
 }
+.arrView{
+  height: 30px!important;
+  width: 30px!important;
+    border-radius: 50%;
+
+  }
+  .arrView i{
+    height: 30px!important;
+    width: 30px!important;
+      border-radius: 50%;
+      color: #EF9B28!important;
+    }
+    .bg-view{
+      background-color: rgb(14,56,47)!important;
+    
+    }
+ .tasksBox{
+  background-color: #f2f0f0!important;
+ }
+ .boxContainer{
+  background-color: rgb(69, 105, 97)!important;
+ }
+ .boxTask{
+  background-color: #EF9B28;
+ }
