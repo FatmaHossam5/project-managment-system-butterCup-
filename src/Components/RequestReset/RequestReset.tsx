@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import logo from '../../assets/PMS 3.svg'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
-import { toast } from 'react-toastify';
+
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
@@ -48,7 +48,6 @@ navigate('/reset-password')
                     placeholder="Enter your E-mail "
                     className="form-control ps-4 mb-1 login "
                     type="email"
-                    name='email'
                     {...register("email", { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })} />
                   {errors.email && errors.email.type === 'required' && (<span className='text-danger'> Email is required</span>)}
                   <hr className="text-white" />

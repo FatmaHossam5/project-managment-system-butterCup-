@@ -4,18 +4,21 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+interface FormData {
+  title: string;
+  description: string;
+}
 
 
-import { ToastContainer } from 'react-toastify'
 
 
 export default function AddProject() {
  const navigate= useNavigate()
-const {register,handleSubmit,formState:{errors}}=useForm()
+const {register,handleSubmit,formState:{errors}}=useForm<FormData>()
 let{baseUrl,reqHeaders}:any=useContext(AuthContext)
 const{getToastValue}= useContext(ToastContext);
 
-const AddProject =(data)=>{
+const AddProject =(data:FormData)=>{
 axios.post(`${baseUrl}/project`,data,{headers:reqHeaders}).then((response)=>{
 getToastValue('success','Added Successfully')
   navigate(-1)
@@ -54,7 +57,7 @@ navigate(-1)
     </div>
     <div className='w-75 m-auto text'>
     <label className='d-block' >Description</label>
-   <textarea className='form-control  border-2 rounded-4' cols="20" rows="4" placeholder='Description'   {...register("description",{required:true})} >
+   <textarea className='form-control  border-2 rounded-4' cols={20} rows={4} placeholder='Description'   {...register("description",{required:true})} >
    </textarea>
    {errors.description&&errors.description.type==='required'&&(<span className='text-danger'> description is required </span>)}
 

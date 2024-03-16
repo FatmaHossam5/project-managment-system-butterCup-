@@ -5,14 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
+interface FormData {
+  email: string;
+  seed: string;
+  password: string;
+  confirmPassword: string;
+}
 export default function ResetPassword() {
-    const {register,handleSubmit,formState:{errors}}=useForm();
+    const {register,handleSubmit,formState:{errors}}=useForm<FormData>();
     const navigate=useNavigate()
     const{baseUrl}=useContext(AuthContext);
     const{getToastValue}=useContext(ToastContext)
 
 
-  const ResetPassword =(data)=>{
+  const ResetPassword =(data:FormData)=>{
  axios.post(`${baseUrl}/Users/Reset`,data).then((response)=>{
   getToastValue("success",response?.data?.message)
   navigate('/login')
@@ -42,7 +48,7 @@ export default function ResetPassword() {
                 placeholder="Enter your E-mail "
                 className="form-control ps-4 mb-1 login " 
                 type="email"
-                name='email'
+               
               {...register("email",{required:true,pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/})}
              />
              {errors.email&&errors.email.type==='required'&&(<span className='text-danger'>Email is required </span>)}
@@ -65,7 +71,7 @@ export default function ResetPassword() {
                 placeholder=" Enter your New Password"
                 className="form-control ps-4 mb-1"
                 type="password"
-                name='newPass'
+            
                 {...register("password",{required:true})}
               />
              {errors.password&&errors.password.type==='required'&&(<span className='text-danger'>password is required </span>)}
@@ -77,7 +83,7 @@ export default function ResetPassword() {
                 placeholder=" Confirm New Password"
                 className="form-control ps-4 mb-1"
                 type="password"
-                name='confirm'
+             
                 {...register("confirmPassword",{required:true})}
               />
              {errors.confirmPassword&&errors.confirmPassword.type==='required'&&(<span className='text-danger'>confirmPassword is required </span>)}

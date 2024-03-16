@@ -9,15 +9,22 @@ import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import { ToastContext } from '../../Context/ToastContext';
-
+interface User {
+  id: string;
+  userName: string;
+  isActivated: boolean;
+  phoneNumber: string;
+  email: string;
+  creationDate: string;
+}
 export default function Users() {
 
   const { getToastValue }: any = useContext(ToastContext)
   const { baseUrl, reqHeaders }: any = useContext(AuthContext)
-  const [usersList, setUsersList] = useState()
+  const [usersList, setUsersList] = useState<User[]>()
   const [modalState, setModalState] = useState("close")
   const handleClose = () => setModalState("close");
-  const [userItem, setUserItem] = useState()
+  const [userItem, setUserItem] = useState<User|null>(null)
 
   const showAllUsers = () => {
     axios.get(`${baseUrl}/Users`, { headers: reqHeaders }).then((response) => {
@@ -27,7 +34,7 @@ export default function Users() {
     })
   }
 
-  const handleBlock = (user: any) => {
+  const handleBlock = (user: string) => {
     axios.put(`${baseUrl}/Users/${user}`, user, { headers: reqHeaders })
       .then((response) => {
         showAllUsers()
@@ -39,7 +46,7 @@ export default function Users() {
       })
   }
 
-  const handleView = (user: any) => {
+  const handleView = (user: User) => {
     setModalState("show-user")
     setUserItem(user)
   }

@@ -4,11 +4,17 @@ import axios from 'axios'
 import { AuthContext } from '../../Context/AuthContext'
 import { Link, useParams } from 'react-router-dom'
 import { ToastContext } from '../../Context/ToastContext'
-
+interface Project {
+  title: string;
+  description: string;
+  manager: {
+    userName: string;
+  };
+}
 
 export default function ViewProject() {
   const{id}=useParams()
-  const [Project,setProject]=useState({})
+  const [Project,setProject]=useState<Project | null>(null)
 const {baseUrl,reqHeaders}:any=useContext(AuthContext)
 const{getToastValue}=useContext(ToastContext)
 
@@ -19,10 +25,13 @@ useEffect(()=>{
   axios.get(`${baseUrl}/project/${id}`,{headers:reqHeaders}).then((response)=>{
     setProject(response?.data)
   }).catch((error)=>{
+ 
    
     getToastValue('error',error.response.data.message)
   })
 },[])
+
+
   return (<>
 
 <div className="container ">  

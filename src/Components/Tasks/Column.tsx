@@ -4,24 +4,36 @@ import Task from './Task'
 import { useDrop } from 'react-dnd'
 import axios from 'axios'
 import { ToastContext } from '../../Context/ToastContext'
-
-export default function Column({status,tasks,setTasks,todos,inProgress,done,getEmployeeTasks}) {
+interface Task {
+    id: string;
+    title: string;
+    status: string;
+   
+  }
+  
+interface ColumnProps {
+    status: string;
+    tasks: Task[]; 
+    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+    todos: Task[];
+    inProgress: Task[];
+    done: Task[];
+    setTodos: React.Dispatch<React.SetStateAction<Task[]>>;
+    setInProgress: React.Dispatch<React.SetStateAction<Task[]>>;
+    setDone: React.Dispatch<React.SetStateAction<Task[]>>;
+    getEmployeeTasks: () => void;
+  }
+export default function Column({status,tasks,setTasks,todos,inProgress,done,getEmployeeTasks}:ColumnProps) {
     const{baseUrl,reqHeaders}:any=useContext(AuthContext)
-    const{getToastValue}=useContext(ToastContext)
-    const [newStatus,setNewStatus]=useState('')
-        
-    let tasksToMap=todos
-    if(status==='InProgress'){
-    tasksToMap=inProgress
-    }
-    if(status==='Done'){
-        tasksToMap=done
-    }
+    const{getToastValue}=useContext(ToastContext)  
+    console.log('Current status:', status);
+    const tasksToMap = status === 'InProgress' ? inProgress : status === 'Done' ? done : todos;
+
     const [{ isOver }, drop] = useDrop(
         () => ({
           accept: "task",
-          drop: (item) => changeItem(item.id,item.status),
-          collect: (monitor) => ({
+          drop: (item:any) => changeItem(item.id,item.status),
+          collect: (monitor:any) => ({
             isOver: !!monitor.isOver()
           })
         }),
@@ -29,32 +41,27 @@ export default function Column({status,tasks,setTasks,todos,inProgress,done,getE
       )
 
 
-      const  changeItem =(id)=>{
-        axios.put(`${baseUrl}/Task/${id}/change-status`,{status},{headers:reqHeaders}).then((response)=>{
-            console.log(response?.data?.status);
-            setNewStatus(response?.data?.status)
+      const  changeItem =(id:string,status:string)=>{
+
+        axios.put(`${baseUrl}/Task/${id}/change-status`,{status},{headers:reqHeaders}).then(()=>{
             getToastValue("success","changed successfully")
-            getEmployeeTasks()
-            
+            getEmployeeTasks()   
         }).catch((error)=>{
            getToastValue("error",error?.response?.data?.message)
             
         })
     
-
-    
     }
+
 
       
     return (
         <div className=' px-5 rounded-3  boxContainer' ref={drop} >
-
-
             {status}
-
             <div  >
-                {tasksToMap.length > 0 && tasksToMap.map(task => <Task key={task.id} task={task} tasks={tasks} setTasks={setTasks} />)}
+                { tasksToMap.map((task:Task) => <Task key={task.id} task={task}  setTasks={setTasks} />)}
             </div>
         </div>
+        
     )
 }

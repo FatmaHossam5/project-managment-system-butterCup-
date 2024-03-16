@@ -21,7 +21,7 @@ const getAllTasks=()=>{
         
     })
 }
-console.log(getAllTasks);
+
 
 
    return( <TasksContext.Provider value={{ getDataTasks, getAllTasks }}>

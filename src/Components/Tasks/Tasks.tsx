@@ -1,48 +1,50 @@
-import { Children, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Modal, Table } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
-import axios from "axios";
-import noData from '../../assets/noData.png';
-import Datano from '../../assets/DataNo.svg';
-import { Modal, Pagination, Table } from 'react-bootstrap';
 import { ToastContext } from "../../Context/ToastContext";
-import DataTable from "react-data-table-component";
+import Datano from '../../assets/DataNo.svg';
+import noData from '../../assets/noData.png';
 import Column from "./Column";
+interface Task {
+  id: string;
+  title:string;
+  status: string;
 
+}
 
-
-
+interface FilterTasksByStatusParams {
+  status: string;
+  tasks: Task[];
+}
 export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [modalState, setModalState] = useState("close")
-  const [modalUpdate, setModalUpdate] = useState("close")
   const handleClose = () => setModalState("close");
   const [projectId, setProjectId] = useState(0);
   const { baseUrl, reqHeaders, role }: any = useContext(AuthContext);
   const {getToastValue}=useContext(ToastContext)
   const navigate = useNavigate();
- 
-  const [todos,setTodos]=useState([])
-  const [inProgress,setInProgress]=useState([])
-  const [done,setDone]=useState([])
+  const [todos, setTodos] = useState<Task[]>([]);
+  const [inProgress,setInProgress]=useState<Task[]>([])
+  const [done,setDone]=useState<Task[]>([])
   
  
   
 
   {/* show All Tasks for Manager  */ }
-   const getTasksList = ( ) => {
+   const getTasksList = useCallback(() => {
     axios
       .get(`${baseUrl}/Task/manager?pageSize=14&pageNumber=1`, { headers: reqHeaders })
       .then((response: any) => {
-        console.log(response.data.data);
         setTasks(response?.data?.data);
-
       })
       .catch((error: any) => {
         getToastValue("error", error.response.data.data.message);
 
       });
-  };
+  },[baseUrl,reqHeaders,getToastValue])
 
  {/*Navigate to Add New Task by Manager  */ }
   const navToAddTask = () => {
@@ -50,7 +52,7 @@ export default function Tasks() {
   }
 
   {/* show Delete Task Model */ }
-  const showDeleteModel = (id) => {
+  const showDeleteModel = (id:number) => {
     setModalState("delete-modal")
     setProjectId(id)
   }
@@ -67,28 +69,29 @@ export default function Tasks() {
   }
 
   {/*Update Task */ }
-  const editTaskShow =(id)=>{
-    
+  const editTaskShow =(id:string)=>{
+ 
     navigate(`/dashboard/edit-task/${id}`)
 
   }
 
-  const getEmployeeTasks =()=>{
-    axios.get(`${baseUrl}/Task`,{headers:reqHeaders}).then((response)=>{
-      console.log(response);
-      
-  
-      const todosTask=response?.data?.data.filter((task:any)=>task.status=='ToDo')
-      const inProgressTask=response?.data?.data.filter((task:any)=>task.status=='InProgress')
-      const doneTask=response?.data?.data.filter((task:any)=>task.status=='Done')
-      setTodos(todosTask)
-      setInProgress(inProgressTask)
-      setDone(doneTask)
-  
-      setTasks(response.data.data)
-   
-    })
-   }
+  const getEmployeeTasks = useCallback(() => {
+    axios.get(`${baseUrl}/Task`, { headers: reqHeaders }).then((response) => {
+        const tasks: Task[] = response?.data?.data || [];
+        const filterTasksByStatus = ({ status, tasks }: FilterTasksByStatusParams) => tasks.filter((task) => task.status === status);
+
+        const todosTask = filterTasksByStatus({ status: 'ToDo', tasks });
+        const inProgressTask = filterTasksByStatus({ status: 'InProgress', tasks });
+        const doneTask = filterTasksByStatus({ status: 'Done', tasks });
+
+        setTodos(todosTask); 
+        setInProgress(inProgressTask);
+        setDone(doneTask);
+        setTasks(tasks);
+    });
+}, [baseUrl, reqHeaders]);
+
+
   
 
   useEffect(() => {
@@ -96,23 +99,24 @@ export default function Tasks() {
     getTasksList();
   else
   getEmployeeTasks()
-  }, []);
+  }, [role,getTasksList,getEmployeeTasks]);
 
 
   const statuses =['ToDo','InProgress','Done']
   return (
     <>
-  
       <Modal show={modalState === 'delete-modal'} onHide={handleClose}>
-
         <Modal.Body>
           <div className="delete-container">
             <div className="icons text-end">
-              <i onClick={handleClose} className="fa-regular fa-circle-xmark text-danger "></i>
+              <button onClick={handleClose}>
+              <i  className="fa-regular fa-circle-xmark text-danger "></i>
+              </button>
+             
             </div>
             <div className="text-center">
               <div className="text-center">
-                <img  src={Datano} alt="msg-NoData" />
+              <img src={Datano} alt="Data Not Found" />
               </div>
               <h5 className='py-3'> Are you sure to Delete this item ? </h5>
             </div>
@@ -127,89 +131,69 @@ export default function Tasks() {
         <div className="col-md-12 trans-head">
           <div className="top d-flex justify-content-between p-3">
             <h3>Tasks</h3>
-            {role == "Manager" ? <button onClick={navToAddTask} className='btn bg-warning text-white'> <i className='fa-plus'></i> Add New Task </button>
-              : ""}
-            
+            {role == "Manager" && (<button onClick={navToAddTask} className='btn bg-warning text-white'> <i className='fa-plus'></i> Add New Task </button>)
+            }
           </div>
-
         </div>
         <div className="col-md-12 ">
-          <input type="text" placeholder='SearchFleets ' className='rounded-4 border-1 mb-4 pro' />
+          {role == "Manager" ?
+            <div className="table-container p-3">
+              <Table striped bordered hover>
+                <thead className='text-center '>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Project</th>
+                    {role == "Manager" ? <th scope="col">Actions</th> : ""}
+                  </tr>
+                </thead>
+                <tbody className='text-center '>
+                  {tasks.length > 0 ? (
+                    tasks.map((task: any) => (
+                      <tr key={task?.id}>
 
-          <div className="header d-flex justify-content-between p-3">
+                        <td >{task?.title}</td>
+                        <td >{task?.status}</td>
+                        <td>{task?.description}</td>
+                        <td>{task?.employee.userName}</td>
+                        <td>{task?.project.title}</td>
+                        {role == "Manager" ?
 
+                          <td> <div className="dropdown ">
+                            <button className="btn btn-transparent dropdown-toggle " type="button" data-bs-toggle="dropdown"     aria-haspopup="true"aria-expanded="false">
+                              <i className="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <ul className="dropdown-menu ">
 
-          </div>
+                              <li onClick={() => editTaskShow(task?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
+                              <li onClick={() => showDeleteModel(task?.id)}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
+                            </ul>
+                          </div></td>
 
-          {role == "Manager" ? 
-          <div className="table-container p-3">
-            <Table striped bordered hover>
-              <thead className='text-center '>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">User</th>
-                  <th scope="col">Project</th>
-                  {role == "Manager" ? <th scope="col">Actions</th> : ""}
-                </tr>
-              </thead>
-              <tbody className='text-center '>
-                {tasks.length > 0 ? (
-                  tasks.map((task: any) => (
-                    <tr key={task?.id}>
-                    
-                    <td >{task?.title}</td>
-                      <td >{task?.status}</td>
-                      <td>{task?.description}</td>
-                      <td>{task?.employee.userName}</td>
-                      <td>{task?.project.title}</td>
-                      {role == "Manager" ?
-
-                        <td> <div className="dropdown ">
-                          <button className="btn btn-transparent dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fa-solid fa-ellipsis-vertical"></i>
-                          </button>
-                          <ul className="dropdown-menu ">
-
-                            <li onClick={()=>editTaskShow(task?.id)} ><a className="dropdown-item " > <i className="fa-regular fa-pen-to-square pe-2"></i>Edit</a></li>
-                            <li onClick={() => showDeleteModel(task?.id)}><a className="dropdown-item" > <i className="fa-solid fa-trash pe-2"></i>Delete</a></li>
-                          </ul>
-                        </div></td>
-
-                        : ""}
-                    </tr>
-                  ))
-                ) : (
-                  <div className="text-center"><img src={noData} alt="notfound" /></div>
-                )}
-                  
-  
-                    
-              </tbody>
-            
-           </Table>
-    
-          </div> :
-           <>
+                          : ""}
+                      </tr>
+                    ))
+                  ) : (
+                    <div className="text-center"><img src={noData} alt="notfound" /></div>
+                  )}
 
 
-{todos.length>0&&<div className="row ">
 
+                </tbody>
 
-  <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-5 tasksBox text-white text-center">
- 
-  {statuses.map((status,index)=>
-  <Column  key={index} status={status} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done}  setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks}/>)}
-  </div>
+              </Table>
 
-
-  </div>}
-
-
-          </>}
-            
-           
+            </div> :
+            <>
+              {todos.length >= 0 && <div className="row ">
+                <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-5 tasksBox text-white text-center">
+                  {statuses.map((status, index) =>
+                    <Column key={index} status={status} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done} setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks} />)}
+                </div>
+              </div>}
+            </>}
         </div>
       </div>
     </>
