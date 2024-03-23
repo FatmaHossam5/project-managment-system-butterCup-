@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { Modal } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
+import { Modal, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import Datano from '../../assets/DataNo.svg';
 import avatar from '../../assets/avatar.png';
+import styles from '../Users/Users.module.css'
+import { CiSearch } from "react-icons/ci";
+import { IoFilter } from "react-icons/io5";
 import { ToastContext } from '../../Context/ToastContext';
+import noData from '../../assets/noData.png';
+
+
 
 interface Project {
   id: string;
@@ -21,18 +26,54 @@ interface Project {
 
 
 export default function Projects() {
-const { baseUrl, reqHeaders }: { baseUrl: string, reqHeaders: Record<string, string> } = useContext(AuthContext);
-const [allProjects,setAllProjects]=useState<Project[]>([])
-const [itemId,setItemId]=useState(0)
-const navigate= useNavigate()
-const[modalState,setModalState]=useState("close")
-const handleClose = () => setModalState("close");
-const[pagesArray,setPagesArray]=useState<number[]>([]);
-const[searchInput,setSearchInput]=useState("")
-const [currentPage, setCurrentPage] = useState(1);
-const{getToastValue}=useContext(ToastContext)
-const [debouncedSearchInput, setDebouncedSearchInput] = useState('');
-const debounceDelay = 500; 
+  const { baseUrl, reqHeaders, role }: { baseUrl: string, reqHeaders: Record<string, string> , role:string|null } = useContext(AuthContext);
+  const [allProjects,setAllProjects]=useState<Project[]>([])
+  const [itemId,setItemId]=useState(0)
+  const navigate= useNavigate()
+  const [allProjsEmployee, setAllProjsEmployee] = useState([])
+  const[modalState,setModalState]=useState("close")
+  const handleClose = () => setModalState("close");
+  const[pagesArray,setPagesArray]=useState<number[]>([]);
+  const[searchInput,setSearchInput]=useState("")
+  const [currentPage, setCurrentPage] = useState(1);
+  const{getToastValue}=useContext(ToastContext)
+  const [debouncedSearchInput, setDebouncedSearchInput] = useState('');
+  const debounceDelay = 500; 
+  const [searchValue,setSearchValue] = useState()
+
+
+
+
+
+
+
+  const showAllProjectsEmployee = (no:any,searchValue:string)=> {
+    axios.get(`${baseUrl}/Project/employee`,
+      {
+        headers: reqHeaders,
+
+        params: {
+          pageSize: 5,
+          pageNumber: no,
+          title:searchValue
+        }
+
+      }
+
+    ).then((response) => {
+      setPagesArray(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
+      setAllProjsEmployee(response?.data?.data)
+    }).catch((error) => {
+      getToastValue('error', error.response.data.message)
+    })
+  }
+
+
+
+
+
+
+
 
   {/* Get  All Projects */ }
   const showAllProjects =(pageNo:number,title:string):void=>{
@@ -81,14 +122,12 @@ const debouncedSetSearchInput = debounce((value) => {
   const editShow =(id:string)=>{
     
     navigate(`/dashboard/edit-pro/${id}`)
-
   }
   const viewPro = (id:string)=>{
     navigate(`/dashboard/view-pro/${id}`)
   }
     {/* show  Delete Modal */ }
   const showDeleteModel = (id:string)=>{
-
     setModalState("delete-modal")
     setItemId(Number(id))
  
@@ -111,11 +150,15 @@ const debouncedSetSearchInput = debounce((value) => {
     setCurrentPage(1)
     showAllProjects(1,title.target.value)
    }
-
-  useEffect(() => {
-    showAllProjects(1,'');
-    debouncedSetSearchInput(searchInput)
-  }, [searchInput])
+   useEffect(() => {
+    if (role === "Manager") {
+      showAllProjects(1, '');
+      debouncedSetSearchInput(searchInput);
+    } else {
+      showAllProjectsEmployee(1, '');
+    }
+  }, [searchInput]);
+  
   
   return (
     <>
@@ -139,6 +182,7 @@ const debouncedSetSearchInput = debounce((value) => {
           </div>
         </Modal.Body>
       </Modal>
+      {role==='Manager'?
       <div className="container bg-white rounded-3 p-3">
         <div className="row ">
         <div className="col-md-12  trans-head">
@@ -212,6 +256,101 @@ const debouncedSetSearchInput = debounce((value) => {
           {allProjects.length == 0 && <div className=' d-flex justify-content-center align-content-center'><img src={Datano} alt="notfound " /></div>}
        
       </div>
+  :
+  <div className="container rounded-3">
+
+  <div className="header bg-white py-4 px-5">
+    <h2>Projects</h2>
+  </div>
+
+  <div className={`${styles.tableContainer} my-3 p-0 rounded-3 bg-white `}>
+
+    {/* Filteration Row */}
+    <div className='px-3 py-4 row'>
+      <div className="col-md-3">
+        <div className="search position-relative">
+          <CiSearch className={`position-absolute ${styles.searchIcon}`} />
+          <input
+            type="text"
+            className={`form-control ${styles.searchInput} rounded-5`}
+            placeholder="Search by title of project"
+            onChange={(e)=>setSearchValue(e.target.value)}
+          />
+        </div>
+      </div>
+      {/* <div className="col-md-2">
+        <button onClick={filtration} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
+      </div> */}
+    </div>
+
+    {/* Table Row */}
+    {
+      allProjsEmployee.length > 0 ?
+
+        <table className="table table-striped text-center">
+          <thead className={`${styles.tableHead}`}>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Descraption</th>
+              <th scope="col">modification Date</th>
+              <th scope="col">Num Tasks</th>
+              <th scope="col">Date Created</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {
+              allProjsEmployee.map((pro) => {
+                return (
+                  <tr key={pro?.id}>
+                    <td>{pro?.title}</td>
+                    <td className='text-white' ><div className='status p-1'>{pro?.description}</div></td>
+                    <td>{pro?.modificationDate}</td>
+                    <td>{pro?.task.length}</td>
+                    <td>{pro?.creationDate}</td>
+                    <td></td>
+                  </tr>
+                )
+              }
+              )
+            }
+
+          </tbody>
+        </table> :
+
+        <div className='text-center my-3'>
+          <img src={noData} alt="" />
+        </div>
+    }
+
+    {/* Pagination Row */}
+    <div className=" d-flex justify-content-end p-3">
+      <div className="col-md-1">
+        Showing
+      </div>
+      <div className="col-md-1">
+        <select className='form-select' 
+        onChange={(e)=>showAllProjectsEmployee(e.target.value, searchValue)}
+        >
+        {
+          pagesArray?.map((pageNo)=>{               
+           return(
+            <option key={pageNo} value={pageNo}>{pageNo}</option>
+           )
+          })
+        }
+        </select>
+      </div>
+      <div className="col-md-2 text-center">
+        of {pagesArray?.length} Results
+      </div>
+    </div>
+
+  </div>
+</div>}
+
+   
     </>
   )
 }

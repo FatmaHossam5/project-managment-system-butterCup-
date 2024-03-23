@@ -1,13 +1,12 @@
-import { Fragment, useContext, useEffect, useState } from 'react'
-import styles from './Users.module.css'
+import axios from 'axios';
+import { Fragment, useContext, useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
+import { CiSearch, CiUser } from "react-icons/ci";
+import { FaEye } from "react-icons/fa6";
 import { HiDotsVertical as ThreeDots } from "react-icons/hi";
-import { FaEye } from "react-icons/fa6"
-import { ImBlocked } from "react-icons/im"
-import { CiSearch } from "react-icons/ci";
+import { ImBlocked } from "react-icons/im";
 import { IoFilter } from "react-icons/io5";
 import { AuthContext } from '../../Context/AuthContext';
-import axios from 'axios';
-import { Modal } from 'react-bootstrap';
 import { ToastContext } from '../../Context/ToastContext';
 interface User {
   id: string;
@@ -16,18 +15,36 @@ interface User {
   phoneNumber: string;
   email: string;
   creationDate: string;
-}
+}import styles from './Users.module.css';
+import { useNavigate } from 'react-router-dom';
+
 export default function Users() {
 
   const { getToastValue }: any = useContext(ToastContext)
-  const { baseUrl, reqHeaders }: any = useContext(AuthContext)
+  const { baseUrl, reqHeaders, role }: any = useContext(AuthContext)
   const [usersList, setUsersList] = useState<User[]>()
   const [modalState, setModalState] = useState("close")
   const handleClose = () => setModalState("close");
   const [userItem, setUserItem] = useState<User|null>(null)
+  const [pageArray, setPageArray] = useState()
+  const [searchValue, setSearchValue] = useState()
+  const [searchRole, setSearchRole] = useState()
+  const navigate = useNavigate()
 
-  const showAllUsers = () => {
-    axios.get(`${baseUrl}/Users`, { headers: reqHeaders }).then((response) => {
+  const showAllUsers = (no: any, searchValue: any, searchRole: any) => {
+    axios.get(`${baseUrl}/Users`,
+      {
+        headers: reqHeaders,
+        params: {
+          pageSize: 10,
+          pageNumber: no,
+          userName: searchValue,
+          groups: searchRole
+        }
+      }
+
+    ).then((response) => {
+      setPageArray(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
       setUsersList(response.data.data);
     }).catch((error) => {
       getToastValue('error', error.response.data.message)
@@ -51,11 +68,21 @@ export default function Users() {
     setUserItem(user)
   }
 
+  const filtration = () => {
+   { searchValue !== null ?
+      showAllUsers(1, searchValue, searchRole)
+      : <img src={noData} alt="" />}
+  }
+  const filtrationByRole = () => {
+    searchRole !== null ?
+      showAllUsers(1, searchValue, searchRole)
+      : <img src={noData} alt="" />
+  }
+
   useEffect(() => {
-    showAllUsers()
-  }, [userItem])
+    role == "Manager" ? showAllUsers() : navigate("/Notfound")
 
-
+  }, [])
 
   return (
     <Fragment>
@@ -83,18 +110,39 @@ export default function Users() {
 
           {/* Filteration Row */}
           <div className='px-3 py-4 row'>
+
+            {/* search by user name */}
             <div className="col-md-3">
               <div className="search position-relative">
                 <CiSearch className={`position-absolute ${styles.searchIcon}`} />
                 <input
                   type="text"
                   className={`form-control ${styles.searchInput} rounded-5`}
-                  placeholder="SearchFleets "
+                  placeholder="Search by user name"
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
               </div>
             </div>
             <div className="col-md-2">
-              <button className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
+              <button onClick={filtration} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
+            </div>
+
+            {/* search by role */}
+            <div className="col-md-3">
+              <div className="search position-relative">
+                <CiUser className={`position-absolute ${styles.searchIcon} text-muted`} />
+                <select
+                  className={`form-select ${styles.searchInput} rounded-5`}
+                  onChange={(e) => setSearchRole(e.target.value)}
+                >
+                  <option value="">select role</option>
+                  <option value="1">Manager</option>
+                  <option value="2">Employee</option>
+                </select>
+              </div>
+            </div>
+            <div className="col-md-2">
+              <button onClick={filtrationByRole} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
             </div>
           </div>
 
@@ -165,13 +213,20 @@ export default function Users() {
               Showing
             </div>
             <div className="col-md-1">
-              <select className='form-select'>
-                <option value="10">10</option>
-                <option value="10">20</option>
+              <select className='form-select'
+                onChange={(e) => showAllUsers(e.target.value, searchValue, searchRole)}
+              >
+                {
+                  pageArray?.map((pageNo) => {
+                    return (
+                      <option key={pageNo} value={pageNo}>{pageNo}</option>
+                    )
+                  })
+                }
               </select>
             </div>
             <div className="col-md-2 text-center">
-              of 102 Results
+              of {pageArray?.length} Results
             </div>
           </div>
 
