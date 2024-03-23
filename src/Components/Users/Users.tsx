@@ -8,17 +8,24 @@ import { ImBlocked } from "react-icons/im";
 import { IoFilter } from "react-icons/io5";
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
-import styles from './Users.module.css';
+interface User {
+  id: string;
+  userName: string;
+  isActivated: boolean;
+  phoneNumber: string;
+  email: string;
+  creationDate: string;
+}import styles from './Users.module.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Users() {
 
   const { getToastValue }: any = useContext(ToastContext)
   const { baseUrl, reqHeaders, role }: any = useContext(AuthContext)
-  const [usersList, setUsersList] = useState()
+  const [usersList, setUsersList] = useState<User[]>()
   const [modalState, setModalState] = useState("close")
   const handleClose = () => setModalState("close");
-  const [userItem, setUserItem] = useState()
+  const [userItem, setUserItem] = useState<User|null>(null)
   const [pageArray, setPageArray] = useState()
   const [searchValue, setSearchValue] = useState()
   const [searchRole, setSearchRole] = useState()
@@ -44,7 +51,7 @@ export default function Users() {
     })
   }
 
-  const handleBlock = (user: any) => {
+  const handleBlock = (user: string) => {
     axios.put(`${baseUrl}/Users/${user}`, user, { headers: reqHeaders })
       .then((response) => {
         showAllUsers()
@@ -56,7 +63,7 @@ export default function Users() {
       })
   }
 
-  const handleView = (user: any) => {
+  const handleView = (user: User) => {
     setModalState("show-user")
     setUserItem(user)
   }

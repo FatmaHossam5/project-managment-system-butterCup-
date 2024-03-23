@@ -1,10 +1,21 @@
-import { createContext } from "react";
-import { toast } from "react-toastify";
+import { ReactNode, createContext } from "react";
+import { ToastOptions, toast } from "react-toastify";
+interface ToastContextType{
+    getToastValue:(type:"success"|'error'|'info'|'warning',message:string,options?:ToastOptions)=>void;
+}
 
-export let ToastContext=createContext(0);
-export default  function ToastContextProvider (props:any){
+export const ToastContext = createContext<ToastContextType>({
+    getToastValue: () => {} 
+  });
+  
 
-    let getToastValue =(type,message)=>
+interface ToastContextProviderProps {
+    children: ReactNode;
+  }
+  
+export default  function ToastContextProvider (props:ToastContextProviderProps){
+
+    const getToastValue =(type: "success" | "error" | "info" | "warning", message: string, options?: ToastOptions) =>
     {
         return toast[type](message,{
             position: "top-right",
@@ -15,6 +26,7 @@ export default  function ToastContextProvider (props:any){
             draggable: true,
             progress: undefined,
             theme: "colored",
+            ...options,
 
         })
     }
