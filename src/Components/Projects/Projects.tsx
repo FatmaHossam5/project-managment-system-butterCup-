@@ -86,6 +86,8 @@ export default function Projects() {
       .then((response)=>{
       setAllProjects(response?.data?.data)
       setPagesArray(Array.from({ length: response?.data?.totalNumberOfPages ?? 0 }, (_, i) => i + 1));
+      console.log(pagesArray);
+      
     })
     .catch((error)=>{
    getToastValue('error',error?.response?.data?.message)

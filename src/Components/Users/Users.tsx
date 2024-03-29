@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { CiSearch, CiUser } from "react-icons/ci";
+import { CiSearch, CiUser } from 'react-icons/ci';
 import { FaEye } from "react-icons/fa6";
 import { HiDotsVertical as ThreeDots } from "react-icons/hi";
 import { ImBlocked } from "react-icons/im";
-import { IoFilter } from "react-icons/io5";
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
+import Loading from '../../Shared/Loading/Loading';
+import Pagination from '../../Shared/Pagination/Pagination';
+import styles from './Users.module.css';
 interface User {
   id: string;
   userName: string;
@@ -15,46 +17,58 @@ interface User {
   phoneNumber: string;
   email: string;
   creationDate: string;
-}import styles from './Users.module.css';
-import { useNavigate } from 'react-router-dom';
+}
+interface Props {}
 
-export default function Users() {
+const Users:React.FC<Props>=()=> {
 
-  const { getToastValue }: any = useContext(ToastContext)
-  const { baseUrl, reqHeaders, role }: any = useContext(AuthContext)
-  const [usersList, setUsersList] = useState<User[]>()
-  const [modalState, setModalState] = useState("close")
+  const { getToastValue }: {getToastValue:any} = useContext(ToastContext)
+  const { baseUrl, reqHeaders, role }: {baseUrl:string,reqHeaders:any,role:string|null} = useContext(AuthContext)
+  const [usersList, setUsersList] = useState<User[]|null>(null)
+  const [modalState, setModalState] = useState<string>("close")
   const handleClose = () => setModalState("close");
-  const [userItem, setUserItem] = useState<User|null>(null)
-  const [pageArray, setPageArray] = useState()
-  const [searchValue, setSearchValue] = useState()
-  const [searchRole, setSearchRole] = useState()
-  const navigate = useNavigate()
+  const [userItem, setUserItem] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const[searchValue,setSearchValue]=useState<string>('');
+  const[searchRole,setSearchRole]=useState<string>('')
 
-  const showAllUsers = (no: any, searchValue: any, searchRole: any) => {
+
+  const showAllUsers = (pageNumber:number,userName:string,groups:number) => {
+    setIsLoading(true)
     axios.get(`${baseUrl}/Users`,
       {
         headers: reqHeaders,
         params: {
-          pageSize: 10,
-          pageNumber: no,
-          userName: searchValue,
-          groups: searchRole
+pageNumber,
+pageSize:5,
+userName,
+groups
         }
       }
 
     ).then((response) => {
-      setPageArray(Array(response.data.totalNumberOfPages).fill().map((_, i) => i + 1))
       setUsersList(response.data.data);
+      setTotalPages(response.data.totalNumberOfPages)
+  
+      
     }).catch((error) => {
       getToastValue('error', error.response.data.message)
+    }).finally(() => {
+      setIsLoading(false)
     })
   }
+
+  const handlePageChange = (pageNumber:number) => {
+    setCurrentPage(pageNumber);
+    showAllUsers(pageNumber,searchValue,Number(searchRole))
+  };
 
   const handleBlock = (user: string) => {
     axios.put(`${baseUrl}/Users/${user}`, user, { headers: reqHeaders })
       .then((response) => {
-        showAllUsers()
+        showAllUsers(currentPage,searchValue,Number(searchRole))
         {
           response.data.isActivated === false ? getToastValue('warning', "user is blocked") : getToastValue('success', "user is Unblocked")
         }
@@ -68,21 +82,27 @@ export default function Users() {
     setUserItem(user)
   }
 
-  const filtration = () => {
-   { searchValue !== null ?
-      showAllUsers(1, searchValue, searchRole)
-      : <img src={noData} alt="" />}
-  }
-  const filtrationByRole = () => {
-    searchRole !== null ?
-      showAllUsers(1, searchValue, searchRole)
-      : <img src={noData} alt="" />
-  }
+const getSearchValue=(userName: React.ChangeEvent<HTMLInputElement>)=>{
+  setSearchValue(userName.target.value);
+  setCurrentPage(1);
+  showAllUsers(1,userName.target.value,Number(searchRole))
+}
+ 
+const handleRoleChange=(groups: React.ChangeEvent<HTMLSelectElement>)=>{
+setSearchRole(groups.target.value)
+setCurrentPage(1)
+if(groups.target.value==='1'){
+  showAllUsers(1,searchValue,1)
+}else if(groups.target.value==='2'){
+  showAllUsers(1,searchValue,2)
+}
+}
+ 
+useEffect(() => {
+ setCurrentPage(1)
+showAllUsers(1, searchValue,Number(searchRole));  
+}, [searchValue,searchRole]);
 
-  useEffect(() => {
-    role == "Manager" ? showAllUsers() : navigate("/Notfound")
-
-  }, [])
 
   return (
     <Fragment>
@@ -97,143 +117,116 @@ export default function Users() {
           <p><b>Status:</b> {userItem?.isActivated == true ? "Active" : "Not Active"}</p>
         </div>
       </Modal>
-
-      <div className={`${styles.users}`}>
-
-        <div className="header bg-white py-4 px-5">
-          <h2>
-            Users
-          </h2>
-        </div>
-
-        <div className={`${styles.tableContainer} my-3 p-0 rounded-3 bg-white `}>
-
-          {/* Filteration Row */}
-          <div className='px-3 py-4 row'>
-
-            {/* search by user name */}
-            <div className="col-md-3">
-              <div className="search position-relative">
-                <CiSearch className={`position-absolute ${styles.searchIcon}`} />
-                <input
-                  type="text"
-                  className={`form-control ${styles.searchInput} rounded-5`}
-                  placeholder="Search by user name"
-                  onChange={(e) => setSearchValue(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="col-md-2">
-              <button onClick={filtration} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
-            </div>
-
-            {/* search by role */}
-            <div className="col-md-3">
-              <div className="search position-relative">
-                <CiUser className={`position-absolute ${styles.searchIcon} text-muted`} />
-                <select
-                  className={`form-select ${styles.searchInput} rounded-5`}
-                  onChange={(e) => setSearchRole(e.target.value)}
-                >
-                  <option value="">select role</option>
-                  <option value="1">Manager</option>
-                  <option value="2">Employee</option>
-                </select>
-              </div>
-            </div>
-            <div className="col-md-2">
-              <button onClick={filtrationByRole} className='btn btn-white rounded-5 border'><IoFilter /> Filter</button>
-            </div>
+    
+        <div className={`${styles.users}`}>
+          <div className="header bg-white py-3 px-5">
+            <h2>
+              Users
+            </h2>
           </div>
+          <div className='px-3 py-2 row'>
 
-          {/* Table Row */}
-          <table className="table table-striped">
-            <thead className={`${styles.tableHead}`}>
-              <tr>
-                <th scope="col">UserName</th>
-                <th scope="col">Status</th>
-                <th scope="col">phoneNumber</th>
-                <th scope="col">Email</th>
-                <th scope="col">Date created</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
+{/* search by user name */}
+<div className="col-md-3">
+  <div className="search position-relative">
+    <CiSearch className={`position-absolute ${styles.searchIcon}`} />
+    <input
+      onChange={getSearchValue}
+      type="text"
+      className={`form-control ${styles.searchInput} rounded-5`}
+      placeholder="Search by user name"
+    
+    />
+  </div>
+</div>
 
-              {
-                usersList?.map((user: any) => {
-                  return (
-                    <tr key={user.id}>
-                      <th scope="row">{user.userName}</th>
-                      <td>
-                        {
-                          user.isActivated == true ?
-                            <button className='btn btn-success rounded-5'>Active</button>
-                            : <button className='btn btn-danger rounded-5'>Not Active</button>
-                        }
-                      </td>
-                      <td>{user.phoneNumber}</td>
-                      <td>{user.email}</td>
-                      <td>{user.creationDate}</td>
-                      <td>
 
-                        <div className="dropdown">
+{/* search by role */}
+<div className="col-md-3">
+  <div className="search position-relative">
+    <CiUser className={`position-absolute ${styles.searchIcon} text-muted`} />
+    <select
+      className={`form-select ${styles.searchInput} rounded-5`}
+      onChange={handleRoleChange}
+      
+    >
+      <option value="">select role</option>
+      <option value="1">Manager</option>
+      <option value="2">Employee</option>
+    </select>
+  </div>
+</div>
 
-                          <ThreeDots className="dropdown-toggle" data-bs-toggle="dropdown" />
-                          <ul className="dropdown-menu">
-                            <li>
-                              {user.isActivated == true ?
+</div>
+          <div className={`${styles.tableContainer} my-3 p-0 rounded-3 bg-white ms-3 py-1`}>
+            {/* Table Row */}
+            {isLoading?<Loading/>:
+              <div className='container  pt-5 '>
+              <table className="table table-striped ">
+                <thead className={`${styles.tableHead} `}>
+                  <tr>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">phoneNumber</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Date created</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody >
 
-                                <a className="dropdown-item"
-                                  onClick={() => handleBlock(user.id)}> <ImBlocked /> Block
-                                </a>
-                                : <a className="dropdown-item"
-                                  onClick={() => handleBlock(user.id)}> <ImBlocked /> UnBlock
-                                </a>
-                              }
+                  {
+                    usersList?.map((user: any) => {
+                      return (
+                        <tr key={user.id} >
+                          <th scope="row">{user.userName}</th>
+                          <td className={`${styles.tableBody}`}>
+                            {
+                              user.isActivated == true ?
+                                <button className='btn btn-success rounded-5 p-0' style={{ width: '100px' }}>Active</button>
+                                : <button className='btn btn-danger rounded-5 p-0' style={{ width: '100px' }}>inActive</button>
+                            }
+                          </td>
+                          <td>{user.phoneNumber}</td>
+                          <td>{user.email}</td>
+                          <td>{user.creationDate ? new Date(user.creationDate).toDateString().split(' ').slice(1).join(' ') : 'N/A'}</td>
+                          <td>
+                            <div className="dropdown">
+                              <ThreeDots className="dropdown-toggle" data-bs-toggle="dropdown" />
+                              <ul className="dropdown-menu">
+                                <li>
+                                  {user.isActivated == true ?
 
-                            </li>
+                                    <a className="dropdown-item"
+                                      onClick={() => handleBlock(user.id)}> <ImBlocked /> Block
+                                    </a>
+                                    : <a className='dropdown-item'
+                                      onClick={() => handleBlock(user.id)}> <ImBlocked /> UnBlock
+                                    </a>
+                                  }
+                                </li>
+                                <li><a className="dropdown-item" onClick={() => handleView(user)}> <FaEye /> View</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>}
+          
 
-                            <li><a className="dropdown-item" onClick={() => handleView(user)}> <FaEye /> View</a></li>
-                          </ul>
-                        </div>
 
-                      </td>
-                    </tr>
-                  )
-                })
-              }
+            {/* Pagination Row */}
 
-            </tbody>
-          </table>
-
-          {/* Pagination Row */}
-          <div className=" d-flex justify-content-end p-3">
-            <div className="col-md-1">
-              Showing
-            </div>
-            <div className="col-md-1">
-              <select className='form-select'
-                onChange={(e) => showAllUsers(e.target.value, searchValue, searchRole)}
-              >
-                {
-                  pageArray?.map((pageNo) => {
-                    return (
-                      <option key={pageNo} value={pageNo}>{pageNo}</option>
-                    )
-                  })
-                }
-              </select>
-            </div>
-            <div className="col-md-2 text-center">
-              of {pageArray?.length} Results
-            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} searchValue={searchValue} />
           </div>
 
         </div>
-
-      </div>
-
+      
     </Fragment>
   )
 }
+export default Users

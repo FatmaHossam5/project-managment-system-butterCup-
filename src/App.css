@@ -1,11 +1,12 @@
 
-body{
-  color: #494949 !important;
-  font-size: 20px !important;
- 
-} 
 
 
+*,
+html,
+body,
+.modal-content {
+  font-family: "Montserrat", sans-serif;
+}
 
 form button
 {
@@ -16,6 +17,14 @@ form button
 
   
 } 
+.page-link{
+  color: #EF9B28!important;
+}
+.active>.page-link{
+  background-color: rgb(239, 155, 40) !important;
+  border-color: #EF9B28!important;
+  color: white!important;
+}
 .hover-effect{
   
   transition:  box-shadow 0.3s, transform 0.3s!important;
@@ -388,3 +397,31 @@ textarea::placeholder ,input::placeholder{
  .boxTask{
   background-color: #EF9B28;
  }
+
+ .loading-spinner-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  border: 6px solid #EF9B28; 
+  border-radius: 50%;
+  border-top: 4px solid transparent;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.dropdown-item:hover{
+  background-color: #EF9B28!important;
+  color: white!important;
+}

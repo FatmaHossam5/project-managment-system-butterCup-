@@ -18,8 +18,14 @@
     width: 95%;
 }
 .tableHead th{
-    background-color: rgba(49, 89, 81, 0.90) !important;
+    background-color: #0E382F !important;
+    color: white!important;
+    padding: 20px!important;
 }
+.tableBody{
+    padding: 20px !important;;
+}
+
 .searchIcon{
     top: 50%;
     bottom: 50%;
@@ -27,4 +33,5 @@
 }
 .searchInput{
     padding-left: 2rem !important;
+    
 }
