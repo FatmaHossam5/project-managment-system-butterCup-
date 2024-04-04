@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+import styles from './AddProject.module.css'
 interface FormData {
   title: string;
   description: string;
@@ -35,7 +36,7 @@ navigate(-1)
     <form onSubmit={handleSubmit(AddProject)} >
     <div className="container bg-white addHead pb-4 ">
     <div className="col-md-12">
-      <div>
+      <div className='mt-4'>
         <h5 onClick={()=>navigate(-1)}>
         <i className="fa-solid fa-chevron-left pe-2"> </i>
         view All Project
@@ -47,7 +48,7 @@ navigate(-1)
     </div>
   </div>
   <div className="container">
-<div className="col-md-8  m-auto bg-white mt-4  p-5 rounded-3">
+<div className="col-md-8  m-auto bg-white mt-4  p-4 rounded-3">
   <div className="inputs w-75 m-auto ">
     <label className='d-block ' >Title</label>
     <input type="text" placeholder='Name' className='form-control  border-2 rounded-5 ' 
@@ -64,8 +65,8 @@ navigate(-1)
    </div>
    <hr  />
    <div className="btns d-flex justify-content-between">
-    <button  onClick={handleClose} className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
-    <button  className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>save</button>
+    <button  onClick={handleClose} className={`${styles['hover-effect']} ms-5 rounded-5 border-black bg-white border-1 px-3 text-black `}>cancel</button>
+    <button  className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4 hover-effect'>save</button>
    </div>
 </div>
   </div>

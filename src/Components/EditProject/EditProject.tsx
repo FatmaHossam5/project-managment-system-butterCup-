@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
+import styles from './EditProject.module.css'
 
 
 export default function EditProject() {
@@ -67,10 +68,10 @@ export default function EditProject() {
             <div className="btns d-flex justify-content-between">
               <Link to = '/dashboard/projects'>
 
-              <button type='button' className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-black'>cancle</button>
+              <button type='button' className={`${styles['hover-effect']} ms-5 rounded-5 border-black bg-white border-1 px-3 text-black`}>cancle</button>
 
               </Link>
-              <button type='submit' className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'>Update</button>
+              <button type='submit' className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4 hover-effect'>Update</button>
             </div>
           </div>
         </div>

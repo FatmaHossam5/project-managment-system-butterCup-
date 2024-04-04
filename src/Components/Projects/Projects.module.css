@@ -1,0 +1,20 @@
+
+
+.tableContainer{
+   
+    box-shadow: 0 -5px 10px rgba(181, 181, 181, 0.1),   /* Top */
+              5px 0 10px rgba(181, 181, 181, 0.1),    /* Right */
+              0 5px 10px rgba(181, 181, 181, 0.1),    /* Bottom */
+              -5px 0 10px rgba(181, 181, 181, 0.1);   /* Left */
+}
+.tableHead th{
+    background-color: #0E382F !important;
+    color: white!important;
+    padding: 20px!important;
+}
+.tableContainer table tbody tr:last-child{
+    border-radius: 0.7rem !important;
+    overflow: hidden;
+    width: 95%;
+}
+

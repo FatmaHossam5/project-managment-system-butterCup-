@@ -4,9 +4,12 @@ import { Modal, Table } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { ToastContext } from "../../Context/ToastContext";
+import Loading from "../../Shared/Loading/Loading";
+import Pagination from "../../Shared/Pagination/Pagination";
 import Datano from '../../assets/DataNo.svg';
-import noData from '../../assets/noData.png';
 import Column from "./Column";
+import styles from './Tasks.module.css';
+import NoData from "../../Shared/NoData/NoData";
 interface Task {
   id: string;
   title:string;
@@ -29,22 +32,44 @@ export default function Tasks() {
   const [todos, setTodos] = useState<Task[]>([]);
   const [inProgress,setInProgress]=useState<Task[]>([])
   const [done,setDone]=useState<Task[]>([])
-  
+  const [totalPages,setTotalPages]=useState(0);
+  const[currentPage,setCurrentPage]=useState(1);
+  const[isLoading,setIsLoading]=useState(false);
  
   
 
   {/* show All Tasks for Manager  */ }
-   const getTasksList = useCallback(() => {
+   const getTasksList = useCallback((pageNumber:number) => {
+    setIsLoading(true)
     axios
-      .get(`${baseUrl}/Task/manager?pageSize=14&pageNumber=1`, { headers: reqHeaders })
+      .get(`${baseUrl}/Task/manager`, { headers: reqHeaders ,params:{
+        pageSize:3,
+        pageNumber
+      }}
+      )
       .then((response: any) => {
+        console.log(response);
+        
         setTasks(response?.data?.data);
+        setTotalPages(response?.data?.totalNumberOfPages)
+        console.log(totalPages);
+        
       })
       .catch((error: any) => {
         getToastValue("error", error.response.data.data.message);
+        console.log(error);
+        
 
-      });
+      }).finally(()=>{
+        setIsLoading(false)
+      })
   },[baseUrl,reqHeaders,getToastValue])
+
+const handlePageChange=(pageNumber:number)=>{
+setCurrentPage(pageNumber);
+getTasksList(pageNumber)
+}
+
 
  {/*Navigate to Add New Task by Manager  */ }
   const navToAddTask = () => {
@@ -62,7 +87,7 @@ export default function Tasks() {
     axios.delete(`${baseUrl}/Task/${projectId}`, { headers: reqHeaders }).then((response) => {
       getToastValue('success','Deleted Successfully!!')
       handleClose();
-      getTasksList()
+      getTasksList(1)
     }).catch((error) => {
       getToastValue("error",error?.response?.data?.message)
     })
@@ -96,7 +121,7 @@ export default function Tasks() {
 
   useEffect(() => {
     if(role==='Manager')
-    getTasksList();
+    getTasksList(1);
   else
   getEmployeeTasks()
   }, [role,getTasksList,getEmployeeTasks]);
@@ -109,7 +134,7 @@ export default function Tasks() {
         <Modal.Body>
           <div className="delete-container">
             <div className="icons text-end">
-              <button onClick={handleClose}>
+              <button onClick={handleClose}  className="btn btn-icon" aria-label="Close">
               <i  className="fa-regular fa-circle-xmark text-danger "></i>
               </button>
              
@@ -127,19 +152,22 @@ export default function Tasks() {
           </div>
         </Modal.Body>
       </Modal>
-      <div className="container bg-white rounded-3 px-3">
+      <div className=" container bg-white rounded-3 ">
         <div className="col-md-12 trans-head">
           <div className="top d-flex justify-content-between p-3">
             <h3>Tasks</h3>
-            {role == "Manager" && (<button onClick={navToAddTask} className='btn bg-warning text-white'> <i className='fa-plus'></i> Add New Task </button>)
+            {role == "Manager" && (<button onClick={navToAddTask} className='btn bg-warning text-white hover-effect'> <i className='fa-plus'></i> Add New Task </button>)
             }
           </div>
         </div>
-        <div className="col-md-12 ">
+        <div className={`${styles.tableContainer}  my-3 p-0  rounded-3   ms-3 `}>
           {role == "Manager" ?
-            <div className="table-container p-3">
-              <Table striped bordered hover>
-                <thead className='text-center '>
+          
+            <div className="container table-responsive pt-5 ">
+          {isLoading?<Loading/>:<>
+          {tasks.length>0?<>
+            <Table striped  hover>
+                <thead className={` ${ styles.tableHead} text-center `}>
                   <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Status</th>
@@ -150,11 +178,10 @@ export default function Tasks() {
                   </tr>
                 </thead>
                 <tbody className='text-center '>
-                  {tasks.length > 0 ? (
-                    tasks.map((task: any) => (
+                  
+                    {tasks.map((task: any) => (
                       <tr key={task?.id}>
-
-                        <td >{task?.title}</td>
+                        <td className={`${styles.tableBody}`} >{task?.title}</td>
                         <td >{task?.status}</td>
                         <td>{task?.description}</td>
                         <td>{task?.employee.userName}</td>
@@ -175,16 +202,22 @@ export default function Tasks() {
                           : ""}
                       </tr>
                     ))
-                  ) : (
-                    <div className="text-center"><img src={noData} alt="notfound" /></div>
-                  )}
+                  }
 
 
 
                 </tbody>
 
-              </Table>
-
+              </Table> 
+<Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange}searchValue=""/>
+          
+          </>:<> 
+<NoData/>                 
+ </>}
+          
+          
+          </>}
+        
             </div> :
             <>
               {todos.length >= 0 && <div className="row ">

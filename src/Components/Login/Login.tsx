@@ -19,11 +19,15 @@ export default function Login({ saveUserData }: any) {
   const LogIn = (data: any) => {
     axios.post(`${baseUrl}/Users/Login`, data)
       .then((response) => {
+        console.log(response);
+        
         localStorage.setItem("userToken", response?.data?.token)
         saveUserData()
        navigate('/dashboard')
        getToastValue('success','welcome')
       }).catch((error) => {
+        console.log(error);
+        
         getToastValue('error',error?.response?.data?.message)
       })
   }

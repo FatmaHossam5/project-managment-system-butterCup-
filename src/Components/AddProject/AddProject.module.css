@@ -1,0 +1,8 @@
+.hover-effect{
+  
+    transition:  box-shadow 0.3s, transform 0.3s!important;
+  }
+  .hover-effect:hover{
+    transform: translateY(-2px);
+     box-shadow: 0px 4px 8px rgba(128, 119, 106, 0.5);
+  }

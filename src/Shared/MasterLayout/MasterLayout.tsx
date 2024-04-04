@@ -7,7 +7,7 @@ export default function MasterLayout({ userData }: any) {
     <>
       <div className="container-fluid master ">
           <div className="d-flex   ">
-          <div>
+          <div className="vh-25">
             <SideBar/>
           </div>
           <div className="w-100 bg-body mb-4" >

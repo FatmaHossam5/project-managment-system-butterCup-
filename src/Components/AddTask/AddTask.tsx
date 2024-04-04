@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+import styles from './AddTask.module.css'
 interface User{
   id:string;
   userName:string;
@@ -74,19 +75,19 @@ export default function AddTask() {
   return (
     <>
       <form onSubmit={handleSubmit(AddTask)} aria-label="Add Task Form">
-        <div className="container bg-white addHead pb-4">
+        <div className="container bg-white addHead ">
           <div className="col-md-12">
             <div>
               <h5 className="p-3 m-auto" onClick={() => navigate(-1)}  aria-label="Go back to view All Tasks">
                 <i className="fa-solid fa-chevron-left pe-2"> </i>
                 view All Tasks
               </h5>
-              <h3> New Task</h3>
+              <h3 > New Task</h3>
             </div>
           </div>
         </div>
         <div className="container">
-          <div className="col-md-8  m-auto bg-white mt-4  p-5 rounded-3">
+          <div className="col-md-8  m-auto bg-white mt-4  p-2 rounded-3">
             <div className="inputs m-auto ">
               <label className='d-block fw-bolder ' htmlFor="title">Title</label>
               <input type="text" id='title' placeholder='Name' className='form-control  border-2 rounded-2 '
@@ -114,8 +115,8 @@ export default function AddTask() {
             </div>
             <hr className='' />
             <div className="btns d-flex justify-content-between">
-              <button onClick={() => navigate(-1)} type='button' className='ms-5 rounded-5 border-black bg-white border-1 px-3 text-muted'  aria-label="Cancel">cancel</button>
-              <button type='submit' className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4'aria-label="Save" disabled={isLoading}>     {isLoading ? 'Saving...' : 'Save'}</button>
+              <button onClick={() => navigate(-1)} type='button' className={`${styles['hover-effect']} ms-5 rounded-5 border-black bg-white border-1 px-3 text-muted `}   aria-label="Cancel">cancel</button>
+              <button type='submit' className='me-5 btn btn-warning text-white bg-warning rounded-5 px-4 hover-effect'aria-label="Save" disabled={isLoading}>     {isLoading ? 'Saving...' : 'Save'}</button>
             </div>
           </div>
         </div>
