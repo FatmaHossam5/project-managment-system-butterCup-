@@ -33,6 +33,7 @@ form button
   transform: translateY(-2px);
    box-shadow: 0px 4px 8px rgba(239, 155, 40, 0.5);
 }
+
 .search-input{
   width: 100%;
   max-width: 300px;

@@ -28,8 +28,8 @@ export default function SideBar() {
         </Modal.Body>
       </Modal>
 
-      <div style={{ display: 'flex', height: '100%', minHeight: '400px' }}>
-        <Sidebar collapsed={!isCollapsed} >
+      <div style={{ display: 'flex', height: '100vh', minHeight: '400px' }} >
+        <Sidebar collapsed={!isCollapsed} style={{ overflowY: 'hidden' }}  >
           <Menu>
             <MenuItem></MenuItem>
             <MenuItem

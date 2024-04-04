@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './Pagination.module.css'
-const Pagination = ({ currentPage, totalPages, onPageChange,searchValue }) => {
+interface PaginationProps {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (pageNumber: number) => void;
+    searchValue: string;
+  }
+const Pagination:React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange,searchValue }) => {
   const renderPageNumbers = () => {
     const pages = [];
     const visiblePages = 3; // Number of visible page numbers

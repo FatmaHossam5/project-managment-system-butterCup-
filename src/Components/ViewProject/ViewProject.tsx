@@ -4,6 +4,7 @@ import axios from 'axios'
 import { AuthContext } from '../../Context/AuthContext'
 import { Link, useParams } from 'react-router-dom'
 import { ToastContext } from '../../Context/ToastContext'
+import styles from './ViewProject.module.css'
 interface Project {
   title: string;
   description: string;
@@ -35,7 +36,7 @@ useEffect(()=>{
   return (<>
 
 <div className="container ">  
-    <div className="col-md-12">
+    <div className="col-md-12 mt-4">
       <h3>Project Board</h3>
     </div>
     <div className="col-md-8 m-auto ">
@@ -53,9 +54,9 @@ useEffect(()=>{
         <label htmlFor="desc" className='text-white'>Desc: </label>
       <input type="text"name='desc' className= ' text-center form-control w-75 mb-3 m-auto  rounded-5  border-0 text-black' value={Project?.description} />
         </div>
-      <div className="bg-white mt-5 ms-2 arrView ">
+      <div className={`${styles['hover-effect']} bg-white mt-5 ms-2 arrView`}  >
         <Link to = '/dashboard/projects'>
-        <i className="fa-solid fa-arrow-left "></i>
+        <i className="fa-solid fa-arrow-left pt-2 pb-1 "></i>
         </Link>
         </div>
         </div>
