@@ -33,7 +33,6 @@ form button
   transform: translateY(-2px);
    box-shadow: 0px 4px 8px rgba(239, 155, 40, 0.5);
 }
-
 .search-input{
   width: 100%;
   max-width: 300px;
@@ -280,8 +279,8 @@ line-height: 22px;
 }
 .arrow i{
  
- transform: translateY(45%);
- margin-left: 12px;
+ transform: translateY(2%);
+ margin-left: 1px;
  
 }
 .css-dip3t8{
@@ -404,7 +403,7 @@ textarea::placeholder ,input::placeholder{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 50vh;
 }
 
 .loading-spinner {
