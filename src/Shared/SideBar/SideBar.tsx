@@ -72,8 +72,11 @@ export default function SideBar() {
 
         <main className="d-none d-md-block" style={{ padding: 10}}>
           <div>
-            <div className=" position-relative arrow " onClick={() => setIsCollapsed(!isCollapsed)}>
+            <div className=" position-relative arrow " >
+              <button className="btn " onClick={() => setIsCollapsed(!isCollapsed)}>
               {isCollapsed ? <i className="fa-solid fa-chevron-left text-white position-absolute"></i> : <i className="fa-solid fa-chevron-right text-white coll position-absolute"></i>}
+
+              </button>
             </div>
           </div>
         </main>
