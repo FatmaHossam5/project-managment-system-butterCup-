@@ -1,19 +1,17 @@
 import axios from 'axios';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Modal, Table } from 'react-bootstrap';
+import { CiSearch } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
-import Datano from '../../assets/DataNo.svg';
-import avatar from '../../assets/avatar.png';
-import styles from '../Users/Users.module.css'
-import { CiSearch } from "react-icons/ci";
-import { IoFilter } from "react-icons/io5";
 import { ToastContext } from '../../Context/ToastContext';
-import noData from '../../assets/noData.png';
 import Input from '../../Shared/Input/Input';
 import Loading from '../../Shared/Loading/Loading';
-import Pagination from '../../Shared/Pagination/Pagination';
 import NoData from '../../Shared/NoData/NoData';
+import Pagination from '../../Shared/Pagination/Pagination';
+import Datano from '../../assets/DataNo.svg';
+import avatar from '../../assets/avatar.png';
+import styles from '../Users/Users.module.css';
 interface Project {
   id: string;
   title:string;
