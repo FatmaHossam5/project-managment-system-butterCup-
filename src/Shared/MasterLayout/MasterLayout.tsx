@@ -6,7 +6,7 @@ export default function MasterLayout({ userData }: any) {
   return (
     <>
       <div className="container-fluid master ">
-          <div className="d-flex   ">
+          <div className="d-flex">
           <div className="vh-25">
             <SideBar/>
           </div>

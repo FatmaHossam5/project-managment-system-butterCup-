@@ -1,23 +1,29 @@
-import { useContext } from 'react';
-import logo from '../../assets/PMS 3.svg'
+import { useContext, useState } from 'react';
+
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContext } from '../../Context/ToastContext';
 
+import AuthComponent from '../../Shared/AuthComponent/AuthComponent';
 
 import { AuthContext } from '../../Context/AuthContext';
+import EmailInput from '../../Shared/EmailInput/EmailInput';
+import PasswordInput from '../../Shared/PasswordInput/PasswordInput';
+import '../../index.css'
 
 export default function Login({ saveUserData }: any) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const{getToastValue}= useContext(ToastContext);
   const{baseUrl}=useContext(AuthContext)
   const navigate = useNavigate()
-
+const [isLoading,setIsLoading]=useState(false)
 
   const LogIn = (data: any) => {
+    setIsLoading(true)
     axios.post(`${baseUrl}/Users/Login`, data)
+ 
       .then((response) => {
         console.log(response);
         
@@ -29,86 +35,34 @@ export default function Login({ saveUserData }: any) {
         console.log(error);
         
         getToastValue('error',error?.response?.data?.message)
+      }).finally(()=>{
+        setIsLoading(false)
       })
   }
   return (
 
     <>
 
-      <div className="Auth-container container-fluid ">
-
-        <div className="row bg-overlay vh-100 justify-content-center align-items-center">
-
-          <div className="col-lg-5 col-md-7 col-sm-9 ">
-
-            <div className="logo  position-relative ">
-              <img src={logo} alt="logo" className="position-absolute " />
-            </div>
-
-            <div className="form-group from-design py-4 rounded-2  ">
+    <AuthComponent title={"Login"} {...{ errors }}>
+    <form onSubmit={handleSubmit(LogIn)} className=''>
+      <EmailInput  inputName={'email'} {...{ errors, register }} />
 
 
-              <form className="  w-75 m-auto" onSubmit={handleSubmit(LogIn)} >
-                <span className=" text-white">
-                  welcome to PMS
-                </span>
-                <h4 className="fw-bolder color position-relative p-0">Log in</h4>
-
-                <div className="form-group my-3 position-relative">
-                  <input
-                    placeholder="Enter your E-mail "
-                    className="form-control ps-4 mb-1 login "
-                    type="email"
-                    {...register('email', { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
-                  />
-                  <hr className="text-white" />
-
-                  {errors.email && errors.email.type === 'required' && (<span className="text-danger"> email is required</span>)}
-
-                </div>
+<PasswordInput inputName={'password'} placeholder='Enter your password' {...{ errors, register }} />
 
 
-                <div className="form-group my-3 ">
-
-                  <input
-                    placeholder=" Enter your Password"
-                    className="form-control ps-4 mb-1"
-                    type="password"
-                    {...register("password", { required: true })}
-
-                  />
-                  <hr className="text-white" />
-
-                  {errors.password && errors.password.type === 'required' && (<span className="text-danger"> password is required</span>)}
 
 
-                </div>
 
-                <div className="form-group mt-5 position-relative d-flex justify-content-between  ">
-                  <Link to="/register" className="text-white text-decoration-none ">
-                    <h6 className="Forget-pass">
-                      Register Now?
-                    </h6>
 
-                  </Link>
-                  <Link to="/request-reset" className="text-white text-decoration-none ">
-                    <h6 className="Forget-pass">
+  <div className=' mt-3 d-flex justify-content-between align-content-center'>
+    <Link to={'/register'} className='forget text-decoration-none orange '>Registration ?</Link>
+    <Link to={'/request-reset'} className='forget text-decoration-none orange '>Forgot Password ?</Link>
+  </div>
+  <button type='submit' disabled={isLoading} className='btn AuthBtn w-100 mt-4 fw-bold text-white bg-orange rounded-5 btn-lg '>{isLoading ? <i className='fa fa-spin fa-spinner'></i> : "Login"}</button>
 
-                      Forgot Password?
-                    </h6>
-
-                  </Link>
-                </div>
-
-                <div className="form-group mt-4">
-                  <button className="btn rounded-5 p-2 w-100">Login</button>
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
+</form>
+    </AuthComponent>
 
 
     </>

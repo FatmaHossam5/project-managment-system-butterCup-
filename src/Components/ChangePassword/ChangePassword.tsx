@@ -1,135 +1,59 @@
-import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
+import { ToastContext } from "../../Context/ToastContext";
+import ConfirmPassword from "../../Shared/ConfirmPassword/ConfirmPassword";
+import PasswordInput from "../../Shared/PasswordInput/PasswordInput";
+import styles from './ChangePassword.module.css';
+interface ChangePassProps {
+  handleClose: () => void;
+}
+interface FormData {
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+export default function ChangePass({ handleClose }: ChangePassProps) {
 
-export default function ChangePass({ handleClose }: any) {
-  const navigate = useNavigate();
+  const { reqHeaders, baseUrl }: any = useContext(AuthContext);
+  const { getToastValue } = useContext(ToastContext);
+  const [isLoading, setIsLoading] = useState(false)
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormData>();
 
-  let { reqHeaders, baseUrl }:any = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-
-
-
-
-  const onSubmit = (data:any) => {
- 
-
-
+  const onSubmit = (data: FormData) => {
+    setIsLoading(true)
     axios
-
       .put(`${baseUrl}/Users/ChangePassword`, data, {
         headers: reqHeaders,
       })
       .then((response) => {
         handleClose();
-        toast.success("password changed successsfully", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        getToastValue('success', 'password changed SuccessFully')
       })
       .catch((error) => {
-        toast.error(error.response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      });
+        getToastValue('error', error.response.data.message)
+      }).finally(() => {
+        setIsLoading(false)
+      })
   };
-
   return (
     <>
-      <div className="Auth-container container-fluid  bg-overlay">
+      <div className=" container-fluid   ">
         <div className="row ">
           <form
-            className="w-100 m-auto p-5 bg-form"
+            className="w-100 m-auto p-5"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h4 className="fw-bolder color p-0">Change Your Password</h4>
-            <div className="form-group my-1 ">
-              <p className="color my-0" style={{ fontSize: "14px" }}>
-                Old Password
-              </p>
-              <input
-                placeholder="Old Password"
-                className="form-control ps-4 mb-1"
-                type="password"
-                {...register("oldPassword", {
-                  required: true,
-                })}
-              />
-              <hr className="text-white" />
-
-              {errors.oldPassword && errors.oldPassword.type === "required" && (
-                <span className="text-danger">oldPassword is required</span>
-              )}
-            </div>
-            <div className="form-group my-1 position-relative">
-              <p className="color my-0" style={{ fontSize: "14px" }}>
-                New Password
-              </p>
-
-              <input
-                placeholder="New Password"
-                className="form-control ps-4 mb-1"
-                type="password"
-                {...register("newPassword", {
-                  required: true,
-                })}
-              />
-              <hr className="text-white" />
-
-              {errors.newPassword && errors.newPassword.type === "required" && (
-                <span className="text-danger">newPassword is required</span>
-              )}
-            </div>
-            <div className="form-group my-1 position-relative">
-              <p className="color my-0" style={{ fontSize: "14px" }}>
-                Confirm Password
-              </p>
-              <input
-                placeholder="Confirm New Password"
-                className="form-control ps-4 mb-1"
-                type="password"
-                {...register("confirmNewPassword", {
-                  required: true,
-                })}
-              />
-              <hr className="text-white" />
-
-              {errors.confirmNewPassword &&
-                errors.confirmNewPassword.type === "required" && (
-                  <span className="text-danger">
-                    confirmNewPassword is required
-                  </span>
-                )}
-            </div>
-
-            <div className="form-group my-3">
-              <button className="btn w-100">Change Password</button>
-            </div>
+            <h3 className="fw-bolder color ">Change Your Password</h3>
+            <PasswordInput {...{ register, errors }} inputName={"oldPassword"} placeholder="old Password" />
+            <PasswordInput {...{ register, errors }} inputName={"newPassword"} placeholder="New Password" />
+            <ConfirmPassword {...{ register, errors, getValues }} inputName={'confirmNewPassword'} placeholder="Confirm New Password" />
+            <button type="submit" disabled={isLoading} className={`${styles.changeBtn} btn AuthBtn w-100 mt-4  text-white bg-orange rounded-3 btn-lg `}>{isLoading ? <i className='fa fa-spin fa-spinner'></i> : 'Change Password'}</button>
           </form>
         </div>
       </div>
     </>
   );
-                }
+}
 

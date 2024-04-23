@@ -1,0 +1,28 @@
+.sidebar-container {
+    display: flex;
+    min-height: 100vh; /* Ensure the container fills the viewport height */
+  }
+  
+  .react-pro-sidebar {
+    flex: 0 0 auto; /* Ensure the sidebar doesn't grow or shrink */
+    height: 100%; /* Set sidebar height to fill the container */
+  }
+  
+  .react-pro-sidebar.collapsed {
+    width: 80px; /* Adjust the collapsed sidebar width as needed */
+  }
+  
+  .react-pro-sidebar-menu,
+  .react-pro-sidebar-sub-menu,
+  .react-pro-sidebar-menu-list,
+  .react-pro-sidebar-menu-item {
+    height: 100%; /* Set sidebar menu and its components to full height */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+  }
+  
+  .react-pro-sidebar-menu {
+    padding: 20px; /* Add padding to the sidebar menu */
+  }
+  
+  /* Add any additional styling as needed */
+  
