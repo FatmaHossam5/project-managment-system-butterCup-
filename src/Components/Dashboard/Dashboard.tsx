@@ -1,17 +1,14 @@
-import header from "../../assets/header-bg.png";
-import icon from "../../assets/icone_one.png";
-import iconn from "../../assets/icon_2.png";
-import iconnn from "../../assets/icon_3.png";
-import Ch from "../Chart/Ch.tsx";
-import ChartsUsers from "../chartsUsers/chartsUsers.tsx";
 import axios from "axios";
-import { AuthContext } from "../../Context/AuthContext.tsx";
 import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Context/AuthContext.tsx";
 import { ToastContext } from "../../Context/ToastContext.tsx";
 import Loading from "../../Shared/Loading/Loading.tsx";
 import DoneIcon from '../../assets/DoneIcon.svg';
 import ProgressIcon from '../../assets/ProgressIcon.svg';
-import TodoIcon from '../../assets/TodoIcon.svg'
+import TodoIcon from '../../assets/TodoIcon.svg';
+import header from "../../assets/header-bg.png";
+import Ch from "../Chart/Ch.tsx";
+import ChartsUsers from "../chartsUsers/chartsUsers.tsx";
 
 
 export default function Dashboard({ userData }: any) {
@@ -62,7 +59,10 @@ export default function Dashboard({ userData }: any) {
 
 useEffect(()=>{
   getTasksCounts();
-  getUsersCounts();
+  if(role==='Manager'){
+    getUsersCounts();
+
+  }
 },[])
 
   return (
@@ -85,6 +85,7 @@ useEffect(()=>{
           </div>
           {/*cards section*/}
           {isLoading? <Loading/>:<>
+
           <div className="col-11 rounded-2 m-auto mt-3   d-flex justify-content-between">
             <div className="col-6   ">
               <h3 className="ps-4 mt-3">Tasks</h3>
@@ -105,6 +106,7 @@ useEffect(()=>{
               </div>
 
             </div>
+            {role==='Manager'?<>
             <div className="col-6  ">
               <h3 className="ps-5 mt-3">Users</h3>
               <div className=" progress-mode d-flex   ">
@@ -124,12 +126,16 @@ useEffect(()=>{
               </div>
 
             </div>
+            </>:""}
+         
           </div>
           {/*Doughnut section*/}
           <div className="col-10   d-flex  justify-content-between">
             <div className="col-5 mx-auto box  rounded-3 mb-5 "><Ch /></div>
-
-            <div className="col-4  box rounded-3 mb-5"><ChartsUsers /></div>
+{role==="Manager"?<>
+<div className="col-4  box rounded-3 mb-5"><ChartsUsers /></div>
+</>:""}
+       
           </div>
           </>}
         

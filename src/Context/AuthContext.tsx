@@ -36,9 +36,12 @@ export default function AuthContextProvider(props:React.PropsWithChildren<{}>){
     const encodedToken = localStorage.getItem("userToken");
     if(encodedToken){
       const decodedToken:any = jwtDecode(encodedToken)
-
       setUserData(decodedToken)
-      setRole(decodedToken.userGroup)
+      setRole((prevRole)=>{
+        return decodedToken.userGroup
+      })
+   
+      
     }
     
 
@@ -49,7 +52,13 @@ export default function AuthContextProvider(props:React.PropsWithChildren<{}>){
       saveUserData();
     }
   }, []);
-
+  useEffect(() => {
+    if (role !== undefined) {
+    
+      console.log(role);
+     
+    }
+  }, [role]);
   const contextValue:AuthContextType={
     userData,
     saveUserData,

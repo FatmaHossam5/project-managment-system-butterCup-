@@ -7,8 +7,8 @@ interface PaginationProps {
     searchValue: string;
   }
 const Pagination:React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange,searchValue }) => {
-  const renderPageNumbers = () => {
-    const pages = [];
+  const renderPageNumbers = ():JSX.Element[] => {
+    const pages:JSX.Element[] = [];
     const visiblePages = 3; // Number of visible page numbers
 
     // Calculate start and end page numbers for display
