@@ -26,7 +26,7 @@ export default function Register() {
     )
       .then((response) => {
         console.log(response);
-        toast.success(`success registeration! Just one step else`, {
+        toast.success(`success registration! Just one step else`, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -59,8 +59,8 @@ export default function Register() {
   return (
     <>
 
-      <div className='container-fluid Auth-container'>
-        <div className="row bg-overlay align-items-center justify-content-center vh-100">
+      <div className='container-fluid  Auth-container'>
+        <div className="row bgOverlay  align-items-center justify-content-center vh-100">
           <div className="col-lg-5 col-md-7 col-sm-9 w-50">
 
             <div className="logo position-relative ">
@@ -210,13 +210,13 @@ export default function Register() {
                 </div>
 
                 <div className='form-group d-flex justify-content-end my-1 fs-6'>
-                  <Link className='text-white text-decoration-underline' to={"/login"}>
+                  <Link className='text-white link' to={"/login"}>
                     Login Now ?
                   </Link>
                 </div>
 
                 <div className='w-75 m-auto'>
-                  <button className={`${styles.rounded6} btn btn-success w-100 mt-1`}>
+                  <button className={`${styles.rounded6} btn btn-success w-100 mt-1 AuthBtn`}>
                     save
                   </button>
                 </div>

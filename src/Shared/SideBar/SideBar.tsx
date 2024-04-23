@@ -23,7 +23,7 @@ export default function SideBar() {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Body>
+        <Modal.Body  style={{backgroundColor:"#3A5E55"}}>
           <ChangePassword handleClose={handleClose} />
         </Modal.Body>
       </Modal>
@@ -80,10 +80,13 @@ export default function SideBar() {
             </div>
           </div>
         </main>
-      </div>
+  </div>
 
-    </>
-  )
-} 
+    </>)
+  
+  
+    }
+
+
 
 
