@@ -12,7 +12,7 @@ interface TaskProps {
 
 }
 export default function Task({ task ,className }: TaskProps) {
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [{}, drag] = useDrag(() => ({
         type: "Task",
         item:{id:task?.id,
         status:task?.status

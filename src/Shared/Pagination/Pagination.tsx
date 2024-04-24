@@ -6,7 +6,7 @@ interface PaginationProps {
     onPageChange: (pageNumber: number) => void;
     searchValue: string;
   }
-const Pagination:React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange,searchValue }) => {
+const Pagination:React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const renderPageNumbers = ():JSX.Element[] => {
     const pages:JSX.Element[] = [];
     const visiblePages = 3; // Number of visible page numbers

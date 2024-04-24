@@ -35,7 +35,9 @@ export default function Tasks() {
   const [totalPages,setTotalPages]=useState(0);
   const[currentPage,setCurrentPage]=useState(1);
   const[isLoading,setIsLoading]=useState(false);
+  const[status,setStatus]=useState('')
  
+  console.log(status);
   
 
   {/* show All Tasks for Manager  */ }
@@ -227,7 +229,7 @@ getTasksList(pageNumber)
               {todos.length >= 0 && <div className="row ">
                 <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-2 tasksBox text-white text-center">
                   {statuses.map((status, index) =>
-                    <Column key={index} status={status} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done} setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks} />)}
+                    <Column key={index} status={status} setStatus={setStatus} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done} setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks} />)}
                 </div>
               </div>}
             </>}

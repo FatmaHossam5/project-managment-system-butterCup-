@@ -8,13 +8,13 @@ export  const TasksContext = createContext ({});
 
  const TasksContextProvider =(props:any)=>{
 
-const [getDataTasks,setGetDataTasks]=useState([])
+const [getDataTasks,setGetDataTasks]=useState<any[]>([]); 
 let{baseUrl,reqHeaders}=useContext(AuthContext)
 
 const getAllTasks=()=>{
     axios.get(`${baseUrl}/Task/manager?pageSize=14&pageNumber=1`,{headers:reqHeaders}).then((response)=>{
         console.log(response);
-        setGetDataTasks(response)
+        setGetDataTasks(response.data)
         
     }).catch((error)=>{
         console.log(error);

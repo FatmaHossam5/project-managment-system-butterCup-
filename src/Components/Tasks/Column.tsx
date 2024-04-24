@@ -22,14 +22,15 @@ interface ColumnProps {
     setInProgress: React.Dispatch<React.SetStateAction<Task[]>>;
     setDone: React.Dispatch<React.SetStateAction<Task[]>>;
     getEmployeeTasks: () => void;
+    setStatus:(status: string)=>void
   }
-export default function Column({status,setTasks,todos,inProgress,done,getEmployeeTasks}:ColumnProps) {
+export default function Column({status,setTasks,todos,inProgress,done,getEmployeeTasks,setStatus}:ColumnProps) {
     const{baseUrl,reqHeaders}:any=useContext(AuthContext)
     const{getToastValue}=useContext(ToastContext)  
-    const [newStatus,setNewStatus]=useState('')
+    
     const tasksToMap = status === 'InProgress' ? inProgress : status === 'Done' ? done : todos;
  
-    const [{ isOver }, drop] = useDrop(
+    const [{  }, drop] = useDrop(
         () => ({
           accept: "Task",
           drop: (item:any) => changeItem(item.id),
@@ -45,7 +46,7 @@ export default function Column({status,setTasks,todos,inProgress,done,getEmploye
       const  changeItem =(id:string)=>{
 
         axios.put(`${baseUrl}/Task/${id}/change-status`,{status},{headers:reqHeaders}).then((response)=>{
-          setNewStatus(response?.data?.status)
+          setStatus(response?.data?.status)
             getToastValue("success","changed successfully")
             getEmployeeTasks()   
         }).catch((error)=>{
