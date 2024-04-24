@@ -1,16 +1,20 @@
-import logo from '../../assets/PMS 3.svg'
-import photo from '../../assets/Ellipse 1.svg'
-import photoOverLay from '../../assets/Group 48102075.svg'
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Register.module.css'
-import { useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-bootstrap';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { ToastContainer } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContext';
+import { ToastContext } from '../../Context/ToastContext';
+import photo from '../../assets/Ellipse 1.svg';
+import photoOverLay from '../../assets/Group 48102075.svg';
+import logo from '../../assets/PMS 3.svg';
+import styles from './Register.module.css';
 
 export default function Register() {
 
   const navigate = useNavigate()
+  const {baseUrl}=useContext(AuthContext);
+  const {getToastValue}=useContext(ToastContext)
 
   const {
     register,
@@ -19,40 +23,19 @@ export default function Register() {
   } = useForm()
 
   const onSubmit = (data: any) => {
-    console.log(data)
+   
     axios.post(
-      `http://upskilling-egypt.com:3003/api/v1/Users/Register`,
+      `${baseUrl}/Users/Register`,
       data
     )
-      .then((response) => {
-        console.log(response);
-        toast.success(`success registration! Just one step else`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
-        // getToastValue('success', "Welcom!")
+      .then(() => {
+    
+        getToastValue('success', 'success registration! Just one step else')
         navigate('/verify-user')
       })
       .catch((error) => {
-        console.log(error);
-        toast.error(error.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
 
-        //     getToastValue('error', error.response)
+            getToastValue('error', error.response)
       })
   }
 
@@ -86,12 +69,7 @@ export default function Register() {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group mt-1 position-relative">
-                      {/* <TextField
-                        variant="standard"
-                        type="email"
-                        placeholder="Enter Your E-mail"
-                        className="w-100"
-                      /> */}
+               
                       <label htmlFor="" className='color fs-6'>UserName</label>
                       <input
                         className='form-control ps-1'
@@ -100,13 +78,12 @@ export default function Register() {
                         {...register("userName",
                           {
                             required: true,
-                            // pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+                            
                           })}
                       />
                       <hr className="text-white m-0" />
                     </div>
                     {errors.userName && errors.userName.type === "required" && <span className='text-danger '> user name is required </span>}
-                    {/* {errors.email && errors.email.type === "pattern" && <span className='text-danger '>Invalid email </span>} */}
                   </div>
 
                   <div className="col-md-6">
