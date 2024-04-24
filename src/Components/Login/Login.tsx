@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
 import axios from "axios";
+import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
 import AuthComponent from '../../Shared/AuthComponent/AuthComponent';
-import { AuthContext } from '../../Context/AuthContext';
 import EmailInput from '../../Shared/EmailInput/EmailInput';
 import PasswordInput from '../../Shared/PasswordInput/PasswordInput';
-import '../../index.css'
+import '../../index.css';
 
 export default function Login({ saveUserData }: any) {
   const { register, handleSubmit, formState: { errors } } = useForm();

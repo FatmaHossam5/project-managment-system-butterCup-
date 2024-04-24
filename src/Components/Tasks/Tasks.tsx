@@ -84,7 +84,7 @@ getTasksList(pageNumber)
 
   {/*Delete Task */ }
   const deleteTask = () => {
-    axios.delete(`${baseUrl}/Task/${projectId}`, { headers: reqHeaders }).then((response) => {
+    axios.delete(`${baseUrl}/Task/${projectId}`, { headers: reqHeaders }).then(() => {
       getToastValue('success','Deleted Successfully!!')
       handleClose();
       getTasksList(1)

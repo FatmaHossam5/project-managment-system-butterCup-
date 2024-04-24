@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
-import axios from 'axios';
 interface User{
   id:string;
   userName:string;

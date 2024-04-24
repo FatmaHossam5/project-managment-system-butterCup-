@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react'
-import logo from '../../assets/PMS 3.svg'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
 import AuthComponent from '../../Shared/AuthComponent/AuthComponent';
+import ConfirmPassword from '../../Shared/ConfirmPassword/ConfirmPassword';
 import EmailInput from '../../Shared/EmailInput/EmailInput';
 import PasswordInput from '../../Shared/PasswordInput/PasswordInput';
-import ConfirmPassword from '../../Shared/ConfirmPassword/ConfirmPassword';
 interface FormData {
   email: string;
   seed: string;

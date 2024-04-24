@@ -24,7 +24,7 @@ export default function SideBar() {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Body  style={{backgroundColor:"#3A5E55"}}>
-          <ChangePassword handleClose={handleClose} />
+          <ChangePassword/>
         </Modal.Body>
       </Modal>
 

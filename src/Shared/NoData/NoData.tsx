@@ -1,4 +1,3 @@
-import React from 'react'
 import DataEmpty from '../../assets/No data-rafiki.png';
 export default function NoData() {
     return (

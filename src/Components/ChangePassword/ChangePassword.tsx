@@ -6,15 +6,13 @@ import { ToastContext } from "../../Context/ToastContext";
 import ConfirmPassword from "../../Shared/ConfirmPassword/ConfirmPassword";
 import PasswordInput from "../../Shared/PasswordInput/PasswordInput";
 import styles from './ChangePassword.module.css';
-interface ChangePassProps {
-  handleClose: () => void;
-}
+
 interface FormData {
   oldPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 }
-export default function ChangePass({ handleClose }: ChangePassProps) {
+export default function ChangePass() {
 
   const { reqHeaders, baseUrl }: any = useContext(AuthContext);
   const { getToastValue } = useContext(ToastContext);
@@ -27,8 +25,7 @@ export default function ChangePass({ handleClose }: ChangePassProps) {
       .put(`${baseUrl}/Users/ChangePassword`, data, {
         headers: reqHeaders,
       })
-      .then((response) => {
-        handleClose();
+      .then(() => {
         getToastValue('success', 'password changed SuccessFully')
       })
       .catch((error) => {
@@ -49,7 +46,7 @@ export default function ChangePass({ handleClose }: ChangePassProps) {
             <PasswordInput {...{ register, errors }} inputName={"oldPassword"} placeholder="old Password" />
             <PasswordInput {...{ register, errors }} inputName={"newPassword"} placeholder="New Password" />
             <ConfirmPassword {...{ register, errors, getValues }} inputName={'confirmNewPassword'} placeholder="Confirm New Password" />
-            <button type="submit" disabled={isLoading} className={`${styles.changeBtn} btn AuthBtn w-100 mt-4  text-white bg-orange rounded-3 btn-lg `}>{isLoading ? <i className='fa fa-spin fa-spinner'></i> : 'Change Password'}</button>
+            <button type="submit" disabled={isLoading || Object.keys(errors).length > 0} className={`${styles.changeBtn} btn AuthBtn w-100 mt-4  text-white bg-orange rounded-3 btn-lg `}>{isLoading ? <i className='fa fa-spin fa-spinner'></i> : 'Change Password'}</button>
           </form>
         </div>
       </div>

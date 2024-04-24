@@ -37,7 +37,7 @@ export default function AuthContextProvider(props:React.PropsWithChildren<{}>){
     if(encodedToken){
       const decodedToken:any = jwtDecode(encodedToken)
       setUserData(decodedToken)
-      setRole((prevRole)=>{
+      setRole(()=>{
         return decodedToken.userGroup
       })
    

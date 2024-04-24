@@ -1,4 +1,3 @@
-import DarkAndLight from '../../Components/DarkAndLight/DarkAndLight'
 import navlogo from '../../assets/navlogo.png'
 import userimg from '../../assets/userimg.png'
 

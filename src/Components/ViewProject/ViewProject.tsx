@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import avatar from '../../assets/avatar.png'
 import axios from 'axios'
-import { AuthContext } from '../../Context/AuthContext'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+import avatar from '../../assets/avatar.png'
 import styles from './ViewProject.module.css'
 interface Project {
   title: string;

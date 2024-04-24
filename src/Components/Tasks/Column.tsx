@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../../Context/AuthContext'
-import Task from './Task'
-import { useDrop } from 'react-dnd'
 import axios from 'axios'
+import React, { useContext, useState } from 'react'
+import { useDrop } from 'react-dnd'
+import { AuthContext } from '../../Context/AuthContext'
 import { ToastContext } from '../../Context/ToastContext'
+import Task from './Task'
 interface Task {
     id: string;
     title: string;
@@ -23,7 +23,7 @@ interface ColumnProps {
     setDone: React.Dispatch<React.SetStateAction<Task[]>>;
     getEmployeeTasks: () => void;
   }
-export default function Column({status,tasks,setTasks,todos,inProgress,done,getEmployeeTasks}:ColumnProps) {
+export default function Column({status,setTasks,todos,inProgress,done,getEmployeeTasks}:ColumnProps) {
     const{baseUrl,reqHeaders}:any=useContext(AuthContext)
     const{getToastValue}=useContext(ToastContext)  
     const [newStatus,setNewStatus]=useState('')
@@ -39,7 +39,7 @@ export default function Column({status,tasks,setTasks,todos,inProgress,done,getE
         }),
        
       )
-console.log(isOver);
+
 
 
       const  changeItem =(id:string)=>{

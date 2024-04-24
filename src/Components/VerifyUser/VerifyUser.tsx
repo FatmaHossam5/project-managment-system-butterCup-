@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useContext } from 'react'
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/PMS 3.svg'
 import { AuthContext } from '../../Context/AuthContext';
 import { ToastContext } from '../../Context/ToastContext';
+import logo from '../../assets/PMS 3.svg';
 export default function VerifyUser() {
   const{register,handleSubmit,formState:{errors}}=useForm();
   const navigate= useNavigate();
@@ -15,7 +15,7 @@ export default function VerifyUser() {
 
 
    const VerifyUser =(data:any)=>{
-     axios.put(`${baseUrl}/Users/verify`,data).then((response)=>
+     axios.put(`${baseUrl}/Users/verify`,data).then(()=>
      {
     getToastValue("success","Verified")
       

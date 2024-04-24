@@ -15,7 +15,7 @@ export default function EditProject() {
   const{getToastValue}=useContext(ToastContext)
  
    const updatePro = (data:any)=>{
-    axios.put (`${baseUrl}/project/${id}`,data,{headers:reqHeaders}).then((response)=>
+    axios.put (`${baseUrl}/project/${id}`,data,{headers:reqHeaders}).then(()=>
     {
 
 

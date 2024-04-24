@@ -11,7 +11,7 @@ interface TaskProps {
   className?: string;
 
 }
-export default function Task({ task ,setTasks,className }: TaskProps) {
+export default function Task({ task ,className }: TaskProps) {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "Task",
         item:{id:task?.id,

@@ -20,7 +20,7 @@ function App() {
       { path: 'request-reset', element: <RequestReset /> },
       { path: 'reset-password', element: <ResetPassword /> },
       { path: 'verify-user', element: <VerifyUser /> },
-      { path: 'Change-pass', element: <ChangePass /> },
+      { path: 'Change-pass', element: <ChangePass   /> },
 
     ]
   }, 

@@ -20,7 +20,7 @@ let{baseUrl,reqHeaders}:any=useContext(AuthContext)
 const{getToastValue}= useContext(ToastContext);
 
 const AddProject =(data:FormData)=>{
-axios.post(`${baseUrl}/project`,data,{headers:reqHeaders}).then((response)=>{
+axios.post(`${baseUrl}/project`,data,{headers:reqHeaders}).then(()=>{
 getToastValue('success','Added Successfully')
   navigate(-1)
 }).catch((error)=>{

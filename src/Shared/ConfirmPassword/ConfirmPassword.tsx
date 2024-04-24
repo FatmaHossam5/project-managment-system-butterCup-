@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { FieldErrors, UseFormGetValues, UseFormRegister } from 'react-hook-form'
-import styles from './ConfirmPassword.module.css'
+import { useState } from 'react';
+import { FieldErrors, UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import styles from './ConfirmPassword.module.css';
 interface FormValues{
     password?:string;
     oldPassword?:string;
