@@ -9,23 +9,36 @@ import TodoIcon from '../../assets/TodoIcon.svg';
 import header from "../../assets/header-bg.png";
 import Ch from "../Chart/Ch.tsx";
 import ChartsUsers from "../chartsUsers/chartsUsers.tsx";
+interface TaskDetail {
+  cardColor: string;
+  iconBgColor: string;
+  icon: string;
+  status: string;
+  number: number;
+}
 
+interface UserDetails extends TaskDetail {
+  status: "ActiveUser" | "DesActiveUser";
+}
+interface DashboardProps {
+  userData: any;
+}
 
-export default function Dashboard({ userData }: any) {
-  const [toDoCount, setToDoCount] = useState(0);
-  const [progressCount, setProgressCount] = useState(0);
-  const [doneCount, setDoneCount] = useState(0);
-  const[isLoading,setIsLoading]=useState(false);
-  const [activeCount, setActiveCount] = useState(0);
-  const [deActiveCount, setDeActiveCount] = useState(0);
-  const {baseUrl,reqHeaders,role}:any=useContext(AuthContext)
+export default function Dashboard({ userData }: DashboardProps) {
+  const [toDoCount, setToDoCount] =  useState<number>(0);
+  const [progressCount, setProgressCount] =  useState<number>(0);
+  const [doneCount, setDoneCount] = useState<number>(0);
+  const[isLoading,setIsLoading]=useState<boolean>(false);
+  const [activeCount, setActiveCount] =  useState<number>(0);
+  const [deActiveCount, setDeActiveCount] =  useState<number>(0);
+  const {baseUrl,reqHeaders,role}=useContext(AuthContext)
   const{getToastValue}=useContext(ToastContext)
-  const TasksDetails = [
+  const TasksDetails :TaskDetail[]= [
     { cardColor: "tasksTodo", iconBgColor: "tasksBg", icon: TodoIcon, status: "Todo", number: toDoCount },
     { cardColor: "tasksProgress", iconBgColor: "progressBg", icon: ProgressIcon, status: "InProgress", number: progressCount },
     { cardColor: "tasksDone", iconBgColor: "doneBg", icon: DoneIcon, status: "Done", number: doneCount }
   ]
-  const UsersDetails = [
+  const UsersDetails: UserDetails[]= [
     { cardColor: "tasksTodo", iconBgColor: "tasksBg", icon: TodoIcon, status: "ActiveUser", number: activeCount },
     { cardColor: "tasksProgress", iconBgColor: "progressBg", icon: ProgressIcon, status: "DesActiveUser", number: deActiveCount },
   ]
