@@ -390,7 +390,7 @@ textarea::placeholder ,input::placeholder{
   background-color: #f2f0f0!important;
  }
  .boxContainer{
-  background-color: rgb(69, 105, 97)!important;
+  background-color: #076b55!important;
  }
  .boxTask{
   background-color: #EF9B28;
@@ -430,15 +430,15 @@ textarea::placeholder ,input::placeholder{
 }
 
 .tasksTodo {
-  background-color: #e5e6f4;
+  background-color: #EF9B28;
 }
 
 .tasksProgress {
-  background-color: #f6f6bf;
+  background-color: rgb(239, 155, 40,0.5);
 }
 
 .tasksDone {
-  background-color: #F4E5ED;
+  background-color: hsla(167, 60%, 14%, 0.4);
 }
 
 .box{
@@ -496,3 +496,14 @@ input.formControlAuth {
     all: unset;
   }
 }
+.task {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* .task.done {
+
+  background-color: #c7f0c1;
+  border-radius: 15px;
+  color: green;
+
+} */

@@ -40,7 +40,7 @@ export default function Ch() {
         label: "Employee Status",
         data: [toDoCount,progressCount,doneCount ],
         borderWidth: 1,
-        backgroundColor:['pink','gray',"beige"],
+        backgroundColor:['#446961','#EF9B28',"#076b55"],
       },
     ],
     options: {

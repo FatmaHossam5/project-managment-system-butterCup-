@@ -36,7 +36,7 @@ export default function Ch() {
         label: "Employee Status",
         data: [activeCount, deActiveCount],
         borderWidth: 1,
-        backgroundColor:['pink','gray'],
+        backgroundColor:['#EF9B28','#446961'],
         
       },
     ],

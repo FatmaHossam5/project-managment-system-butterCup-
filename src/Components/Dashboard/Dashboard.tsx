@@ -106,7 +106,7 @@ useEffect(()=>{
               </div>
 
             </div>
-            {role==='Manager'?<>
+            {role==='Manager'&&(<>
             <div className="col-6  ">
               <h3 className="ps-5 mt-3">Users</h3>
               <div className=" progress-mode d-flex   ">
@@ -126,15 +126,15 @@ useEffect(()=>{
               </div>
 
             </div>
-            </>:""}
+            </>)}
          
           </div>
           {/*Doughnut section*/}
           <div className="col-10   d-flex  justify-content-between">
-            <div className="col-5 mx-auto box  rounded-3 mb-5 "><Ch /></div>
-{role==="Manager"?<>
-<div className="col-4  box rounded-3 mb-5"><ChartsUsers /></div>
-</>:""}
+            <div className="col-5 mx-auto box  rounded-3 my-3 "><Ch /></div>
+{role==="Manager"&&(<>
+<div className="col-4 box rounded-3 my-2"><ChartsUsers /></div>
+</>)}
        
           </div>
           </>}

@@ -8,22 +8,29 @@ interface Task {
 interface TaskProps {
   task: Task;
   setTasks: React.Dispatch<React.SetStateAction<any>>;
+  className?: string;
 
 }
-export default function Task({ task ,setTasks}: TaskProps) {
+export default function Task({ task ,setTasks,className }: TaskProps) {
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: "task",
+        type: "Task",
         item:{id:task?.id,
         status:task?.status
         },
         collect: (monitor) => ({
-          isDragging: !!monitor.isDragging()
+          isDragging: !!monitor.isDragging(),
+         
+
         })
+        
       }))
-      
+   
+  
+     
+
   return (
-    <div ref={drag}role="presentation" aria-roledescription="draggable task">
-        <div className=" my-5 p-3 rounded-3 boxTask">
+    <div ref={drag}role="presentation" aria-roledescription="draggable task"className={`task ${className}`}>
+        <div className={`task ${className} my-5 p-3 rounded-3 boxTask`}>
         {task?.title}
         </div>
         </div>

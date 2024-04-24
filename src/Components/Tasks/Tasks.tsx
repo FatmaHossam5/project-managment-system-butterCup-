@@ -101,19 +101,23 @@ getTasksList(pageNumber)
   }
 
   const getEmployeeTasks = useCallback(() => {
+    setIsLoading(true)
     axios.get(`${baseUrl}/Task`, { headers: reqHeaders }).then((response) => {
         const tasks: Task[] = response?.data?.data || [];
         const filterTasksByStatus = ({ status, tasks }: FilterTasksByStatusParams) => tasks.filter((task) => task.status === status);
-
         const todosTask = filterTasksByStatus({ status: 'ToDo', tasks });
         const inProgressTask = filterTasksByStatus({ status: 'InProgress', tasks });
         const doneTask = filterTasksByStatus({ status: 'Done', tasks });
-
         setTodos(todosTask); 
         setInProgress(inProgressTask);
         setDone(doneTask);
         setTasks(tasks);
-    });
+    }).catch((error)=>{
+      console.log(error);
+      
+    }).finally(()=>{
+      setIsLoading(false)
+    })
 }, [baseUrl, reqHeaders]);
 
 
@@ -221,7 +225,7 @@ getTasksList(pageNumber)
             </div> :
             <>
               {todos.length >= 0 && <div className="row ">
-                <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-5 tasksBox text-white text-center">
+                <div className="col-md-12 d-flex justify-content-evenly rounded-1 py-2 tasksBox text-white text-center">
                   {statuses.map((status, index) =>
                     <Column key={index} status={status} tasks={tasks} setTasks={setTasks} todos={todos} inProgress={inProgress} done={done} setTodos={setTodos} setInProgress={setInProgress} setDone={setDone} getEmployeeTasks={getEmployeeTasks} />)}
                 </div>

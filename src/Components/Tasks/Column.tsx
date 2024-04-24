@@ -26,24 +26,26 @@ interface ColumnProps {
 export default function Column({status,tasks,setTasks,todos,inProgress,done,getEmployeeTasks}:ColumnProps) {
     const{baseUrl,reqHeaders}:any=useContext(AuthContext)
     const{getToastValue}=useContext(ToastContext)  
-    console.log('Current status:', status);
+    const [newStatus,setNewStatus]=useState('')
     const tasksToMap = status === 'InProgress' ? inProgress : status === 'Done' ? done : todos;
-
+ 
     const [{ isOver }, drop] = useDrop(
         () => ({
-          accept: "task",
-          drop: (item:any) => changeItem(item.id,item.status),
+          accept: "Task",
+          drop: (item:any) => changeItem(item.id),
           collect: (monitor:any) => ({
             isOver: !!monitor.isOver()
           })
         }),
        
       )
+console.log(isOver);
 
 
-      const  changeItem =(id:string,status:string)=>{
+      const  changeItem =(id:string)=>{
 
-        axios.put(`${baseUrl}/Task/${id}/change-status`,{status},{headers:reqHeaders}).then(()=>{
+        axios.put(`${baseUrl}/Task/${id}/change-status`,{status},{headers:reqHeaders}).then((response)=>{
+          setNewStatus(response?.data?.status)
             getToastValue("success","changed successfully")
             getEmployeeTasks()   
         }).catch((error)=>{
@@ -56,10 +58,10 @@ export default function Column({status,tasks,setTasks,todos,inProgress,done,getE
 
       
     return (
-        <div className=' px-5 rounded-3  boxContainer' ref={drop} >
+        <div className=' px-5 rounded-3 py-2  boxContainer' ref={drop} style={{ width: '250px' }} >
             {status}
-            <div  >
-                { tasksToMap.map((task:Task) => <Task key={task.id} task={task}  setTasks={setTasks} />)}
+            <div      >
+              { tasksToMap.map((task:Task) => <Task key={task.id} task={task}  setTasks={setTasks} className={`task ${task.status === 'Done' ? 'done' : ''}`} />)}
             </div>
         </div>
         
