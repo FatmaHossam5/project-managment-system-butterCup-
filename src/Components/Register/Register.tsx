@@ -50,21 +50,21 @@ export default function Register() {
 
   return (
     <>
-      <div className='container-fluid Auth-container'>
-        <div className="row bgOverlay align-items-center justify-content-center min-vh-100 py-4">
+      <div className='container-fluid Auth-container  '>
+        <div className="row bgOverlay align-items-center justify-content-center vh-100 ">
           <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-11">
             
             {/* Logo Section - Fixed positioning */}
-            <div className="text-center mb-4">
+            <div className="text-center ">
               <img src={logo} alt="PMS Logo" className={styles.logoImage} />
             </div>
 
             {/* Form Container */}
-            <div className={`${styles.formContainer} form-group from-design py-4 px-4 px-md-5 rounded-3 shadow-lg`}>
+            <div className={`${styles.formContainer} form-group from-design  px-4 px-md-5 rounded-3 shadow-lg `}>
               
               {/* Header */}
               <div className="text-center mb-4">
-                <h6 className='text-white mb-2 fs-5'>Welcome to PMS</h6>
+                <h6 className='text-white my-3 fs-5'>Welcome to PMS</h6>
                 <h3 className='color mb-0'>
                   <span className='text-decoration-underline color fs-1'>C</span>reate New Account
                 </h3>
@@ -266,7 +266,7 @@ export default function Register() {
                 </div>
 
                 {/* Login Link */}
-                <div className='form-group d-flex justify-content-end my-4 fs-6'>
+                <div className='form-group d-flex justify-content-end my-2 fs-6'>
                   <Link className={`${styles.loginLink} text-white link text-decoration-none`} to={"/login"}>
                     Already have an account? <span className="color">Login Now</span>
                   </Link>
@@ -277,7 +277,7 @@ export default function Register() {
                   <button 
                     type="submit"
                     disabled={isLoading}
-                    className={`${styles.submitButton} btn btn-success w-100 mt-3 AuthBtn position-relative`}
+                    className={`${styles.submitButton} btn btn-success w-100 mt-2 mb-3 AuthBtn position-relative`}
                   >
                     {isLoading ? (
                       <>

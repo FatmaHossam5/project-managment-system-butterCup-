@@ -1,0 +1,227 @@
+/* Login Form Container */
+.login-form {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Form Fields Container */
+.form-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Links Container */
+.links-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Auth Links */
+.auth-link {
+  color: #EF9B28;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.auth-link:hover {
+  color: #fff;
+  background-color: rgba(239, 155, 40, 0.1);
+  transform: translateY(-1px);
+}
+
+.auth-link:active {
+  transform: translateY(0);
+}
+
+.registration-link {
+  color: #4CAF50;
+}
+
+.registration-link:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.forgot-password-link {
+  color: #FF9800;
+}
+
+.forgot-password-link:hover {
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+/* Login Button */
+.login-button {
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(135deg, #EF9B28 0%, #f39c12 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(239, 155, 40, 0.3);
+}
+
+.login-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 155, 40, 0.4);
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(239, 155, 40, 0.3);
+}
+
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Button Content */
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .login-form {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 1.75rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.5rem 0;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  
+  .form-fields-container {
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .links-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-link {
+    justify-content: center;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .login-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 1rem 0;
+  }
+  
+  .form-fields-container {
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .links-container {
+    margin-bottom: 1.25rem;
+  }
+  
+  .auth-link {
+    font-size: 0.85rem;
+    padding: 0.625rem;
+  }
+  
+  .login-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Focus States for Accessibility */
+.login-button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.auth-link:focus {
+  outline: 2px solid #EF9B28;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Animation for form elements */
+.form-fields-container > * {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.form-fields-container > *:nth-child(1) { animation-delay: 0.1s; }
+.form-fields-container > *:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading animation enhancement */
+.loading-container i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

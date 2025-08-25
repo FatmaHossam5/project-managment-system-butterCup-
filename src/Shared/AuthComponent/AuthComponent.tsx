@@ -1,18 +1,51 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import AuthLogo from '../../assets/AuthLogo.svg'
+import bgLogin from '../../assets/bg-logIn.png'
+import bgRequest from '../../assets/bg-reuest.png'
+import bgReset from '../../assets/bg-reset.png'
+import bgRegister from '../../assets/bg-register.png'
+
 interface Props {
     children: React.ReactNode
     title: string
   }
 export default function AuthComponent({title,children}:Props) {
 const {pathname}=useLocation();
+
+const getBackgroundStyle = () => {
+  let backgroundImage;
+  switch(pathname) {
+    case '/':
+    case '/login':
+      backgroundImage = bgLogin;
+      break;
+    case '/request-reset':
+      backgroundImage = bgRequest;
+      break;
+    case '/reset-password':
+      backgroundImage = bgReset;
+      break;
+    case '/register':
+      backgroundImage = bgRegister;
+      break;
+    default:
+      backgroundImage = bgLogin;
+  }
+  
+  return {
+    background: `url(${backgroundImage}) no-repeat`,
+    backgroundSize: '100% 100%',
+    minHeight: '100vh'
+  };
+};
+
   return (
     <>
-    <main className={`${pathname === '/' || pathname === '/login' ? "AuthLogin" : pathname === "/request-reset" ? "bg-request" : pathname === "/reset-password" ? "bg-reset" : "AuthChange"} Auth-container container-fluid`}>
-    <div className=" auth  ">
+    <main className="Auth-container container-fluid" style={getBackgroundStyle()}>
+    <div className="auth">
       
-      <div className={`${pathname === '/register'? "col-md-10" :"col-md-6" }  m-auto`}>
+      <div className={`${pathname === '/register'? "col-md-10" :"col-12" }  m-auto`}>
 
         <div className='text-center '>
           <img src={AuthLogo} className='Auth-Logo object-fit-cover me-2 mt-1' alt="logo" />

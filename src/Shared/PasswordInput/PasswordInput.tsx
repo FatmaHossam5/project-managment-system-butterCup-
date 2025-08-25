@@ -15,33 +15,65 @@ interface passwordInputProps{
 
 export default function PasswordInput({register,inputName,placeholder,errors}:passwordInputProps) {
     const[type,setType]=useState(false);
-    const required = "This Field is required";
+    const required = "Password is required";
+    
+    const getLabelText = () => {
+      switch(inputName) {
+        case "newPassword": return "New Password";
+        case "oldPassword": return "Current Password";
+        default: return "Password";
+      }
+    };
+
+    const getErrorField = () => {
+      switch(inputName) {
+        case "oldPassword": return errors?.oldPassword;
+        case "newPassword": return errors?.newPassword;
+        default: return errors?.password;
+      }
+    };
+
+    const errorField = getErrorField();
+    
   return (
     <>
     <div className={'inputIcon'}>
-    <label className={'orange mt-3'}>{inputName==="newPassword"? "New Password": "Password"}</label>
-    <div className=' d-flex align-items-center justify-content-between position-relative'>
-        <div className='d-flex gap-2 flex-grow-1 flex-column  '>
+      <div className='input-field-container'>
+        <label className={'input-label'}>
+          <i className='fas fa-lock me-2'></i>
+          {getLabelText()}
+        </label>
+        <div className='input-wrapper'>
           <input
-            className=   {' w-100 formControlAuth'}
+            className={'formControlAuth'}
             type={type ? "text" : "password"}
-            placeholder={placeholder}
+            placeholder={placeholder || `Enter your ${getLabelText().toLowerCase()}`}
+            aria-describedby={`${inputName}-error`}
             {...register(`${inputName}`, {
               required,
               pattern: {
                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                message: "pass must be at least 6 letters, including UPPER/lowercase, numbers and special characters"
+                message: "Password must be at least 6 characters with uppercase, lowercase, number and special character"
               },
-            })} />
+            })} 
+          />
+          <button
+            type="button"
+            className='password-toggle-btn'
+            onClick={() => setType(!type)}
+            aria-label={type ? "Hide password" : "Show password"}
+          >
+            <i className={`fa-regular ${type ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+          </button>
         </div>
-        <i  onClick={() => setType(!type)} className={`fa-regular  position-absolute end-0 me-3 ${type ? 'fa-eye-slash' : 'fa-eye'}  `} ></i>
+        {errorField && (
+          <div id={`${inputName}-error`} className='error-message' role="alert">
+            <i className='fas fa-exclamation-circle me-1'></i>
+            {errorField.message}
+          </div>
+        )}
       </div>
     </div>
-    {
-      inputName === "oldPassword" ? errors?.oldPassword ? <span className='text-danger small'>{errors?.oldPassword?.message}</span> : null
-        : inputName === "newPassword" ? errors?.newPassword ? <span className='text-danger small'>{errors?.newPassword?.message}</span> : null
-          : errors?.password ? <span className='text-danger small'>{errors?.password?.message}</span> : null
-    } 
     </>
   )
 }
