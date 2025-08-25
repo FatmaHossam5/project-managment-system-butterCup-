@@ -1,22 +1,32 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Navbar/NavBar";
 import SideBar from "../SideBar/SideBar";
+import styles from './MasterLayout.module.css';
 
 export default function MasterLayout({ userData }: any) {
   return (
     <>
-      <div className="container-fluid master ">
-          <div className="d-flex">
-          <div className="vh-25">
-            <SideBar/>
+      <div className={`container-fluid ${styles.masterLayout}`}>
+        <div className={`d-flex ${styles.layoutContainer}`}>
+          {/* Sidebar */}
+          <div className={`${styles.sidebarContainer} vh-100`}>
+            <SideBar />
           </div>
-          <div className="w-100 bg-body mb-4" >
-            <NavBar userData={userData}/>
-           <Outlet/>
-          </div>
+          
+          {/* Main Content Area */}
+          <div className={`${styles.mainContent} w-100 bg-body`}>
+            {/* Navigation Bar */}
+            <div className={styles.navbarContainer}>
+              <NavBar userData={userData} />
+            </div>
+            
+            {/* Page Content */}
+            <div className={styles.pageContent}>
+              <Outlet />
+            </div>
           </div>
         </div>
-   
+      </div>
     </>
   );
 }

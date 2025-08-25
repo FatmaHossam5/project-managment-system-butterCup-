@@ -1,23 +1,507 @@
-.rounded6 {
-    border-radius: 2rem !important;
-    border-color: #EF9B28 !important;
+/* Enhanced Register Component Styles */
+
+/* Logo Image */
+.logoImage {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
-.overlayRegister {
-    top: 0;
-    left: 50%;
-    right: 50%;
-    bottom: 0;
-    transform: translate(-50%, 0%);
-    opacity: 0;
+/* Form Container */
+.formContainer {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-.overlayRegister:hover{
-    cursor: pointer;
-    opacity: 1;
+.formContainer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* Registration Form */
+.registrationForm {
+  max-width: 100%;
+}
+
+/* Form Fields */
+.formField {
+  margin-bottom: 1rem;
+}
+
+.formLabel {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.formLabel:hover {
+  color: #ffa726 !important;
+}
+
+/* Form Inputs */
+.formInput {
+  font-size: 14px;
+  border: none !important;
+  background-color: transparent !important;
+  color: white !important;
+  padding: 0.75rem 0.5rem !important;
+  transition: all 0.3s ease;
+  border-radius: 0 !important;
+}
+
+.formInput:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px;
+}
+
+/* Password Input Container */
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput {
+  padding-right: 3rem !important;
+}
+
+/* Enhanced Password Toggle Button */
+.passwordToggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, rgba(239, 155, 40, 0.15) 0%, rgba(255, 167, 38, 0.1) 100%);
+  border: 2px solid rgba(239, 155, 40, 0.4);
+  color: #EF9B28;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(239, 155, 40, 0.2);
+}
+
+.passwordToggle:hover {
+  background: linear-gradient(135deg, rgba(239, 155, 40, 0.25) 0%, rgba(255, 167, 38, 0.2) 100%);
+  border-color: #EF9B28;
+  color: #ffa726;
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 4px 15px rgba(239, 155, 40, 0.4);
+}
+
+.passwordToggle:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.passwordToggle:focus {
+  outline: 2px solid #EF9B28;
+  outline-offset: 2px;
+}
+
+/* Enhanced Password Toggle Icons */
+.passwordToggle i {
+  font-size: 18px;
+  transition: all 0.3s ease;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  position: absolute;
+  top: 18%;
+  left: 37%;
+  transform: translate(-50%, -50%);
+}
+
+.passwordToggle:hover i {
+  transform: translate(-50%, -50%) scale(1.2);
+  color: #ffa726;
+  filter: drop-shadow(0 2px 4px rgba(239, 155, 40, 0.3));
+}
+
+/* Font Awesome Eye Icons - Cute Regular styling */
+.passwordToggle .fa-eye {
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passwordToggle .fa-eye-slash {
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passwordToggle:hover .fa-eye,
+.passwordToggle:hover .fa-eye-slash {
+  color: #ffa726;
+  text-shadow: 0 2px 4px rgba(239, 155, 40, 0.3);
+}
+
+/* Remove the global ::after pseudo-element for password toggle icons */
+.passwordToggle i::after {
+  display: none !important;
+  content: none !important;
+}
+
+
+
+/* Input Underline */
+.inputUnderline {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #EF9B28 0%, rgba(239, 155, 40, 0.3) 100%);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.inputUnderline:hover {
+  background: linear-gradient(90deg, #ffa726 0%, rgba(255, 167, 38, 0.5) 100%);
+}
+
+/* Error States */
+.inputError {
+  color: #ff6b6b !important;
+}
+
+.inputError::placeholder {
+  color: rgba(255, 107, 107, 0.6) !important;
+}
+
+.errorUnderline {
+  background: linear-gradient(90deg, #ff6b6b 0%, rgba(255, 107, 107, 0.3) 100%) !important;
+}
+
+.errorMessage {
+  font-size: 12px;
+  margin-top: 0.25rem;
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Enhanced Profile Photo Upload */
+.photoUploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.photoUploadLabel {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.photoUploadLabel:hover {
+  transform: scale(1.05);
+}
+
+.photoPreview {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.photoPreview:hover {
+  box-shadow: 0 0 20px rgba(239, 155, 40, 0.4);
+}
+
+.uploadOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  text-align: center;
+}
+
+.uploadOverlay i {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #EF9B28;
+}
+
+.uploadOverlay p {
+  font-size: 0.8rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.photoUploadLabel:hover .uploadOverlay {
+  opacity: 1;
+}
+
+.uploadHint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Profile Image */
+.imgRegister {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(239, 155, 40, 0.3);
+  transition: all 0.3s ease;
+}
+
+.photoUploadLabel:hover .imgRegister {
+  border-color: #EF9B28;
+}
+
+/* File Input */
 .inputFileRegister {
-    display: none;
+  display: none;
+}
+
+/* Login Link */
+.loginLink {
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.loginLink:hover {
+  background-color: rgba(239, 155, 40, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Submit Button */
+.submitButton {
+  border-radius: 2rem !important;
+  border-color: #EF9B28 !important;
+  background: linear-gradient(135deg, #EF9B28 0%, #ffa726 100%) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding: 0.75rem 2rem !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(239, 155, 40, 0.4) !important;
+  background: linear-gradient(135deg, #ffa726 0%, #EF9B28 100%) !important;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0) !important;
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Loading State */
+.submitButton:disabled .fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem !important;
+  }
+  
+  .logoImage {
+    width: 100px;
+  }
+  
+  .imgRegister {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .submitButton {
+    font-size: 14px !important;
+    padding: 0.6rem 1.5rem !important;
+  }
+  
+  .formInput {
+    font-size: 13px !important;
+    padding: 0.6rem 0.4rem !important;
+  }
+  
+  .passwordInput {
+    padding-right: 2.5rem !important;
+  }
+  
+  .passwordToggle {
+    right: 8px;
+    padding: 0;
+    width: 34px;
+    height: 34px;
+  }
+  
+  .passwordToggle i {
+    font-size: 15px;
+  }
+  
+  .errorMessage {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .formContainer {
+    padding: 1rem !important;
+  }
+  
+  .logoImage {
+    width: 80px;
+  }
+  
+  .imgRegister {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .uploadOverlay i {
+    font-size: 1.2rem;
+  }
+  
+  .uploadOverlay p {
+    font-size: 0.7rem;
+  }
+  
+  .uploadHint {
+    font-size: 10px;
+  }
+  
+  .submitButton {
+    font-size: 13px !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  .passwordToggle {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+  }
+  
+  .passwordToggle i {
+    font-size: 13px;
+  }
+}
+
+/* Accessibility Improvements */
+.formInput:focus-visible {
+  outline: 2px solid #EF9B28 !important;
+  outline-offset: 2px;
+}
+
+.submitButton:focus-visible {
+  outline: 2px solid white !important;
+  outline-offset: 2px;
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid #EF9B28 !important;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .formInput {
+    border: 1px solid white !important;
+  }
+  
+  .inputUnderline {
+    height: 3px;
+  }
+  
+  .submitButton {
+    border: 2px solid white !important;
+  }
+  
+  .passwordToggle {
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .formContainer,
+  .formInput,
+  .inputUnderline,
+  .photoUploadLabel,
+  .imgRegister,
+  .uploadOverlay,
+  .loginLink,
+  .submitButton,
+  .passwordToggle,
+  .passwordToggle i {
+    transition: none !important;
+  }
+  
+  .submitButton:hover:not(:disabled) {
+    transform: none !important;
+  }
+  
+  .photoUploadLabel:hover {
+    transform: none;
+  }
+  
+  .loginLink:hover {
+    transform: none;
+  }
+  
+  .passwordToggle:hover {
+    transform: translateY(-50%) !important;
+  }
 } 
 

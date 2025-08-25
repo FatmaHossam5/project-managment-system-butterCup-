@@ -1,9 +1,270 @@
-.searchIcon{
-    top: 50%;
-    bottom: 50%;
-    transform: translate(50%, -50%);
+/* Enhanced Input Component Styles */
+
+/* Input Container */
+.inputContainer {
+  margin-bottom: 1.5rem;
+  position: relative;
 }
-.searchInput{
-    padding-left: 2rem !important;
-    
+
+/* Input Label */
+.inputLabel {
+  font-weight: 500;
+  transition: color 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.inputLabel:hover {
+  color: #ffa726 !important;
+}
+
+/* Input Wrapper */
+.inputWrapper {
+  position: relative;
+}
+
+/* Form Input */
+.formInput {
+  font-size: 14px;
+  border: none !important;
+  background-color: transparent !important;
+  color: white !important;
+  padding: 0.75rem 0.5rem !important;
+  transition: all 0.3s ease;
+  border-radius: 0 !important;
+  width: 100%;
+}
+
+.formInput:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.formInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px;
+  transition: color 0.3s ease;
+}
+
+.formInput:focus::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Input Underline */
+.inputUnderline {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #EF9B28 0%, rgba(239, 155, 40, 0.3) 100%);
+  margin: 0;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.inputUnderline:hover {
+  background: linear-gradient(90deg, #ffa726 0%, rgba(255, 167, 38, 0.5) 100%);
+}
+
+/* Error States */
+.inputError {
+  color: #ff6b6b !important;
+}
+
+.inputError::placeholder {
+  color: rgba(255, 107, 107, 0.6) !important;
+}
+
+.errorUnderline {
+  background: linear-gradient(90deg, #ff6b6b 0%, rgba(255, 107, 107, 0.3) 100%) !important;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Error Message */
+.errorMessage {
+  font-size: 12px;
+  margin-top: 0.25rem;
+  display: block;
+  animation: fadeIn 0.3s ease;
+  color: #ff6b6b;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-5px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Helper Text */
+.helperText {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Icons */
+.errorIcon,
+.successIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.errorIcon {
+  color: #ff6b6b;
+  animation: pulse 2s infinite;
+}
+
+.successIcon {
+  color: #4caf50;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Success State */
+.formInput:valid:not(:placeholder-shown) + .inputUnderline {
+  background: linear-gradient(90deg, #4caf50 0%, rgba(76, 175, 80, 0.3) 100%);
+}
+
+/* Focus States */
+.formInput:focus + .inputUnderline {
+  background: linear-gradient(90deg, #ffa726 0%, rgba(255, 167, 38, 0.5) 100%);
+  height: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formInput {
+    font-size: 13px !important;
+    padding: 0.6rem 0.4rem !important;
+  }
+  
+  .errorMessage {
+    font-size: 11px;
+  }
+  
+  .helperText {
+    font-size: 10px;
+  }
+  
+  .errorIcon,
+  .successIcon {
+    font-size: 14px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .inputContainer {
+    margin-bottom: 1rem;
+  }
+  
+  .formInput {
+    font-size: 12px !important;
+    padding: 0.5rem 0.3rem !important;
+  }
+  
+  .inputLabel {
+    font-size: 14px !important;
+  }
+}
+
+/* Accessibility Improvements */
+.formInput:focus-visible {
+  outline: 2px solid #EF9B28 !important;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .formInput {
+    border: 1px solid white !important;
+  }
+  
+  .inputUnderline {
+    height: 3px;
+  }
+  
+  .errorUnderline {
+    height: 4px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .formInput,
+  .inputUnderline,
+  .errorIcon,
+  .successIcon,
+  .errorMessage {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  .formInput {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  .formInput:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Search Input Specific Styles (for backward compatibility) */
+.searchInput {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: white !important;
+  color: #333 !important;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(45, 180, 153, 0.8);
+  box-shadow: 0 0 5px rgba(45, 180, 153, 0.3);
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.searchIcon {
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 18px;
 }

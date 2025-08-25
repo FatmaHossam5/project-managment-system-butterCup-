@@ -1,0 +1,246 @@
+/* Enhanced Master Layout Styles */
+
+/* Master Layout Container */
+.masterLayout {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Layout Container */
+.layoutContainer {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Sidebar Container */
+.sidebarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  z-index: 1000;
+  background-color: #0e382f;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Main Content Area */
+.mainContent {
+  margin-left: 280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+}
+
+/* Navbar Container */
+.navbarContainer {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Page Content */
+.pageContent {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 80px); /* Adjust based on navbar height */
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .sidebarContainer {
+    width: 250px;
+  }
+  
+  .mainContent {
+    margin-left: 250px;
+  }
+}
+
+@media (max-width: 992px) {
+  .sidebarContainer {
+    width: 240px;
+  }
+  
+  .mainContent {
+    margin-left: 240px;
+  }
+  
+  .pageContent {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebarContainer {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+  
+  .sidebarContainer.open {
+    transform: translateX(0);
+  }
+  
+  .mainContent {
+    margin-left: 0;
+  }
+  
+  .pageContent {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .pageContent {
+    padding: 0.75rem;
+  }
+}
+
+/* Sidebar Toggle for Mobile */
+.sidebarToggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1001;
+  background-color: #EF9B28;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sidebarToggle:hover {
+  background-color: #ffa726;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .sidebarToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Overlay for Mobile Sidebar */
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebarOverlay.open {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebarOverlay {
+    display: block;
+  }
+}
+
+/* Scrollbar Styling */
+.sidebarContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebarContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebarContainer::-webkit-scrollbar-thumb {
+  background: rgba(239, 155, 40, 0.5);
+  border-radius: 3px;
+}
+
+.sidebarContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 155, 40, 0.7);
+}
+
+/* Content Loading States */
+.pageContent.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+/* Print Styles */
+@media print {
+  .sidebarContainer {
+    display: none;
+  }
+  
+  .mainContent {
+    margin-left: 0;
+  }
+  
+  .navbarContainer {
+    display: none;
+  }
+  
+  .pageContent {
+    padding: 0;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .sidebarContainer {
+    border-right: 2px solid #000;
+  }
+  
+  .navbarContainer {
+    border-bottom: 2px solid #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .sidebarContainer,
+  .mainContent,
+  .sidebarToggle,
+  .sidebarOverlay {
+    transition: none !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .masterLayout {
+    background-color: #1a1a1a;
+  }
+  
+  .mainContent {
+    background-color: #1a1a1a;
+  }
+  
+  .navbarContainer {
+    background-color: #2d2d2d;
+    border-bottom-color: #404040;
+  }
+  
+  .pageContent {
+    background-color: #1a1a1a;
+  }
+}

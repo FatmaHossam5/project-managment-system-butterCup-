@@ -1,0 +1,295 @@
+/* Enhanced Button Component Styles */
+
+/* Base Button */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Button Variants */
+.primary {
+  background: linear-gradient(135deg, #EF9B28 0%, #ffa726 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 155, 40, 0.3);
+}
+
+.primary:hover:not(.disabled) {
+  background: linear-gradient(135deg, #ffa726 0%, #EF9B28 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 155, 40, 0.4);
+}
+
+.secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.secondary:hover:not(.disabled) {
+  background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+}
+
+.success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.success:hover:not(.disabled) {
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.danger:hover:not(.disabled) {
+  background: linear-gradient(135deg, #e74c3c 0%, #dc3545 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+.warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+  color: #212529;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.warning:hover:not(.disabled) {
+  background: linear-gradient(135deg, #ffb300 0%, #ffc107 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+}
+
+.info {
+  background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
+.info:hover:not(.disabled) {
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
+}
+
+.light {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #212529;
+  box-shadow: 0 4px 15px rgba(248, 249, 250, 0.3);
+}
+
+.light:hover:not(.disabled) {
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(248, 249, 250, 0.4);
+}
+
+.dark {
+  background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(52, 58, 64, 0.3);
+}
+
+.dark:hover:not(.disabled) {
+  background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(52, 58, 64, 0.4);
+}
+
+/* Button Sizes */
+.sm {
+  font-size: 14px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.5rem;
+}
+
+.md {
+  font-size: 16px;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+}
+
+.lg {
+  font-size: 18px;
+  padding: 1rem 2.5rem;
+  border-radius: 2.5rem;
+}
+
+/* Full Width */
+.fullWidth {
+  width: 100%;
+}
+
+/* Disabled State */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Loading State */
+.loadingIcon {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Icon Styles */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+
+/* Button Text */
+.buttonText {
+  display: inline-block;
+}
+
+/* Active State */
+.button:active:not(.disabled) {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button {
+    font-size: 14px;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .sm {
+    font-size: 12px;
+    padding: 0.4rem 1.2rem;
+  }
+  
+  .md {
+    font-size: 14px;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .lg {
+    font-size: 16px;
+    padding: 0.8rem 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .button {
+    font-size: 13px;
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .sm {
+    font-size: 11px;
+    padding: 0.3rem 1rem;
+  }
+  
+  .md {
+    font-size: 13px;
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .lg {
+    font-size: 15px;
+    padding: 0.7rem 1.8rem;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .button {
+    border: 2px solid currentColor;
+  }
+  
+  .primary,
+  .secondary,
+  .success,
+  .danger,
+  .info,
+  .dark {
+    border: 2px solid white;
+  }
+  
+  .light,
+  .warning {
+    border: 2px solid #212529;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .loadingIcon {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .button:hover:not(.disabled) {
+    transform: none !important;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .button:hover:not(.disabled) {
+    transform: none;
+  }
+  
+  .button:active:not(.disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .button {
+    background: none !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+}
