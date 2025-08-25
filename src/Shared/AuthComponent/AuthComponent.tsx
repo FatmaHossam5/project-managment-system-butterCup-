@@ -45,7 +45,7 @@ const getBackgroundStyle = () => {
     <main className="Auth-container container-fluid" style={getBackgroundStyle()}>
     <div className="auth">
       
-      <div className={`${pathname === '/register'? "col-md-10" :"col-12" }  m-auto`}>
+      <div className={`${pathname === '/register'? "col-md-10" :"col-6" }  m-auto`}>
 
         <div className='text-center '>
           <img src={AuthLogo} className='Auth-Logo object-fit-cover me-2 mt-1' alt="logo" />

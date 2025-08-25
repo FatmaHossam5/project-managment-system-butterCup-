@@ -291,7 +291,7 @@ export default function Register() {
                   <button 
                     type="submit"
                     disabled={isLoading}
-                    className={`${styles.submitButton} btn btn-success w-100 mt-2 mb-3 AuthBtn position-relative`}
+                    className={`${styles.submitButton} btn btn-success w-100 mt-3 mb-5 AuthBtn position-relative`}
                   >
                     {isLoading ? (
                       <>
