@@ -53,6 +53,11 @@ form button
   border: none!important;
   background-color: transparent!important;
   color: white!important;
+  pointer-events: auto!important;
+  user-select: text!important;
+  -webkit-user-select: text!important;
+  -moz-user-select: text!important;
+  -ms-user-select: text!important;
 }
 
 
@@ -101,6 +106,28 @@ form button
   width: 100vw;
   z-index: 1;
   pointer-events: none;
+}
+
+/* Ensure form inputs are interactive */
+.form-group input,
+.form-control {
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Override any potential z-index issues */
+.form-group,
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  position: relative !important;
+  z-index: 1000 !important;
+  pointer-events: auto !important;
 }
 
 /* Override Bootstrap container-fluid and row spacing */

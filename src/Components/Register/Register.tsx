@@ -21,7 +21,9 @@ export default function Register() {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm()
+  } = useForm({
+    mode: 'onChange'
+  })
 
   const onSubmit = (data: any) => {
     setIsLoading(true);
@@ -95,8 +97,14 @@ export default function Register() {
               </div>
 
               {/* Registration Form */}
-              <form onSubmit={handleSubmit(onSubmit)} className={styles.registrationForm}>
+              <form 
+                onSubmit={handleSubmit(onSubmit)} 
+                className={styles.registrationForm}
+                noValidate
+              >
                 <ToastContainer />
+                
+             
 
                 <div className="row g-3">
                   {/* Username Field - Updated validation */}
@@ -110,6 +118,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.userName ? styles.inputError : ''}`}
                         type="text"
                         placeholder='Enter your username'
+                        autoComplete="username"
                         {...register("userName", {
                           required: "Username is required",
                           minLength: {
@@ -142,6 +151,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.email ? styles.inputError : ''}`}
                         type="email"
                         placeholder='Enter your email'
+                        autoComplete="email"
                         {...register("email", {
                           required: "Email is required",
                           pattern: {
@@ -170,6 +180,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.country ? styles.inputError : ''}`}
                         type="text"
                         placeholder="Enter your country"
+                        autoComplete="country"
                         {...register("country", {
                           required: "Country is required"
                         })}
@@ -194,6 +205,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.phoneNumber ? styles.inputError : ''}`}
                         type="tel"
                         placeholder="Enter your phone number"
+                        autoComplete="tel"
                         {...register("phoneNumber", {
                           required: "Phone number is required",
                           validate: validatePhoneNumber
@@ -219,6 +231,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.password ? styles.inputError : ''}`}
                         type="password"
                         placeholder="Enter your password"
+                        autoComplete="new-password"
                         {...register("password", {
                           required: "Password is required",
                           minLength: {
@@ -247,6 +260,7 @@ export default function Register() {
                         className={`form-control ${styles.formInput} ${errors.confirmPassword ? styles.inputError : ''}`}
                         type="password"
                         placeholder="Confirm your password"
+                        autoComplete="new-password"
                         {...register("confirmPassword", {
                           required: "Please confirm your password",
                           validate: (value) => {

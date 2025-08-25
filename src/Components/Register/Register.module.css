@@ -12,6 +12,9 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10;
 }
 
 .formContainer:hover {
@@ -22,11 +25,30 @@
 /* Registration Form */
 .registrationForm {
   max-width: 100%;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure all form elements are interactive */
+.registrationForm * {
+  pointer-events: auto !important;
+}
+
+.registrationForm input,
+.registrationForm textarea,
+.registrationForm select {
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
 }
 
 /* Form Fields */
 .formField {
   margin-bottom: 1rem;
+  pointer-events: auto !important;
 }
 
 .formLabel {
@@ -47,17 +69,49 @@
   padding: 0.75rem 0.5rem !important;
   transition: all 0.3s ease;
   border-radius: 0 !important;
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
 }
 
 .formInput:focus {
   outline: none !important;
   box-shadow: none !important;
   background-color: rgba(255, 255, 255, 0.05) !important;
+  pointer-events: auto !important;
+}
+
+.formInput:focus-visible {
+  outline: 2px solid #EF9B28 !important;
+  outline-offset: 2px;
 }
 
 .formInput::placeholder {
   color: rgba(255, 255, 255, 0.6) !important;
   font-size: 13px;
+}
+
+/* Ensure input elements are properly interactive */
+.formInput,
+.formInput:focus,
+.formInput:active,
+.formInput:hover {
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  cursor: text !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+/* Override any potential interference */
+.formInput:not([disabled]):not([readonly]) {
+  pointer-events: auto !important;
+  cursor: text !important;
 }
 
 /* Password Input Container */
