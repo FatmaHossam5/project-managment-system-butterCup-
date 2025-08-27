@@ -8,7 +8,6 @@ import AuthComponent from '../../Shared/AuthComponent/AuthComponent';
 import EmailInput from '../../Shared/EmailInput/EmailInput';
 import PasswordInput from '../../Shared/PasswordInput/PasswordInput';
 import styles from './Login.module.css';
-import '../../index.css';
 
 interface LoginFormData {
   email: string;

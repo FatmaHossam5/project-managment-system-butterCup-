@@ -1,5 +1,4 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import '../../index.css'
 interface FormValues{
    email:string;
 
